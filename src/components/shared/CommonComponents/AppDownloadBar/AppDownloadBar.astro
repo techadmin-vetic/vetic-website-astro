@@ -1,0 +1,46 @@
+---
+const {
+  content: { appDownloadBar },
+} = Astro.props;
+---
+
+<div class="w-11/12 mx-auto container">
+  
+  <a href="https://vetic.sng.link/Awgsc/rjr7/2cek" target="_blank" rel="noopener noreferrer">
+    <div
+      class="bg-[#B8A2FC] text-white sm:h-[43px] rounded-xl mt-2 sm:mt-4 flex justify-center items-center p-2"
+    >
+      <!-- Mobile View (Scrolling Text) -->
+      <div class="block sm:hidden overflow-hidden relative w-full">
+        <div class="whitespace-nowrap animate-scroll">
+          {appDownloadBar?.heading}
+        </div>
+      </div>
+
+      <!-- Desktop View (Static Text) -->
+      <span class="hidden sm:block">{appDownloadBar?.heading}</span>
+    </div>
+  </a>
+</div>
+
+<style>
+  /* Tailwind CSS Keyframes */
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  /* Tailwind CSS Custom Animation */
+  .animate-scroll {
+    animation: scroll 10s linear infinite;
+  }
+</style>
+

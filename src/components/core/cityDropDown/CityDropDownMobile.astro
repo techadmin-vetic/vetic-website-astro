@@ -1,0 +1,75 @@
+---
+
+---
+
+<div x-data="{ open: false }" class="relative">
+  <button
+    @mouseenter="open = true"
+    @mouseleave="open = false"
+    class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-slate-200"
+  >
+    Our Clinics
+  </button>
+
+  <div
+    x-show="open"
+    @mouseenter="open = true"
+    @mouseleave="open = false"
+    class="absolute z-10 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-300"
+  >
+    <a
+      href="/pet-clinic-gurgaon"
+      class="block px-4 py-2 text-gray-700 hover:bg-slate-100"
+    >
+      Gurgaon
+    </a>
+    <a
+      href="/pet-clinic-delhi"
+      class="block px-4 py-2 text-gray-700 hover:bg-slate-100"
+    >
+      Delhi
+    </a>
+    <a
+      href="/pet-clinic-noida"
+      class="block px-4 py-2 text-gray-700 hover:bg-slate-100"
+    >
+      Noida
+    </a>
+    <a
+      href="/pet-clinic-ghaziabad"
+      class="block px-4 py-2 text-gray-700 hover:bg-slate-100"
+    >
+      Ghaziabad
+    </a>
+    <a
+      href="/pet-clinic-faridabad"
+      class="block px-4 py-2 text-gray-700 hover:bg-slate-100"
+    >
+      Faridabad
+    </a>
+    <a
+      href="/pet-clinic-hyderabad"
+      class="block px-4 py-2 text-gray-700 hover:bg-slate-100"
+    >
+      Hyderabad
+    </a>
+    <a
+      href="/pet-clinic-mumbai"
+      class="block px-4 py-2 text-gray-700 hover:bg-slate-100"
+    >
+      Mumbai
+    </a>
+    <a
+      href="/pet-clinic-bengaluru"
+      class="block px-4 py-2 text-gray-700 hover:bg-slate-100"
+    >
+      Bengaluru
+    </a>
+    <a
+      href="/pet-clinic-pune"
+      class="block px-4 py-2 text-gray-700 hover:bg-slate-100"
+    >
+      Pune
+    </a>
+  </div>
+</div>

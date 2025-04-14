@@ -1,0 +1,94 @@
+---
+import { Image } from "astro:assets";
+
+const servicesData = [
+  {
+    image:
+      "https://vetic-img.s3.ap-south-1.amazonaws.com/website/home_page/consultationImage.webp",
+    alt_img: "one",
+    heading: "Consultation",
+    path: "https://vetic.in/pet-consultation-gurgaon",
+  },
+  {
+    image:
+      "https://vetic-img.s3.ap-south-1.amazonaws.com/website/home_page/groomingImage.webp",
+    alt_img: "one",
+    heading: "Grooming",
+    path: "https://vetic.in/pet-grooming-near-me",
+  },
+  {
+    image:
+      "https://vetic-img.s3.ap-south-1.amazonaws.com/website/home_page/vaccination-Image.webp",
+    alt_img: "one",
+    heading: "Vaccination",
+    path: "https://vetic.in/pet-vaccination-near-me",
+  },
+  {
+    image:
+      "https://vetic-img.s3.ap-south-1.amazonaws.com/website/home_page/infraImagelarge.webp",
+    alt_img: "one",
+    heading: "Emergency Care",
+    path: "https://vetic.in/pet-emergency-care-near-me",
+  },
+  {
+    image:
+      "https://vetic-img.s3.ap-south-1.amazonaws.com/website/home_page/surgeryImage_h.webp",
+    alt_img: "one",
+    heading: "Surgery",
+    path: "https://vetic.in/pet-surgeries-near-me",
+  },
+  {
+    image:
+      "https://vetic-img.s3.ap-south-1.amazonaws.com/website/home_page/medicineImage.webp",
+    alt_img: "one",
+    heading: "Medicines",
+    path: "https://vetic.in/pet-consultation-gurgaon",
+  },
+  {
+    image:
+      "https://vetic-img.s3.ap-south-1.amazonaws.com/website/home_page/diagnosticsImage.webp",
+    alt_img: "one",
+    heading: "Diagnostics",
+    path: "https://vetic.in/pet-diagnostics-near-me",
+  },
+];
+---
+
+<div class="pt-6 mx-auto px-4 sm:px-24">
+  <h2 class="text-3xl font-bold text-blue-950">
+    Services at Vetic <span class="text-blue-400 text-3xl">
+      Veterinary Hospital Near You</span
+    >
+  </h2>
+  <p class="text-gray-500 text-sm font-bold pt-4 pb-4">
+    Looking for the best veterinary hospital near you? Let’s find out why Vetic
+    is the answer to your query.
+  </p>
+  <div class="service_area3">
+    <ul
+      role="list"
+      class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
+    >
+      {
+        servicesData.map((value) => {
+          return (
+            <li class="relative shadow-md transition-transform duration-300 transform hover:scale-105">
+              <div class="group aspect-h-7 aspect-w-10 block w-full overflow-hidden rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100">
+                <Image
+                  width="1"
+                  height="1"
+                  class="pointer-events-none object-cover group-hover:opacity-75"
+                  src={value.image}
+                  alt={value.alt_img}
+                />
+              </div>
+              <p class="pointer-events-none mt-2 block truncate text-xl text-center font-medium text-gray-600">
+                {value.heading}
+              </p>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</div>

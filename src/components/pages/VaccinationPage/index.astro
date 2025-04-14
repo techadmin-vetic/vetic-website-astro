@@ -1,0 +1,34 @@
+---
+import AppDownloadBar from "@components/shared/CommonComponents/AppDownloadBar/AppDownloadBar.astro";
+import HeroSection from "@components/shared/CommonComponents/HeroSection/HeroSection.astro";
+import Testimonials from "@components/shared/CommonComponents/Testimonials/Testimonials.astro";
+import type { IVaccinationPageProps } from "@components/pages/PagePropsInterface/page_props_interface";
+import AppDownload from "@components/shared/CommonComponents/AppDownload/AppDownload.astro";
+import ClinicSection from "@components/shared/CommonComponents/ClinicSection/ClinicSection.astro";
+import FAQComponent from "@components/shared/CommonComponents/FAQComponent/FAQComponent.astro";
+import Footer from "@components/core/footer/Footer.astro";
+import Navbar from "@components/core/navbar/Navbar.astro";
+import { reduceFAQs } from "@utils/global_utils";
+import WhyChooseVetic from "@components/shared/GroomingPageComponent/WhyChooseVetic/WhyChooseVetic.astro";
+import ServicePackage from "@components/shared/CommonComponents/ServicePackage/ServicePackage.astro";
+import VaccinationSchedules from "@components/shared/VaccinationComponents/VaccinationSchedules/VaccinationSchedules.astro";
+
+const { content } = Astro.props as IVaccinationPageProps;
+const reducedFAQs = reduceFAQs(content?.Faq?.data ?? [], "title", "content");
+---
+
+<AppDownloadBar content={content} />
+<Navbar location={content.meta.location} srNumber={content.meta.srNumber} />
+<HeroSection content={content} />
+<WhyChooseVetic content={content} />
+<VaccinationSchedules content={content} />
+<ClinicSection content={content} location={content.meta.location} />
+<ServicePackage content={content} />
+<AppDownload content={content} />
+<Testimonials content={content} />
+<FAQComponent  
+heading={content?.Faq?.heading}
+subHeading={content?.Faq?.subHeading}
+faqs={reducedFAQs}
+hideHeading={true}/>
+<Footer />

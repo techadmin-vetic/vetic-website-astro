@@ -1,0 +1,14 @@
+---
+interface Props {
+  className?: string;
+}
+const { className } = Astro.props;
+---
+
+<div
+  x-data=`{className: '${className}' }`
+  :class="className"
+  @click="$store.ui.toggleBookNow()"
+>
+  <slot />
+</div>

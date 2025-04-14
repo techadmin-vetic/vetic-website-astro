@@ -1,0 +1,126 @@
+---
+import { Image } from "astro:assets";
+import BookNowButton from "@components/ui/BookNowButton.astro";
+
+const {
+  content: { trending_categories },
+} = Astro.props;
+// console.log(trending_categories);
+---
+
+<div class="w-full mx-auto sm:mt-6">
+  <div class="container w-11/12 mx-auto py-4">
+    <h2
+      class="text-[24px] sm:text-[36px] leading-8 font-primaryFont mb-2 sm:mb-4"
+    >
+      {trending_categories?.heading}
+    </h2>
+    <p class="text-gray-600 text-md sm:text-xl mb-6 sm:mb-6 font-secondaryFont">
+      {trending_categories?.para}
+    </p>
+
+    <!-- Carousel Wrapper -->
+    <div class="category-carousel">
+      {
+        trending_categories?.cards?.map((data) => (
+          <div class="carousel-cell bg-white shadow-lg rounded-3xl flex flex-col h-[350px] sm:h-[500px] border-[1px] mx-2  p-4 sm:m-4">
+            {/* Product Image */}
+            <div class="flex justify-center items-center p-6 h-[60%] bg-slate-100 rounded-t-3xl">
+              <img
+                src={data.image}
+                alt={data.img_alt}
+                class="max-h-full object-contain"
+              />
+            </div>
+
+            {/* Product Info */}
+            <div class="mt-2 ">
+              <h2 class="sm:text-2xl text-xl font-primaryFont">
+                {data.heading}
+              </h2>
+              <p class="text-sm text-gray-600">{data.priceContent}</p>
+            </div>
+
+            {/* Price & Button */}
+            <div class=" mt-auto">
+              <div class="flex justify-between items-center">
+                <div class="">
+                  <div class="flex items-center space-x-2">
+                    <p class="sm:text-3xl text-xl font-primaryFont text-[#333333]">
+                      {data.price}
+                    </p>
+                    <p class="sm:text-xl text-md text-gray-600 font-secondaryFont line-through">
+                      {data.cutPrice}
+                    </p>
+                  </div>
+                  <p class="text-green-600 font-semibold font-secondaryFont">
+                    {data.discount}
+                  </p>
+                </div>
+                <a href={data.product_link} target="_blank">
+                  <button class="bg-black text-white font-primaryFont sm:text-xl text-md rounded-lg py-2 px-6">
+                    {data.buttonText}
+                  </button>
+                </a>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<!-- Flickity CSS & Script -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/flickity@2/dist/flickity.min.css"
+/>
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+<script>
+  import Flickity from "flickity";
+  document.addEventListener("DOMContentLoaded", () => {
+    const elem = document.querySelector(".category-carousel");
+    new Flickity(elem, {
+      cellAlign: "left",
+      groupCells: true,
+      contain: true,
+      pageDots: false,
+      prevNextButtons: false,
+      autoPlay: true,
+      wrapAround: true,
+      draggable: true,
+    });
+  });
+</script>
+
+<!-- CSS Styling -->
+<style>
+  /* Ensure Flickity properly handles layout */
+  .category-carousel {
+    display: block; /* Ensure it respects Flickity's block display */
+  }
+
+  .carousel-cell {
+    width: 32%; /* Each card takes 1/3 of the row */
+    box-sizing: border-box; /* Include padding and borders */
+  }
+
+  @media (max-width: 640px) {
+    .carousel-cell {
+      width: 100%; /* Full width on mobile */
+    }
+  }
+
+  /* Optional: Customize Flickity navigation buttons */
+  .category-carousel .flickity-prev-next-button {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+  }
+
+  .category-carousel .flickity-prev-next-button:hover {
+    background: black;
+  }
+</style>

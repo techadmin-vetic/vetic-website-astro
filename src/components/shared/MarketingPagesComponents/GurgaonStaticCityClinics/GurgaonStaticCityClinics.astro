@@ -1,0 +1,48 @@
+---
+import type { IMetaNewPageProps } from "@components/pages/PagePropsInterface/page_props_interface";
+import BookNowButtonMarketing from "@components/ui/BookNowButtonMarketing.astro";
+
+const { content, srNumber, location } = Astro.props as IMetaNewPageProps;
+---
+
+<div class="bg-gradient-to-b from-gray-50 w-11/12 mx-auto">
+  <div class="space-y-4 px-4 pt-6 w-full mx-auto">
+    <div class="text-left">
+      <h1
+        class="text-2xl tracking-wide font-bricolage font-semibold py-2 lg:py-4"
+      >
+        {content.Clinics.heading}
+      </h1>
+    </div>
+    <BookNowButtonMarketing>
+      <div class="rounded-3xl overflow-hidden">
+        <img
+          src={content?.ClinicsDataStatic?.[0]?.clinicImage}
+          alt="Clinic_facade_image"
+          class="w-full h-76 sm:h-[650px] tracking-image"
+        />
+      </div>
+
+      <div class="flex justify-between align-center w-full mx-auto mt-3">
+        <div class="w-full grid grid-cols-2 gap-4">
+          {
+            content.Clinics.usp.map((USPContentClinics) => {
+              return (
+                <div class="flex items-center h-10">
+                  <img
+                    src={USPContentClinics.logo}
+                    alt="USP Logo"
+                    class="w-6 h-6 sm:w-8 sm:h-8"
+                  />
+                  <p class="pl-2 text-sm sm:text-lg font-normal font-bricolage tracking-wide">
+                    {USPContentClinics.heading}
+                  </p>
+                </div>
+              );
+            })
+          }
+        </div>
+      </div>
+    </BookNowButtonMarketing>
+  </div>
+</div>

@@ -1,0 +1,134 @@
+---
+import Testimonials from "@components/shared/CommonComponents/Testimonials/Testimonials.astro";
+import BookNowForm from "../shared/CommonComponents/BookNowForms/BookNowForms.tsx";
+
+interface Props {
+  location: string;
+  content: any;
+}
+
+const { location, content } = Astro.props;
+---
+
+<div
+  class="fixed inset-0 flex sm:items-center sm:justify-center bg-black bg-opacity-50 overflow-y-auto"
+  x-data="{ packageData: null }"
+  x-show="$store.ui.book_now_package"
+  @package-selected.window="packageData = $event.detail;"
+  x-transition:enter="transition ease-out duration-300"
+  x-transition:enter-start="opacity-0"
+  x-transition:enter-end="opacity-100"
+  x-transition:leave="transition ease-in duration-300"
+  x-transition:leave-start="opacity-100"
+  x-transition:leave-end="opacity-0"
+  aria-labelledby="modal-title"
+  role="dialog"
+  aria-modal="true"
+  @click.self="$store.ui.closeBookNowPackage()"
+>
+  <div
+    class="relative w-full sm:w-[800px] max-w-full mx-auto bg-white rounded-t-lg sm:rounded-lg shadow-lg mt-auto sm:mt-0"
+    x-show="$store.ui.book_now_package"
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="sm:opacity-0 sm:scale-95 translate-y-full sm:translate-y-0"
+    x-transition:enter-end="sm:opacity-100 sm:scale-100 translate-y-0"
+    x-transition:leave="transition ease-in duration-200"
+    x-transition:leave-start="sm:opacity-100 sm:scale-100 translate-y-0"
+    x-transition:leave-end="sm:opacity-0 sm:scale-95 translate-y-full sm:translate-y-0"
+  >
+    <div class="p-6 max-h-[90vh] overflow-y-auto">
+      <button
+        @click="$store.ui.closeBookNowPackage()"
+        class="absolute top-4 right-4 text-gray-600 hover:text-gray-800"
+        aria-label="close"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <h2
+        class="text-2xl font-primaryFont font-bold mb-6"
+        id="modal-title"
+        x-text="packageData?.heading"
+      >
+      </h2>
+
+      <div class="flex flex-col md:flex-row gap-8">
+        <div class="md:w-1/2">
+          <img
+            src="https://placedog.net/500/300?random=7"
+            alt="Dog getting groomed"
+            class="object-contain rounded-xl mb-4"
+          />
+          <h3 class="text-xl font-semibold mb-2">Service Inclusions</h3>
+          <ul class="list-disc list-inside space-y-1 text-gray-800">
+            <template x-for="inclusion in packageData?.serviceInclusions">
+              <li x-text="inclusion" class="text-sm text-gray-600"></li>
+            </template>
+          </ul>
+        </div>
+
+        <div class="md:w-1/2">
+          <div
+            class="sm:border-[1px] sm:border-primaryFontColor sm:p-6 rounded-3xl"
+          >
+            <h3 class="text-xl hidden sm:block font-semibold mb-4">
+              Fill the form for a Hassle Free Appointment Booking
+            </h3>
+            <BookNowForm inSideModal={true} client:load location={location} />
+          </div>
+        </div>
+      </div>
+
+      <!-- <Testimonials /> -->
+
+      <!-- service gallery -->
+      <div class="w-full mt-8">
+        <h3 class="text-xl font-semibold mb-4">Service Gallery</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <img
+            src="https://placedog.net/500/300?random=1"
+            alt="Service Image 1"
+            class="w-full h-48 object-cover rounded-lg"
+          />
+          <img
+            src="https://placedog.net/500/300?random=2"
+            alt="Service Image 2"
+            class="w-full h-48 object-cover rounded-lg"
+          />
+          <img
+            src="https://placedog.net/500/300?random=3"
+            alt="Service Image 3"
+            class="w-full h-48 object-cover rounded-lg"
+          />
+          <img
+            src="https://placedog.net/500/300?random=4"
+            alt="Service Image 4"
+            class="w-full h-48 object-cover rounded-lg"
+          />
+          <img
+            src="https://placedog.net/500/300?random=5"
+            alt="Service Image 1"
+            class="w-full h-48 object-cover rounded-lg"
+          />
+          <img
+            src="https://placedog.net/500/300?random=6"
+            alt="Service Image 2"
+            class="w-full h-48 object-cover rounded-lg"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

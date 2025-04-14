@@ -1,0 +1,28 @@
+---
+export const prerender = true;
+import MainLayout from "@layouts/_main_layout.astro";
+import ModalContainer from "@components/ui/ModalContainer.astro";
+import BookNowFormModal from "@components/ui/BookNowFormModal.astro";
+import { GETAboutUspageSiteData } from "@api/api_functions";
+import AboutUsPage from "@components/pages/AboutUsPage/index.astro";
+
+const {
+  data: {
+    page_content: {
+      body: { main: mainContent },
+    },
+  },
+} = await GETAboutUspageSiteData();
+---
+
+<MainLayout title={mainContent?.meta?.title} description={mainContent?.meta?.description} canonicalTag={mainContent?.meta?.canonicalTag}>
+  <AboutUsPage
+    content={mainContent}
+    location={mainContent.meta.location}
+    srNumber={mainContent.meta.srNumber}
+  />
+
+  <ModalContainer>
+    <BookNowFormModal location={mainContent.meta.location} />
+  </ModalContainer>
+</MainLayout>

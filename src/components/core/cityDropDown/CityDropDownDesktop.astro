@@ -1,0 +1,74 @@
+---
+
+---
+
+<style>
+  [x-cloak] {
+    display: none !important;
+  }
+</style>
+
+<div class="flex items-center justify-center">
+  <div class="bg-white w-full rounded-xl">
+    <div x-data="{ open: false }" class="inline-flex relative">
+      <button
+        @click="open = ! open"
+        class="px-3 py-2 text-md leading-6 font-primaryFont bold text-gray-900"
+      >
+        Our Clinics
+      </button>
+      <div
+        x-cloak
+        x-show="open"
+        @click.away="open = false"
+        class="w-full absolute top-12 left-0 p-2 text-left bg-white border border-gray-200 rounded-lg shadow space-y-2"
+      >
+        <a
+          href="/pet-clinic-gurgaon"
+          class="block px-2 py-1 font-secondaryFont cursor-pointer hover:bg-[#ff6982] rounded-lg hover:text-white"
+          >Gurgaon</a
+        >
+        <a
+          href="/pet-clinic-delhi"
+          class="block px-2 py-1 font-secondaryFont cursor-pointer hover:bg-[#ff6982] rounded-lg hover:text-white"
+          >Delhi</a
+        >
+        <a
+          href="/pet-clinic-noida"
+          class="block px-2 py-1 font-secondaryFont cursor-pointer hover:bg-[#ff6982] rounded-lg hover:text-white"
+          >Noida</a
+        >
+        <a
+          href="/pet-clinic-ghaziabad"
+          class="block px-2 py-1 font-secondaryFont cursor-pointer hover:bg-[#ff6982] rounded-lg hover:text-white"
+          >Ghaziabad</a
+        >
+        <a
+          href="/pet-clinic-faridabad"
+          class="block px-2 py-1 font-secondaryFont cursor-pointer hover:bg-[#ff6982] rounded-lg hover:text-white"
+          >Faridabad</a
+        >
+        <a
+          href="/pet-clinic-hyderabad"
+          class="block px-2 py-1 font-secondaryFont cursor-pointer hover:bg-[#ff6982] rounded-lg hover:text-white"
+          >Hyderabad</a
+        >
+        <a
+          href="/pet-clinic-mumbai"
+          class="block px-2 py-1 font-secondaryFont cursor-pointer hover:bg-[#ff6982] rounded-lg hover:text-white"
+          >Mumbai</a
+        >
+        <a
+          href="/pet-clinic-bengaluru"
+          class="block px-2 py-1 font-secondaryFont cursor-pointer hover:bg-[#ff6982] rounded-lg hover:text-white"
+          >Bengaluru</a
+        >
+        <a
+          href="/pet-clinic-pune"
+          class="block px-2 py-1 font-secondaryFont cursor-pointer hover:bg-[#ff6982] rounded-lg hover:text-white"
+          >Pune</a
+        >
+      </div>
+    </div>
+  </div>
+</div>

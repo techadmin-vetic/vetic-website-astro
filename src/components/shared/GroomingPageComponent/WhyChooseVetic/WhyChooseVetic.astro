@@ -1,0 +1,90 @@
+---
+import { Image } from "astro:assets";
+
+const {
+  content: { whyChooseVetic },
+} = Astro.props;
+---
+
+<div class="container w-11/12 mx-auto bg-white py-6 sm:py-10">
+  <div class="px-4">
+    <h2
+      class="text-2xl sm:text-[36px] font-primaryFont text-gray-800 mb-2 py-4 sm:mb-0"
+    >
+      {whyChooseVetic?.heading}
+    </h2>
+    <div
+      class="mt-4 grid grid-cols-1 gap-4 sm:mt-8 lg:grid-cols-6 lg:grid-rows-2"
+    >
+      {
+        whyChooseVetic?.card?.map((card, index) => (
+          <div
+            class={`relative ${
+              index === 0 || index === 1 ? "lg:col-span-3" : "lg:col-span-2"
+            }`}
+          >
+            <div
+              class={`absolute inset-px rounded-lg bg-white ${
+                index === 0
+                  ? "max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]"
+                  : index === 1
+                    ? "lg:rounded-tr-[2rem]"
+                    : index === 2
+                      ? "lg:rounded-bl-[2rem]"
+                      : index === 4
+                        ? "max-lg:rounded-b-[2rem] lg:rounded-br-[2rem]"
+                        : ""
+              }`}
+            />
+            <div
+              class={`relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] ${
+                index === 0
+                  ? "max-lg:rounded-t-[calc(2rem+1px)] lg:rounded-tl-[calc(2rem+1px)]"
+                  : index === 1
+                    ? "lg:rounded-tr-[calc(2rem+1px)]"
+                    : index === 2
+                      ? "lg:rounded-bl-[calc(2rem+1px)]"
+                      : index === 4
+                        ? "max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-br-[calc(2rem+1px)]"
+                        : ""
+              }`}
+            >
+              <picture>
+                <source media="(min-width: 640px)" srcset={card.desktopImage} />
+                <source media="(max-width: 639px)" srcset={card.mobileImage} />
+                <img
+                  class="h-[180px] sm:h-[300px] lg:h-60 xl:h-72 w-full object-cover"
+                  src={card.mobileImage}
+                  srcset={`${card.mobileImage} 639w, ${card.desktopImage} 640w`}
+                  sizes="(min-width: 640px) 640px, 100vw"
+                  alt={card.heading}
+                />
+              </picture>
+              <div class="p-6 pt-2 sm:pt-4">
+                <p class="mt-2 text-[24px] font-medium font-primaryFont tracking-tight text-gray-950">
+                  {card.heading}
+                </p>
+                <p class="mt-2 max-w-lg text-[16px] text-gray-600">
+                  {card.subHeading}
+                </p>
+              </div>
+            </div>
+            <div
+              class={`pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 ${
+                index === 0
+                  ? "max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]"
+                  : index === 1
+                    ? "lg:rounded-tr-[2rem]"
+                    : index === 2
+                      ? "lg:rounded-bl-[2rem]"
+                      : index === 4
+                        ? "max-lg:rounded-b-[2rem] lg:rounded-br-[2rem]"
+                        : ""
+              }`}
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>

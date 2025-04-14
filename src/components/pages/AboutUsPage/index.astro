@@ -1,0 +1,32 @@
+---
+import AppDownloadBar from "@components/shared/CommonComponents/AppDownloadBar/AppDownloadBar.astro";
+import HeroSection from "@components/shared/AboutUsComponents/HeroSection/HeroSection.astro";
+import type { IAboutUsPageProps } from "@components/pages/PagePropsInterface/page_props_interface";
+import AppDownload from "@components/shared/CommonComponents/AppDownload/AppDownload.astro";
+import Footer from "@components/core/footer/Footer.astro";
+import Navbar from "@components/core/navbar/Navbar.astro";
+import VeticStory from "@components/shared/AboutUsComponents/VeticStory/VeticStory.astro";
+import VeticGrowthSection from "@components/shared/AboutUsComponents/VeticGrowthSection/VeticGrowthSection.astro";
+import VeticLocations from "@components/shared/AboutUsComponents/VeticLocations/VeticLocations.astro";
+import VeticCommunity from "@components/shared/AboutUsComponents/VeticCommunity/VeticCommunity.astro";
+import JoinVeticSection from "@components/shared/AboutUsComponents/JoinVeticSection/JoinVeticSection.astro";
+import VeticInfastructure from "@components/shared/HomePageComponent/VeticInfastructure/VeticInfastructure.astro";
+import Testimonials from "@components/shared/CommonComponents/Testimonials/Testimonials.astro";
+import DescriptionSection from "@components/shared/CommonComponents/DescriptionSection/DescriptionSection.astro";
+
+const { content } = Astro.props as IAboutUsPageProps;
+---
+
+<AppDownloadBar content={content} />
+<Navbar location={content.meta.location} srNumber={content.meta.srNumber} />
+<HeroSection content={content} />
+<DescriptionSection content={content} />
+<VeticStory content={content} />
+<VeticGrowthSection content={content}  isAboutUsPage/>
+<VeticLocations content={content} />
+<VeticCommunity content={content} />
+<JoinVeticSection content={content} />
+<VeticInfastructure content={content} />
+<Testimonials content={content} />
+<AppDownload content={content} />
+<Footer />

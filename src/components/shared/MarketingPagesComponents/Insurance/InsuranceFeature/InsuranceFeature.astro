@@ -1,0 +1,103 @@
+---
+import BookNowButtonMarketing from "@components/ui/BookNowButtonMarketing.astro";
+import CarouselContainer from "@components/ui/CarouselContainer.astro";
+
+// import BookNowButton from "@components/ui/BookNowButton.astro";
+
+const {
+  content: { InsuranceFeatures },
+} = Astro.props;
+// console.log(InsuranceFeatures);
+---
+
+<div
+  class="font-bricolage w-full [background:linear-gradient(178.96deg,_#FFE8F3,_#FFF)] pb-2 px-4 sm:px-16 box-border gap-[12px] leading-[normal] tracking-[normal] text-left text-[24px] text-gray sm:w-11/12 mx-auto sm:rounded-3xl mt-6 sm:mt-8 md:mt-12 "
+>
+  <h1
+    class="font-bricolage text-2xl sm:text-[36px] sm:leading-[43.2px] font-semibold sm:pb-2 py-2 sm:py-10 sm:my-2"
+  >
+    {InsuranceFeatures.heading}
+  </h1>
+  <div class="flex flex-col lg:flex-row lg:gap-8">
+    <!-- Carousel Container -->
+    <div class="lg:w-1/2">
+      <CarouselContainer carouselId="insurance-carousel">
+        <div id="insurance-carousel" class="carousel">
+          {
+            InsuranceFeatures.mobileImage.map((value) => {
+              return (
+                <BookNowButtonMarketing>
+                  <div class="carousel-cell">
+                    <img
+                      class="rounded-lg max-w-full w-full overflow-hidden max-h-full  object-cover lg:contain sm:p-6 "
+                      src={value}
+                      alt="insurance_image"
+                    />
+                  </div>
+                </BookNowButtonMarketing>
+              );
+            })
+          }
+        </div>
+      </CarouselContainer>
+    </div>
+
+    <!-- Services Component -->
+    <div class="lg:w-1/2">
+      <div class="py-2">
+        {
+          InsuranceFeatures.servicesComponent.map((data, index) => {
+            const isLastItem =
+              index === InsuranceFeatures.servicesComponent.length - 1;
+            return (
+              <div class="bg-white flex justify-start items-center mt-4 border-[1px] border-gray-300 px-3 sm:rounded-2xl rounded-xl">
+                <img
+                  class="rounded-lg mr-2 h-16 w-18 sm:p-1"
+                  src="https://vetic-img.s3.ap-south-1.amazonaws.com/website/landing+page/image+1.png"
+                  alt="banner_image"
+                />
+                <div class="sm:p-1">
+                  <p class="text-base sm:text-xl font-semibold sm:leading-none	my-2 mt-3">
+                    {data.heading}
+                  </p>
+                  <p class="text-sm sm:text-xl font-light text-gray-500 sm:leading-none mb-2">
+                    {data.description}
+                  </p>
+                </div>
+
+                {!isLastItem && <p class="mt-4" />}
+              </div>
+            );
+          })
+        }
+      </div>
+
+      <!-- Button -->
+      <div class="mt-2 mb-6 sm:mt-4 flex items-center sm:pt-4 ">
+        <BookNowButtonMarketing
+          className="bg-[#152239] text-white text-sm sm:text-xl px-7 sm:px-16 py-2 sm:py-3 w-full text-center rounded-xl font-bricolage tracking-button lg:w-auto"
+        >
+          {InsuranceFeatures?.buttonText}
+        </BookNowButtonMarketing>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import Flickity from "flickity";
+  import "flickity/css/flickity.css";
+
+  window.addEventListener("DOMContentLoaded", () => {
+    var elem = document.querySelector("#insurance-carousel");
+    new Flickity(elem, {
+      cellAlign: "left",
+      contain: true,
+      pageDots: false,
+      wrapAround: true,
+      pauseAutoPlayOnHover: false,
+      prevNextButtons: false,
+      autoPlay: 1500,
+    });
+  });
+</script>

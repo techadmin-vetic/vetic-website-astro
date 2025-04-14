@@ -1,0 +1,26 @@
+---
+import MainLayout from "@layouts/_main_layout.astro";
+import ModalContainer from "@components/ui/ModalContainer.astro";
+import BookNowFormModal from "@components/ui/BookNowFormModal.astro";
+import { GETConsultationNearMepageSiteData } from "@api/api_functions";
+import ConsultationNearMe from "@components/pages/ConsultationPage/index.astro";
+
+const {
+  data: {
+    page_content: {
+      body: { main: mainContent },
+    },
+  },
+} = await GETConsultationNearMepageSiteData();
+---
+
+<MainLayout title={mainContent?.meta?.title} description={mainContent?.meta?.description} canonicalTag={mainContent?.meta?.canonicalTag}>
+  <ConsultationNearMe
+    content={mainContent}
+    location={mainContent.meta.location}
+    srNumber={mainContent.meta.srNumber}
+  />
+  <ModalContainer>
+    <BookNowFormModal location={mainContent.meta.location} />
+  </ModalContainer>
+</MainLayout>

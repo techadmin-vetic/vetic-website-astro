@@ -1,0 +1,159 @@
+---
+// import { Image } from "astro:assets";
+import BookNowButton from "@components/ui/BookNowButton.astro";
+import CarouselContainer from "@components/ui/CarouselContainer.astro";
+import { Image } from "astro:assets";
+import type { IHomePageProps } from "@components/pages/PagePropsInterface/page_props_interface";
+const {
+  content: { testimonials },
+} = Astro.props as IHomePageProps;
+---
+
+<style>
+  .testimonials-bg {
+    background-image: url("https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/Banner+Image/bgIconM.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+  }
+
+  @media (min-width: 768px) {
+    .testimonials-bg {
+      background-image: url("https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/Banner+Image/bgIconD.webp");
+      background-position: bottom;
+    }
+  }
+</style>
+
+<script>
+  import Flickity from "flickity";
+  import "flickity/css/flickity.css";
+  var elem = document.querySelector(".new_reviews_carousel");
+
+  new Flickity(elem, {
+    // options
+    cellAlign: "left",
+    contain: true,
+    prevNextButtons: false,
+    pauseAutoPlayOnHover: false,
+    pageDots: false,
+    autoPlay: 3000,
+    wrapAround: true,
+  });
+</script>
+
+<div class="py-10 bg-cover bg-center testimonials-bg sm:rounded-3xl">
+  <div class="container w-11/12 mx-auto">
+    <div class="flex justify-between items-center w-full lg:pt-4">
+      <h2 class="text-2xl sm:text-3xl font-primaryFont">
+        {testimonials.heading}
+      </h2>
+      <div class="">
+        <div class="flex items-center">
+          <span class="text-[24px] sm:text-2xl font-primaryFont"
+            >{testimonials.rating}</span
+          >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="h-4 w-4 ml-1 text-yellow-300"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        <p
+          class="text-zinc-600 text-[14px] font-secondaryFont whitespace-nowrap overflow-hidden"
+        >
+          {testimonials.ratingData}
+        </p>
+      </div>
+    </div>
+
+    <CarouselContainer carouselId="new_reviews_carousel">
+      {
+        testimonials?.testimonialData?.map((reviews) => (
+          <div class="sm:px-0 mt-4 sm:w-2/6">
+            <div class="bg-white border-[1px] border-primaryColor w-[94%] p-4 rounded-lg flex flex-col items-start">
+              <div class="flex items-center justify-between mb-2 w-full">
+                <div class="flex">
+                  <BookNowButton>
+                    <Image
+                      width={200}
+                      height={200}
+                      class="w-12 h-12 rounded-full mr-2 tracking-image"
+                      src={reviews.image}
+                      alt="User profile picture"
+                      loading="lazy"
+                    />
+                  </BookNowButton>
+                  <div>
+                    <div class="font-secondaryFont text-md">
+                      {reviews.petOwner}
+                    </div>
+
+                    <div class="text-sm text-zinc-500 font-secondaryFont">
+                      {reviews.petName}
+                    </div>
+                  </div>
+                </div>
+                <div class="">
+                  {/* google icon  */}
+                  <svg
+                    class="w-5 h-5 ml-1 mb-1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    x="0px"
+                    y="0px"
+                    viewBox="0 0 48 48"
+                  >
+                    <path
+                      fill="#FFC107"
+                      d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"
+                    />
+                    <path
+                      fill="#FF3D00"
+                      d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"
+                    />
+                    <path
+                      fill="#4CAF50"
+                      d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"
+                    />
+                    <path
+                      fill="#1976D2"
+                      d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"
+                    />
+                  </svg>
+                  <div class="flex justify-between items-center bg-gray-200 rounded-lg px-1">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      class="h-2 w-2 text-yellow-400"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+
+                    <p class="text-[9px] font-secondaryFont font-light ml-1">
+                      {reviews.google_rating}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <p class="font-secondaryFont font-light text-sm">
+                {reviews.content}
+              </p>
+            </div>
+          </div>
+        ))
+      }
+    </CarouselContainer>
+  </div>
+</div>

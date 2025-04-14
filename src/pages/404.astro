@@ -1,0 +1,40 @@
+---
+import MainLayout from "@layouts/_main_layout.astro";
+---
+
+<MainLayout
+  withServiceLayout={false}
+  title="Page Not Found"
+  description="Page Not Found"
+  canonicalTag=""
+>
+  <head>
+    <!-- Automatically redirect to the homepage after 1 seconds -->
+    <meta http-equiv="refresh" content="1; url=/" />
+    <script>
+      setTimeout(() => {
+        const url = window.location.href;
+        const lastChar = url.charAt(url.length - 1);
+        if (lastChar === "/") {
+          window.location.href = url.slice(0, url.length - 1);
+        }else{
+          window.location.href = "/";
+        }
+      }, 0);
+    </script>
+  </head>
+  <div class="flex flex-col items-center justify-center min-h-[60vh] px-4">
+    <h1 class="text-4xl font-bold mb-4 font-primaryFont">
+      404: Page Not Found
+    </h1>
+    <p class="text-lg mb-8 font-secondaryFont">
+      The page you're looking for doesn't exist. Please Go to the homepage...
+    </p>
+    <a
+      href="/"
+      class="bg-black text-white px-6 py-2 rounded-md hover:bg-primary-dark transition-colors font-primaryFont"
+    >
+      Go Home
+    </a>
+  </div>
+</MainLayout>

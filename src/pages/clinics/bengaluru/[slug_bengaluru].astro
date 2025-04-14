@@ -1,0 +1,76 @@
+---
+export const prerender = true;
+import type { GetStaticPaths } from "astro";
+import ClinicsDetails from "@components/pages/ClinicDetailsPage/index.astro";
+import MainLayout from "@layouts/_main_layout.astro";
+import ModalContainer from "@components/ui/ModalContainer.astro";
+import BookNowFormModal from "@components/ui/BookNowFormModal.astro";
+import type { IClinicDetailsPageGETResponseData } from "@api/api_modals";
+import BookNowPackageModal from "@components/ui/BookNowPackageModal.astro";
+
+export const getStaticPaths = (async () => {
+  const res = await fetch("https://static.vetic.in/api/clinic/");
+  const resdata = await res.json();
+  const data = resdata.data;
+
+  const paths = data
+    .filter(
+      (slug: IClinicDetailsPageGETResponseData) =>
+        slug?.page_content?.body?.main?.meta?.location === "bengaluru" &&
+        slug?.page_content?.body?.main?.pageCategory?.includes(
+          "BengaluruClinicDetailsPages"
+        )
+    )
+    .map((res: IClinicDetailsPageGETResponseData) => {
+      return {
+        props: {
+          ...res,
+        },
+        params: {
+          slug_bengaluru: res.page_slug,
+        },
+      };
+    });
+  return paths;
+}) satisfies GetStaticPaths;
+
+const {
+  page_content: {
+    body: { main: mainContent },
+  },
+}: IClinicDetailsPageGETResponseData = Astro.props;
+
+const clinicsPage =
+  mainContent?.pageCategory?.includes("BengaluruClinicDetailsPages") &&
+  mainContent?.meta?.location === "bengaluru";
+// console.log(mainContent?.meta?.schemaData)
+---
+
+<MainLayout
+  withServiceLayout={false}
+  title={mainContent?.meta?.title}
+  description={mainContent?.meta?.description}
+  canonicalTag={mainContent?.meta?.canonicalTag}
+  schemaData={mainContent?.meta?.schemaData}
+>
+  {
+    clinicsPage && (
+      <ClinicsDetails
+        content={mainContent}
+        location={mainContent?.meta?.location}
+        srNumber={mainContent?.meta?.srNumber}
+      />
+    )
+  }
+
+  <ModalContainer>
+    <BookNowFormModal location={mainContent?.meta?.location} />
+  </ModalContainer>
+  <ModalContainer>
+    <BookNowPackageModal
+      slot="package"
+      location={mainContent?.meta?.location}
+      content={mainContent}
+    />
+  </ModalContainer>
+</MainLayout>

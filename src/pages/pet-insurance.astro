@@ -1,0 +1,31 @@
+---
+import Insurance from "@components/pages/MarketingPages/Insurance/index.astro";
+import ModalContainer from "@components/ui/ModalContainer.astro";
+import { GETInsuranceSiteData } from "@api/api_functions";
+import MainLayout from "@layouts/_main_layout.astro";
+import BookNowFormModal from "@components/ui/BookNowFormModal.astro";
+
+const {
+  data: {
+    page_content: {
+      body: { main: mainContent },
+    },
+  },
+} = await GETInsuranceSiteData();
+// console.log(mainContent, "vikram");
+---
+
+<MainLayout
+  title={mainContent?.meta?.title}
+  description={mainContent?.meta?.description}
+  canonicalTag={mainContent?.meta?.canonicalTag}
+>
+  <Insurance
+    content={mainContent}
+    location={mainContent.meta.location}
+    srNumber={mainContent.meta.srNumber}
+  />
+  <ModalContainer>
+    <BookNowFormModal location={mainContent.meta.location} />
+  </ModalContainer>
+</MainLayout>

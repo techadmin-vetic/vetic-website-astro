@@ -1,0 +1,98 @@
+---
+
+---
+
+<slot />
+
+<script is:inline>
+  if (window.Worker) {
+    const gtmWorker = new Worker("/gtmWorker.js");
+
+    gtmWorker.onmessage = function (e) {
+      const data = e.data;
+      if (data.action === "pushEvent") {
+        window.dataLayer.push(data.event);
+      } else if (data.action === "sendGTAGEvent") {
+        const utmSourceData = window.getUTMData();
+        window.gtag("event", data.eventAction, {
+          event_category: "Button",
+          event_label: data.eventLabel,
+          ...utmSourceData,
+        });
+      }
+    };
+
+    gtmWorker.onerror = function (e) {
+      console.error(
+        "Error in worker:",
+        e.message,
+        e.filename,
+        e.lineno,
+        e.colno
+      );
+    };
+
+    gtmWorker.onmessageerror = function (e) {
+      console.error("Message error in worker:", e);
+    };
+
+    function pushEventToGTM(event) {
+      gtmWorker.postMessage({
+        action: "pushEvent",
+        event: event,
+      });
+    }
+
+    function sendGTAGEvent(eventAction, eventLabel) {
+      gtmWorker.postMessage({
+        action: "sendGTAGEvent",
+        eventAction: eventAction,
+        eventLabel: eventLabel,
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      /* Thankyou Page Event Listener */
+      if (document.getElementById("thank-you-page-container")) {
+        const eventObject = {
+          event: "EC_FormSubmit",
+          enhanced_conversion_data: {
+            phone_number: window.getMobileFromURL(true),
+          },
+        };
+        pushEventToGTM(eventObject);
+      }
+      /* Thankyou page event listener ends */
+
+      /* Tracking Call Now Button events starts */
+      document.querySelectorAll(".tracking-button").forEach((button) => {
+        button.addEventListener("click", () => {
+          sendGTAGEvent("click", button.innerText);
+        });
+      });
+      /* Tracking Call Now Button event ends */
+
+      /* Tracking Image Click Event Starts */
+      document.querySelectorAll(".tracking-image").forEach((image) => {
+        image.addEventListener("click", () => {
+          sendGTAGEvent("click", image.alt || "Image");
+        });
+      });
+      /* Tracking Image Click Event Ends */
+
+      /* Tracking Scroll Event Starts */
+      document.addEventListener("scroll", () => {
+        if (
+          !window.userScrolled &&
+          (window.scrollY > 160 || window.scrollY > 320 || window.scrollY > 640)
+        ) {
+          sendGTAGEvent("scroll", "Scrolled more than 160px");
+          window.userScrolled = true; // Ensure the event is sent only once
+        }
+      });
+      /* Tracking Scroll Events Ends */
+    });
+  } else {
+    console.error("Web Workers are not supported in this browser.");
+  }
+</script>

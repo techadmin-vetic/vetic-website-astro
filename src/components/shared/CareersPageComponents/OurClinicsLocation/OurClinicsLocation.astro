@@ -1,0 +1,39 @@
+---
+import { data } from "flickity";
+
+const {
+  content: { ourLocations },
+} = Astro.props;
+---
+
+<div class="py-6 sm:py-12 bg-gradient-to-b from-primaryColor">
+  <div class="container mx-auto w-11/12">
+    <div class="">
+      <h2 class="text-2xl sm:text-[36px] leading-8 font-primaryFont mb-6">
+        {ourLocations?.heading}
+      </h2>
+    </div>
+    <ul
+      role="list"
+      class="grid grid-cols-2 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 sm:mt-10"
+    >
+      {
+        ourLocations?.cards?.map((data) => (
+          <li class="col-span-1 flex flex-col divide-y divide-gray-200 bg-white text-center shadow-sm border border-grey-100 rounded-xl">
+            <div class="p-2">
+              <img
+                class="mx-auto w-full h-[180px] shrink-0 rounded-xl"
+                src={data?.image}
+                alt=""
+              />
+              <h3 class="mt-2 text-sm font-medium text-gray-900">
+                {data?.cityName}
+              </h3>
+              <p class="text-sm text-gray-500">{data?.clinicCount}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>

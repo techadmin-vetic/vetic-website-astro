@@ -1,0 +1,34 @@
+---
+// This file is used to serve the apple-app-site-association file for iOS app linking
+// The file is located at src/pages/.well-known/apple-app-site-association
+// The file is served at the URL /.well-known/apple-app-site-association
+// The file is served as a JSON file with the correct content type
+// The file is used to support universal links for iOS apps
+// src/pages/.well-known/apple-app-site-association.ts
+
+const data = {
+  activitycontinuation: {
+    apps: ["7D72ZN5BF5.com.vetic.vetic", "7D72ZN5BF5.com.vetic.vetic.dev"],
+  },
+  applinks: {
+    apps: [],
+    details: [
+      {
+        appID: "7D72ZN5BF5.com.vetic.vetic",
+        paths: ["*"],
+      },
+      {
+        appID: "7D72ZN5BF5.com.vetic.vetic.dev",
+        paths: ["*"],
+      },
+    ],
+  },
+};
+
+// manually return a new Response
+return new Response(JSON.stringify(data), {
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+---

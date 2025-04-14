@@ -1,0 +1,167 @@
+---
+import BookNowButton from "@components/ui/BookNowButton.astro";
+import { Image } from "astro:assets";
+
+import type { IHomePageProps } from "@components/pages/PagePropsInterface/page_props_interface";
+const {
+  content: { bannerSection },
+} = Astro.props as IHomePageProps;
+---
+
+<!----------------------------------------------------------- Desktop Screen ----------------------------------------------------------->
+<section
+  class="hidden lg:block relative bg-cover bg-cente"
+>
+  <Image
+    src="https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/Footer/Component_bg_image_Desktop.webp"
+    alt="Background Image"
+    width={50}
+    height={50}
+    quality={80}
+    format="webp"
+    class="absolute inset-0 w-full h-full object-fit"
+    loading="lazy"
+  />
+  <div class="container w-11/12 mx-auto py-4 flex items-center justify-between pt-20 relative">
+    <!-- Left Content Section -->
+    <div class="text-center md:text-left md:w-1/2 space-y-6 pb-10">
+      <h1 class="text-5xl text-gray-900 font-primaryFont leading-tight">
+        {bannerSection?.heading1}
+        <span class="text-primaryFontColor">{bannerSection?.heading2}</span>
+      </h1>
+      <h2 class="text-xl text-gray-700 font-secondaryFont">
+        {bannerSection?.subHeadingSpan1}
+        <span class="text-primaryFontColor font-semibold">
+          {bannerSection?.subHeadingSpan2}
+        </span>
+        {bannerSection?.subHeadingSpan3}
+        <span class="text-primaryFontColor font-semibold">
+          {bannerSection?.subHeadingSpan4}
+        </span>
+      </h2>
+      <BookNowButton
+        className="bg-gray-950 text-white text-center w-52 py-3 rounded-xl font-primaryFont tracking-button"
+      >
+        {bannerSection?.buttonText}
+      </BookNowButton>
+      <!-- USP Section -->
+      <div class="mt-12 flex flex-wrap items-center gap-4">
+        {bannerSection?.usp.map((usps) => (
+          <div
+            class="grid place-items-center w-32 h-40 rounded-2xl py-2 text-center bg-gradient-to-t from-white from-10%"
+          >
+            <div class="bg-white rounded-xl grid place-items-center w-16 h-16">
+              <Image
+                src={usps.uspIcon}
+                width={40}
+                height={40}
+                format="webp"
+                quality={80}
+                alt="Pet Care"
+                loading="lazy"
+              />
+            </div>
+            <p class="text-sm text-gray-700">{usps.heading}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Right Image Section -->
+    <div class="md:w-1/2 flex items-end justify-center absolute bottom-0 right-0">
+      <Image
+        src={bannerSection?.desktopImage}
+        width={500}
+        height={500}
+        format="webp"
+        quality={80}
+        alt="Pet Care"
+        class="max-w-full h-auto"
+        loading="lazy"
+      />
+    </div>
+  </div>
+</section>
+
+
+
+ <!----------------------------------------------------------- Mobile View Screen ----------------------------------------------------------->
+
+<section
+  class="lg:hidden pt-6 relative"
+>
+  <Image
+    src="https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/Footer/Component_bg_image_mobile.webp"
+    alt="Background_Image"
+    width={200}
+    height={200}
+    quality={80}
+    format="webp"
+    class="absolute inset-0 w-full h-full object-cover"
+    loading="lazy"
+  />
+  <div class="container mx-auto relative ">
+    <div class="w-11/12 mx-auto space-y-6">
+      <h1 class="text-3xl sm:text-4xl font-primaryFont font-bold text-gray-900">
+        {bannerSection?.heading1}
+        <span class="text-primaryFontColor">{bannerSection?.heading2}</span>
+      </h1>
+      <h2 class="text-md text-gray-700">
+        {bannerSection?.subHeadingSpan1}
+        <span class="text-primaryFontColor font-semibold"
+          >{bannerSection?.subHeadingSpan2}</span
+        >
+        {bannerSection?.subHeadingSpan3}
+        <span class="text-primaryFontColor font-semibold"
+          >{bannerSection?.subHeadingSpan4}</span
+        >
+      </h2>
+    </div>
+  </div>
+
+  <!-- Image section -->
+  <div class="mt-6 flex items-center justify-center relative bottom-0 right-0">
+    <Image
+      src={bannerSection?.mobileImage}
+      width={200}
+      height={200}
+      format="webp"
+      quality={80}
+      alt="Pet Care"
+      class="w-2/3 h-2/3"
+      loading="lazy"
+    />
+  </div>
+  <!-- Image section end -->
+
+  <div class="bg-white rounded-t-3xl overflow-hidden relative">
+    <div class="mx-auto mt-4 w-11/12 flex h-32 mb-4 items-center justify-start">
+      {
+        bannerSection?.usp.map((usps) => (
+          <div class="flex flex-col w-32 h-full items-center rounded-2xl mr-2 text-center bg-gradient-to-b from-pink-50 from-10%">
+            <div class="bg-white rounded-xl mt-2 flex items-center justify-center w-12 h-12">
+              <Image
+                src={usps.uspIcon}
+                width={40}
+                height={40}
+                format="webp"
+                quality={80}
+                alt="Pet Care"
+                class="w-2/3 h-2/3"
+                loading="lazy"
+              />
+            </div>
+            <p class="mt-2 text-sm text-gray-700">{usps.heading}</p>
+          </div>
+        ))
+      }
+    </div>
+    <div class="flex items-center justify-center">
+      <BookNowButton
+        className="bg-black text-white text-center w-11/12 mx-auto py-3 rounded-2xl font-bricolage tracking-button"
+      >
+        {bannerSection?.buttonText}
+      </BookNowButton>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,130 @@
+---
+import type { IMetaNewPageProps } from "@components/pages/PagePropsInterface/page_props_interface";
+import BookNowButtonMarketing from "@components/ui/BookNowButtonMarketing.astro";
+import CarouselContainer from "@components/ui/CarouselContainer.astro";
+
+// const ClinicsDataStatic = [
+// {
+//     clinicName: "Gurgaon & Faridabad Clinics Near You",
+//     clinicImage:
+//       "https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/plum-page/Gurgaon+%26+Faridabad_3_11zon.webp",
+//   },
+//   {
+//     clinicName: "Delhi Clinics Near You",
+//     clinicImage:
+//       "https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/plum-page/Delhi_2_11zon.webp",
+//   },
+//   {
+//     clinicName: "Noida & Ghaziabad Clinics Near You",
+//     clinicImage:
+//       "https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/plum-page/Noida+%26+Ghaziabad_6_11zon.webp",
+//   },
+//   {
+//     clinicName: "Mumbai Clinics Near You",
+//     clinicImage:
+//     "https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/plum-page/Mumbai_5_11zon.webp",
+//   },
+//   {
+//     clinicName: "Bengaluru Clinics Near You",
+//     clinicImage:
+//       "https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/plum-page/Bangalore_1_11zon.webp",
+//   },
+//   {
+//     clinicName: "Pune Clinic Near You",
+//     clinicImage:
+//       "https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/plum-page/Pune_7_11zon.webp",
+//   },,
+//   {
+//     clinicName: "Hyderabad Clinic Near You",
+//     clinicImage:
+//       "https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/plum-page/Hyderabad_4_11zon.webp",
+//   },
+// ];
+const { content, srNumber, location } = Astro.props as IMetaNewPageProps;
+---
+
+<div class="bg-gradient-to-b from-gray-50 w-11/12 mx-auto">
+  <div class="space-y-4 px-4 pt-6 w-full mx-auto">
+    <div class="text-left">
+      <h1
+        class="text-2xl tracking-wide font-bricolage font-semibold py-2 lg:py-4"
+      >
+        {content.Clinics.heading}
+      </h1>
+    </div>
+    <BookNowButtonMarketing>
+      <div
+        class="h-96 bg-center bg-cover bg-no-repeat relative rounded-3xl overflow-hidden tracking-image"
+        style={{
+          backgroundImage: `url("${content.Clinics.clinicBannerImage}")`,
+        }}
+      >
+      </div>
+      <div class="flex justify-between align-center w-full mx-auto mt-3">
+        <div class="w-full grid grid-cols-2 gap-4">
+          {
+            content.Clinics.usp.map((USPContentClinics) => {
+              return (
+                <div class="flex items-center h-10">
+                  <img
+                    src={USPContentClinics.logo}
+                    alt="USP Logo"
+                    class="w-6 h-6 sm:w-8 sm:h-8"
+                  />
+                  <p class="pl-2 text-sm sm:text-lg font-normal font-bricolage tracking-wide">
+                    {USPContentClinics.heading}
+                  </p>
+                </div>
+              );
+            })
+          }
+        </div>
+      </div>
+    </BookNowButtonMarketing>
+  </div>
+
+  <CarouselContainer carouselId="static_clinic_carousel">
+    {
+      content?.ClinicsDataStatic?.length > 0 &&
+        content?.ClinicsDataStatic?.map((clinics) => {
+          return (
+            <>
+              <div class="mr-3">
+                <div class="my-4">
+                  <BookNowButtonMarketing>
+                    <div
+                      class="w-[220px] sm:w-[18rem] h-[130px] sm:h-[12rem] relative overflow-hidden rounded-t-xl tracking-image"
+                      style={{
+                        backgroundSize: "contain",
+                        backgroundImage: `url("${clinics.clinicImage}")`,
+                        backgroundRepeat: "no-repeat",
+                        imageSize: "cover",
+                      }}
+                    />
+                  </BookNowButtonMarketing>
+                </div>
+                <p class="text-xs sm:text-base rounded-b-xl font-light absolute bottom-0 bg-gray-950 text-white w-full text-center py-1 font-bricolage">
+                  {clinics.clinicName}
+                </p>
+              </div>
+            </>
+          );
+        })
+    }
+  </CarouselContainer>
+</div>
+
+<script>
+  import Flickity from "flickity";
+  import "flickity/css/flickity.css";
+  var elem = document.querySelector(".static_clinic_carousel");
+  new Flickity(elem, {
+    // options
+    cellAlign: "left",
+    contain: true,
+    prevNextButtons: false,
+    pauseAutoPlayOnHover: false,
+    pageDots: false,
+    autoPlay: 1500,
+  });
+</script>

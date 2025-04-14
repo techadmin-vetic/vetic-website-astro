@@ -1,0 +1,56 @@
+---
+import { Image } from "astro:assets";
+
+// New image import (replace with actual path)
+---
+
+<section class="bg-pink-50 py-12 rounded-xl container w-11/12 mx-auto sm:mt-10 my-6">
+  <div class="container w-11/12 mx-auto py-2">
+    <div class="md:flex md:items-center md:justify-between">
+      <div class="md:w-[60%]">
+        <h2
+          class="text-3xl md:text-4xl font-bold text-gray-800 font-primaryFont mb-4"
+        >
+          Locate a Vetic Pet Clinic Near You
+        </h2>
+        <p class="text-gray-700 text-md mb-6 font-secondaryFont">
+          Finding a Vetic Pet Clinic is easy! With 40+ Multispeciality Pet
+          Hospitals, we are dedicated to making pet healthcare accessible and
+          convenient for you.
+        </p>
+        <div class="flex items-center space-x-4">
+          <select
+            class="border font-primaryFont border-gray-300 rounded-md py-2 px-4 w-48"
+          >
+          <!-- Add city options -->
+            <option>Gurugram</option>
+            <option>Delhi</option>
+            <option>Noida</option>
+            <option>Ghaziabad</option>
+            <option>Faridabad</option>
+            <option>Hyderabad</option>
+            <option>Mumbai</option>
+            <option>Bangalore</option>
+            <option>Pune</option>
+          </select>
+          <a href="/clinics-locator">
+            <button class="bg-black text-white rounded-md py-2 px-6">
+              Search
+            </button>
+          </a>
+        </div>
+      </div>
+      <div class="hidden md:block md:w-[40%] pl-16">
+        <Image
+          src="https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/about_us/about-us-city-locator+(1)+(1).webp"
+          alt="Dog and cat"
+          width={200}
+          height={100}
+          class="w-[60%] h[60%] rounded-lg"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- You can keep the existing grid of locations if needed, or remove it if not required in the new design -->

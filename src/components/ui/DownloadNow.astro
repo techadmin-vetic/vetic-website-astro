@@ -1,0 +1,71 @@
+---
+const {
+  content: { download_now_btn },
+} = Astro.props;
+// console.log(download_now_btn);
+---
+
+<a
+  href={download_now_btn.download_now_btn_link}
+  class="order-now-button hidden font-secondaryFont"
+  id="mobileOrderButton"
+>
+  {download_now_btn.download_now_btn_content}
+</a>
+
+<!-- Alpine.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.0/dist/cdn.min.js" defer
+></script>
+
+<!-- Script to handle scroll -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const button = document.getElementById("mobileOrderButton");
+
+    window.addEventListener("scroll", () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+      if (scrollTop === 0) {
+        // Hide the button when at the top of the page
+        button.classList.add("hidden");
+      } else {
+        // Show the button when user scrolls up or down
+        button.classList.remove("hidden");
+      }
+    });
+  });
+</script>
+
+<!-- CSS Styles -->
+<style>
+  .order-now-button {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #1f3d73;
+    color: white;
+    font-size: 18px;
+    font-weight: semi-bold;
+    padding: 14px 28px;
+    border-radius: 8px;
+    z-index: 10;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  @media (min-width: 641px) {
+    /* Hide the button on desktop view */
+    .order-now-button {
+      display: none !important;
+    }
+  }
+</style>

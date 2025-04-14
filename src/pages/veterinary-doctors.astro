@@ -1,0 +1,27 @@
+---
+export const prerender = true;
+import MainLayout from "@layouts/_main_layout.astro";
+import ModalContainer from "@components/ui/ModalContainer.astro";
+import BookNowFormModal from "@components/ui/BookNowFormModal.astro";
+import { GETVeterinaryDoctorspageSiteData } from "@api/api_functions";
+import VeterinaryDoctorsCityWisePage from "@components/pages/VeterinaryDoctorsLocatorCityWise/index.astro";
+
+const {
+  data: {
+    page_content: {
+      body: { main: mainContent },
+    },
+  },
+} = await GETVeterinaryDoctorspageSiteData();
+---
+
+<MainLayout title={mainContent?.meta?.title} description={mainContent?.meta?.description} canonicalTag={mainContent?.meta?.canonicalTag} >
+  <VeterinaryDoctorsCityWisePage
+    content={mainContent}
+    location={mainContent.meta.location}
+    srNumber={mainContent.meta.srNumber}
+  />
+  <ModalContainer>
+    <BookNowFormModal location={mainContent.meta.location} />
+  </ModalContainer>
+</MainLayout>

@@ -1,0 +1,24 @@
+---
+import { Image } from "astro:assets";
+
+const {
+  content: { descriptionSection },
+} = Astro.props;
+---
+
+<div class="container w-11/12 mx-auto py-2">
+  {
+    descriptionSection && (
+      <>
+        <h2 class="text-gray-900 mt-6 mb-8 font-primaryFont text-2xl sm:text-4xl">
+          {descriptionSection?.heading}
+        </h2>
+        <p class="text-gray-700 text-md">
+          {descriptionSection.subHeading1}
+          <br />
+          {descriptionSection.subHeading2}
+        </p>
+      </>
+    )
+  }
+</div>

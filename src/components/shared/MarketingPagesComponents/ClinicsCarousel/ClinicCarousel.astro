@@ -1,0 +1,121 @@
+---
+import { GETAllClinicsSiteData } from "@api/api_functions";
+import type { IGETAllClinicsResult } from "@api/api_modals";
+import CarouselContainer from "@components/ui/CarouselContainer.astro";
+import ClinicCardV1 from "@components/shared/MarketingPagesComponents/ClinicCards/ClinicCardV1.astro";
+import type { IAllClinicsPageProps } from "@components/pages/PagePropsInterface/page_props_interface";
+
+const { heading, headingSuffix, location, hideHeading} =
+  Astro.props as IAllClinicsPageProps;
+
+const getAllClinicsresponse = async () => {
+  const response = await GETAllClinicsSiteData();
+  let datalocation: IGETAllClinicsResult[] = [];
+  if (response.status) {
+    const res = response.data?.results;
+    switch (location) {
+      case "delhi":
+        datalocation = res.filter(
+          (e) => e.district === "62ddc72c-9eed-11ed-b93a-027b5103e28a"
+        );
+        break;
+      case "noida":
+        datalocation = res.filter(
+          (e) => e.district === "ece8531e-926a-495c-a69c-f32e6d5a668b"
+        );
+        break;
+      case "ghaziabad":
+        datalocation = res.filter(
+          (e) => e.district === "c48add3c-ca28-11ed-b60d-3fc0f6941078"
+        );
+        break;
+      case "mumbai":
+        datalocation = res.filter(
+          (e) => e.district === "352b32b3-49d4-419c-abef-6b2c9b2dcbcd"
+        );
+        break;
+      case "bengaluru":
+        datalocation = res.filter(
+          (e) => e.district === "ca3f04f6-3ad0-468f-aed8-b0c822a39e50"
+        );
+        break;
+      case "hyderabad":
+        datalocation = res.filter(
+          (e) => e.district === "ca3f04f6-3ad0-468f-aed8-b0c822a39e51"
+        );
+        break;
+      case "pune":
+        datalocation = res.filter(
+          (e) => e.district === "352b32b3-49d4-419c-abef-6b2c9b2dcbcb"
+        );
+        break;
+      case "faridabad":
+        datalocation = res.filter(
+          (e) => e.district === "60362641-1bac-4179-a123-25ffd2453434"
+        );
+        break;
+      case "maharashtra":
+        datalocation = res.filter(
+          (e) => e.district === "352b32b3-49d4-419c-abef-6b2c9b2dcbcd"
+        );
+        break;
+      default: // case "gurgaon"
+        datalocation = res.filter(
+          (e) => e.district === "49814896-3e3d-11ed-9612-1e00da260979"
+        );
+    }
+    return datalocation;
+  } else {
+    return datalocation;
+  }
+};
+const clinicsData = await getAllClinicsresponse().then((data) => data);
+---
+
+<div class="w-full lg:w-11/12 mx-auto mt-0 sm:mt-4 md:mt-4 lg:mt-10">
+  {
+    !hideHeading && (
+      <div class="mx-auto text-left">
+        <h2 class="text-lg  ml-6 sm:ml-4 font-bold tracking-tight text-gray-900 sm:text-xl lg:text-3xl">
+          {heading}
+          {headingSuffix}
+        </h2>
+      </div>
+    )
+  }
+
+  <div class="lg:mx-4 px-4 mt-4 mb-8 sm:m-1 sm:h-[16rem] w-full">
+    <CarouselContainer carouselId="clinic_carousel">
+      {
+        clinicsData && clinicsData?.length > 0 ? (
+          clinicsData.map((value, id) => (
+            <ClinicCardV1
+              clinicName={value.name}
+              fridayStartTime={value.visiting_hours.friday_start_time}
+              fridayEndTime={value.visiting_hours.friday_end_time}
+              imageUrl={value.image_url}
+              rating={value.rating}
+            />
+          ))
+        ) : (
+          <div />
+        )
+      }
+    </CarouselContainer>
+  </div>
+</div>
+
+<script>
+  import Flickity from "flickity";
+  import "flickity/css/flickity.css";
+  var elem = document.querySelector(".clinic_carousel");
+  new Flickity(elem, {
+    // options
+    cellAlign: "left",
+    contain: true,
+    prevNextButtons: false,
+    pauseAutoPlayOnHover: false,
+    pageDots: false,
+    autoPlay: 1500,
+  });
+</script>

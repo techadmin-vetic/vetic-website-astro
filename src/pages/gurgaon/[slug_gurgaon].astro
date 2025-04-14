@@ -1,0 +1,136 @@
+---
+export const prerender = true;
+
+import type { GetStaticPaths } from "astro";
+import DynamicClinicsPage from "@components/pages/MarketingPages/MarketingDynamicPages/Clinics/index.astro";
+import DynamicGroomingPage from "@components/pages/MarketingPages/MarketingDynamicPages/Grooming/index.astro";
+import DynamicBrandPage from "@components/pages/MarketingPages/MarketingDynamicPages/Brand/index.astro";
+import DynamicVaccinationPage from "@components/pages/MarketingPages/MarketingDynamicPages/Vaccination/index.astro";
+import DynamicSurgeryPage from "@components/pages/MarketingPages/MarketingDynamicPages/Surgery/index.astro";
+
+import ModalContainer from "@components/ui/ModalContainer.astro";
+import BookNowFormModal from "@components/ui/BookNowFormModal.astro";
+import type {
+  IConsultationSlugGETResponseData,
+  IGroomingSlugGETResponseData,
+  IBrandSlugGETResponseData,
+  ISurgerySlugGETResponseData,
+  IVaccinationSlugGETResponseData,
+} from "@api/api_modals";
+import MainLayout from "@layouts/_main_layout.astro";
+import BookNowPackageModal from "@components/ui/BookNowPackageModal.astro";
+
+export const getStaticPaths = (async () => {
+  const res = await fetch("https://static.vetic.in/api/marketing-new/");
+  const resdata = await res.json();
+  const data = resdata.data;
+  // console.log((data.page_slug = "pet-clinics-new"), "static path");
+  const paths = data
+    .filter(
+      (slug: IConsultationSlugGETResponseData) =>
+        slug?.page_content?.body?.main?.meta?.location === "gurgaon" &&
+        (slug?.page_slug?.includes("-new") || slug?.page_slug?.includes("-pm"))
+    )
+    .map((res: IConsultationSlugGETResponseData) => {
+      return {
+        props: {
+          ...res,
+        },
+        params: {
+          slug_gurgaon: res.page_slug,
+        },
+      };
+    });
+  return paths;
+}) satisfies GetStaticPaths;
+
+const {
+  page_content: {
+    body: { main: mainContent },
+  },
+}: IConsultationSlugGETResponseData = Astro.props;
+const {
+  page_content: {
+    body: { main: MainContent },
+  },
+}: IGroomingSlugGETResponseData = Astro.props;
+const {
+  page_content: {
+    body: { main: BrandContent },
+  },
+}: IBrandSlugGETResponseData = Astro.props;
+
+const {
+  page_content: {
+    body: { main: SurgeryContent },
+  },
+}: ISurgerySlugGETResponseData = Astro.props;
+
+const {
+  page_content: {
+    body: { main: VaccinationContent },
+  },
+}: IVaccinationSlugGETResponseData = Astro.props;
+
+const clinicsPage =
+  mainContent?.pageCategory?.includes("Consultation") &&
+  mainContent?.meta?.location === "gurgaon";
+const brandPage = BrandContent?.pageCategory?.includes("Brand");
+const surgeryPage = SurgeryContent?.pageCategory?.includes("Surgery");
+const vaccinationPage =
+  VaccinationContent?.pageCategory?.includes("Vaccination");
+---
+
+<MainLayout
+  withServiceLayout={false}
+  title={mainContent?.meta?.title}
+  description={mainContent?.meta?.description}
+  canonicalTag={mainContent?.meta?.canonicalTag}
+>
+<head slot="head">
+  <meta name="robots" content="noindex, nofollow" />
+</head>
+  {
+    clinicsPage ? (
+      <DynamicClinicsPage
+        content={mainContent}
+        location={mainContent.meta.location}
+        srNumber={mainContent.meta.srNumber}
+      />
+    ) : brandPage ? (
+      <DynamicBrandPage
+        content={BrandContent}
+        location={BrandContent.meta.location}
+        srNumber={BrandContent.meta.srNumber}
+      />
+    ) : surgeryPage ? (
+      <DynamicSurgeryPage
+        content={SurgeryContent}
+        location={SurgeryContent.meta.location}
+        srNumber={SurgeryContent.meta.srNumber}
+      />
+    ) : vaccinationPage ? (
+      <DynamicVaccinationPage
+        content={VaccinationContent}
+        location={VaccinationContent.meta.location}
+        srNumber={VaccinationContent.meta.srNumber}
+      />
+    ) : (
+      <DynamicGroomingPage
+        content={MainContent}
+        location={MainContent.meta.location}
+        srNumber={MainContent.meta.srNumber}
+      />
+    )
+  }
+  <ModalContainer>
+    <BookNowFormModal location={mainContent.meta.location} />
+  </ModalContainer>
+  <ModalContainer>
+    <BookNowPackageModal
+      slot="package"
+      location={mainContent.meta.location}
+      content={mainContent}
+    />
+  </ModalContainer>
+</MainLayout>

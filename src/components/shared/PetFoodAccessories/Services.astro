@@ -1,0 +1,61 @@
+---
+
+const {
+  content: { services },
+} = Astro.props;
+// console.log(services);
+---
+<section class="bg-gray-50 py-8">
+    <div class="container mx-auto  w-11/12">
+      <h2 class="text-[24px] sm:text-[36px] text-gray-900 font-primaryFont ">
+        {services?.services_main_heading}
+      </h2>
+      <p class=" text-gray-700 sm:mt-2 text-md sm:text-xl font-secondaryFont">
+        {services?.services_main_description}
+      </p>
+  
+      <!-- Cards Grid -->
+      <div class="mt-8 grid grid-cols-1 lg:grid-cols-6 gap-6">
+        <!-- Card 1: Full Width -->
+        <div class="lg:col-span-6 bg-gray-200 rounded-xl p-6 flex items-center justify-between">
+          <div>
+            <h3 class="text-xl sm:text-3xl text-gray-900 font-primaryFont"> {services?.data[0]?.services_heading}</h3>
+            <p class="text-gray-700 text-sm sm:text-xl  mt-2 font-secondaryFont"> {services?.data[0]?.services_description}</p>
+          </div>
+          <img src={services?.data[0]?.image_laptop} alt={services?.data[0]?.img_alt_laptop} class="sm:w-36 sm:h-36 w-20 h-20" />
+        </div>
+  
+        <!-- Card 2: Half Screen Height -->
+        <div class="lg:col-span-3 lg:row-span-2 bg-[#D8BFFF] rounded-xl p-6 flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl sm:text-3xl font-semibold text-purple-900 font-primaryFont">{services?.data[1]?.services_heading}</h3>
+            <p class="text-gray-700 text-sm sm:text-xl mt-2 font-secondaryFont">
+                {services?.data[1]?.services_description}
+            </p>
+          </div>
+          <img src={services?.data[1]?.image_laptop} alt={services?.data[1]?.img_alt_laptop} class="sm:w-60 sm:h-60 w-20 h-20 self-end" />
+        </div>
+  
+        <!-- Cards 3 and 4 in a Row -->
+        <div class="lg:col-span-3 grid grid-rows-2 gap-6">
+          <!-- Card 3 -->
+          <div class="bg-[#F2DBB2] rounded-xl p-6 flex items-center justify-between">
+            <div>
+              <h3 class="text-xl sm:text-3xl font-semibold text-yellow-900 font-primaryFont">{services?.data[3]?.services_heading}</h3>
+              <p class="text-gray-700 text-sm sm:text-xl  mt-2 font-secondaryFont"> {services?.data[3]?.services_description}</p>
+            </div>
+            <img src={services?.data[3]?.image_laptop} alt={services?.data[3]?.img_alt_laptop} class="sm:w-36 sm:h-36 h-20 w-20" />
+          </div>
+  
+          <!-- Card 4 -->
+          <div class="bg-white rounded-xl p-6 flex items-center justify-between">
+            <div>
+              <h3 class="text-xl sm:text-3xl font-semibold text-gray-900 font-primaryFont">{services?.data[2]?.services_heading}</h3>
+              <p class="text-gray-700 text-sm sm:text-xl mt-2 font-secondaryFont"> {services?.data[2]?.services_description}</p>
+            </div>
+            <img src={services?.data[2]?.image_laptop} alt={services?.data[2]?.img_alt_laptop} class="sm:w-36 sm:h-36 h-20 w-20" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>  

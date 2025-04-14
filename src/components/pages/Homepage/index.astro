@@ -1,0 +1,31 @@
+---
+import AppDownloadBar from "@components/shared/CommonComponents/AppDownloadBar/AppDownloadBar.astro";
+import HeroSection from "@components/shared/HomePageComponent/HeroSection/HeroSection.astro";
+import PetLoveVetic from "@components/shared/HomePageComponent/PetLoveVetic/PetLoveVetic.astro";
+import VeticServices from "@components/shared/HomePageComponent/VeticServices/VeticServices.astro";
+import Testimonials from "@components/shared/CommonComponents/Testimonials/Testimonials.astro";
+import VeticInfastructure from "@components/shared/HomePageComponent/VeticInfastructure/VeticInfastructure.astro";
+import type { IHomePageProps } from "@components/pages/PagePropsInterface/page_props_interface";
+import VeticBlogs from "@components/shared/HomePageComponent/VeticBlogs/VeticBlogs.astro";
+import AppDownload from "@components/shared/CommonComponents/AppDownload/AppDownload.astro";
+import Footer from "@components/core/footer/Footer.astro";
+import Navbar from "@components/core/navbar/Navbar.astro";
+import CallNowButton from "@components/ui/CallNowButton.astro";
+// interface Props {
+//   content: any;
+//   location: string;
+//   srNumber: string;
+// }
+const { content } = Astro.props as IHomePageProps;
+---
+
+<AppDownloadBar content={content} />
+<Navbar location={content.meta.location} srNumber={content.meta.srNumber} />
+<HeroSection content={content} />
+<PetLoveVetic content={content} />
+<VeticServices content={content} isHomePage />
+<VeticInfastructure content={content} />
+<Testimonials content={content} />
+<VeticBlogs />
+<AppDownload content={content} />
+<Footer />

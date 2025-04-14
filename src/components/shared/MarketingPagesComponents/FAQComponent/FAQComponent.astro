@@ -1,0 +1,74 @@
+---
+import type { TFAQ } from "../shared_components_interface";
+
+interface Props {
+  faqs: TFAQ[];
+  hideHeading: boolean;
+}
+const { faqs, hideHeading } = Astro.props;
+---
+
+<div class="container w-full sm:w-3/4 text-grey mx-auto px-6 py-2 mt-6 sm:mt-10">
+  <h2
+    class="text-2xl sm:text-3xl font-bold text-center font-bricolage antialiased"
+  >
+    Frequently asked questions
+  </h2>
+  <p
+    class="font-bricolage text-sm sm:text-xl text-gray-500 pt-1 text-center px-3  sm:pb-8 antialiased"
+  >
+    Everything you need to know about Vetic.
+  </p>
+
+  <div class="leading-loose text-lg mt-2">
+    {
+      faqs.map((faq, idx) => {
+        return (
+          <div x-data="{open: false}" id={`${idx}`}>
+            <button
+              x-on:click="open= !open"
+              class="w-full font-bold py-3 flex justify-between items-center mt-2 tracking-button"
+            >
+              <div class="text-sm sm:text-[18px] w-full font-medium font-bricolage text-left">
+                {faq.question}
+              </div>
+              <span x-show="!open" class="w-4 h-4">
+                <svg
+                  class="fill-current"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                >
+                  <path
+                    class="heroicon-ui"
+                    d="M12 22a10 10 0 110-20 10 10 0 010 20zm0-2a8 8 0 100-16 8 8 0 000 16zm1-9h2a1 1 0 010 2h-2v2a1 1 0 01-2 0v-2H9a1 1 0 010-2h2V9a1 1 0 012 0v2z"
+                  />
+                </svg>
+              </span>
+              <span x-show="open" class="w-4 h-4">
+                <svg
+                  class="fill-current"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                >
+                  <path
+                    class="heroicon-ui"
+                    d="M12 22a10 10 0 110-20 10 10 0 010 20zm0-2a8 8 0 100-16 8 8 0 000 16zm4-8a1 1 0 01-1 1H9a1 1 0 010-2h6a1 1 0 011 1z"
+                  />
+                </svg>
+              </span>
+            </button>
+
+            <div
+              x-show="open"
+              class="text-gray-500 text-sm sm:text-[15px] mt-2"
+            >
+              {faq.answer}
+            </div>
+          </div>
+        );
+      })
+    }
+  </div>
+</div>

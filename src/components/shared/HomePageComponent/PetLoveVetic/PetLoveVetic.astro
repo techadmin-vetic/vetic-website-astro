@@ -1,0 +1,163 @@
+---
+import { Image } from "astro:assets";
+import type { IHomePageProps } from "@components/pages/PagePropsInterface/page_props_interface";
+
+const {
+  content: { petLoveVetic },
+} = Astro.props as IHomePageProps;
+---
+
+<div class="bg-cover bg-center pet-love-vetic-bg">
+  <div class="container w-11/12 mx-auto py-10">
+    <h2 class="text-2xl sm:text-4xl font-primaryFont text-gray-800 mb-4">
+      {petLoveVetic?.heading}
+    </h2>
+    <p class="text-gray-700 text-lg font-secondaryFont">
+      {petLoveVetic?.subHeading1}
+      <br />
+      {petLoveVetic?.subHeading2}
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mt-8">
+      <!-- Card 1: Expert Vets -->
+
+      <div
+        class="bg-white overflow-hidden h-full rounded-3xl border-[1px] border-primaryColor flex flex-col md:col-span-7"
+      >
+        <a href="/pet-consultation-near-me">
+          <div class="px-6 sm:px-10 pt-4">
+            <h2 class="text-2xl font-primaryFont text-gray-700 mb-2">
+              {petLoveVetic?.card[0]?.heading}
+            </h2>
+            <p
+              class="text-gray-600 text-md mb-4 font-secondaryFont sm:w-[400px]"
+            >
+              {petLoveVetic?.card[0]?.subHeading}
+            </p>
+            <div class="h-[180px] sm:h-[250px] lg:h-60 xl:h-72 object-fit">
+              <picture>
+                <source
+                  media="(min-width: 768px)"
+                  srcset={petLoveVetic?.card[0]?.desktopImage}
+                />
+                <img
+                  src={petLoveVetic?.card[0]?.mobileImage}
+                  alt="Expert Vets"
+                  class="rounded-t-2xl h-full w-full object-fill"
+                />
+              </picture>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Card 2 : state-of-clinic -->
+
+      <div
+        class="bg-white overflow-hidden h-full rounded-3xl border-[1px] border-primaryColor flex flex-col md:col-span-5"
+      >
+        <a href="/pet-clinic-near-me">
+          <div class="px-6 sm:px-10 pt-4">
+            <h2 class="text-2xl font-primaryFont text-gray-700 mb-2">
+              {petLoveVetic?.card[1]?.heading}
+            </h2>
+            <p class="text-gray-600 text-md mb-4 font-secondaryFont">
+              {petLoveVetic?.card[1]?.subHeading}
+            </p>
+            <div class="h-[180px] sm:h-[250px] lg:h-60 xl:h-72 object-fit">
+              <picture>
+                <source
+                  media="(min-width: 768px)"
+                  srcset={petLoveVetic?.card[1]?.desktopImage}
+                />
+                <img
+                  src={petLoveVetic?.card[1]?.mobileImage}
+                  alt="State-of-the-art Clinic"
+                  class="rounded-t-2xl h-full w-full object-fill"
+                />
+              </picture>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Card 3: Holistic Care -->
+
+      <div
+        class="bg-white overflow-hidden h-full rounded-3xl border-[1px] border-primaryColor flex flex-col md:col-span-5"
+      >
+        <a href="/pet-grooming-near-me">
+          <div class="px-6 sm:px-10 pt-4">
+            <h2 class="text-2xl font-primaryFont text-gray-700 mb-2">
+              {petLoveVetic?.card[2]?.heading}
+            </h2>
+            <p class="text-gray-600 w-[110%] text-md mb-4 font-secondaryFont">
+              {petLoveVetic?.card[2]?.subHeading}
+            </p>
+            <div class="h-[180px] sm:h-[250px] lg:h-60 xl:h-72 object-fit">
+              <picture>
+                <source
+                  media="(min-width: 768px)"
+                  srcset={petLoveVetic?.card[2]?.desktopImage}
+                />
+                <img
+                  src={petLoveVetic?.card[2]?.mobileImage}
+                  alt="Holistic Care"
+                  class="rounded-t-2xl h-full w-full object-fill"
+                />
+              </picture>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Card 4: Tech-Powered Petcare -->
+
+      <div
+        class="bg-white overflow-hidden h-full rounded-3xl border-[1px] border-primaryColor flex flex-col md:col-span-7"
+      >
+        <a href="/pet-clinic-near-me">
+          <div class="px-6 sm:px-10 pt-4">
+            <h2 class="text-2xl font-primaryFont text-gray-700 mb-2">
+              {petLoveVetic?.card[3]?.heading}
+            </h2>
+            <p
+              class="text-gray-600 text-md mb-4 font-secondaryFont sm:w-[550px]"
+            >
+              {petLoveVetic?.card[3]?.subHeading}
+            </p>
+            <div class="h-[180px] sm:h-[250px] lg:h-60 xl:h-72 object-fit">
+              <picture>
+                <source
+                  media="(min-width: 768px)"
+                  srcset={petLoveVetic?.card[3]?.desktopImage}
+                />
+                <img
+                  src={petLoveVetic?.card[3]?.mobileImage}
+                  alt="Tech-Powered Petcare"
+                  class="rounded-t-2xl h-full w-full object-fill"
+                />
+              </picture>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .pet-love-vetic-bg {
+    background-image: url("https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/Banner+Image/bgIconM.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top right;
+  }
+
+  @media (min-width: 768px) {
+    .pet-love-vetic-bg {
+      background-image: url("https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/Banner+Image/bgIconD.webp");
+      background-position: top right;
+    }
+  }
+</style>

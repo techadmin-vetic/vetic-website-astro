@@ -1,0 +1,64 @@
+---
+
+---
+
+<style>
+  [x-cloak] {
+    display: none !important;
+  }
+</style>
+
+<div
+  x-cloak
+  x-data=`{
+    show: false, 
+    showPackage: false,
+    resetState() {
+      this.show = false;
+      this.showPackage = false;
+      $store.ui.book_now = false;
+      $store.ui.book_now_package = false;
+    }
+  }`
+  x-init="
+  show = $store.ui.book_now; 
+  showPackage = $store.ui.book_now_package; 
+  $watch('$store.ui.book_now',() =>  show = $store.ui.book_now); 
+  $watch('$store.ui.book_now_package',() =>  showPackage = $store.ui.book_now_package)"
+>
+  <div
+    x-show="show || showPackage"
+    @click="resetState()"
+    class="fixed top-0 left-0 w-screen h-screen bg-black opacity-35 z-[40]"
+  >
+  </div>
+
+  <div
+    x-show="show"
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="opacity-0 scale-90"
+    x-transition:enter-end="opacity-100 scale-100"
+    x-transition:leave="transition ease-in duration-300"
+    x-transition:leave-start="opacity-100 scale-100"
+    x-transition:leave-end="opacity-0 scale-90"
+    class="fixed z-[60] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[20rem] bg-transparent rounded-lg"
+  >
+    <slot />
+  </div>
+  <div
+    x-show="showPackage"
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100"
+    x-transition:leave="transition ease-in duration-300"
+    x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0"
+    class="fixed inset-0 z-50 overflow-y-auto"
+    aria-labelledby="modal-title"
+    role="dialog"
+    aria-modal="true"
+    x-ref="packageModal"
+  >
+    <slot name="package" />
+  </div>
+</div>

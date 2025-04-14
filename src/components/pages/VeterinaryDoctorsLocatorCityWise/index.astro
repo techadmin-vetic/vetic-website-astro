@@ -1,0 +1,17 @@
+---
+import DoctorsLocatorCityWise from "@components/shared/VererinaryDoctorLocatorComponent/DoctorsLocatorCityWise/DoctorsLocatorCityWise.astro";
+import Footer from "@components/core/footer/Footer.astro";
+import Navbar from "@components/core/navbar/Navbar.astro";
+import AppDownloadBar from "@components/shared/CommonComponents/AppDownloadBar/AppDownloadBar.astro";
+import type { IVeterinaryDoctorsPageProps } from "@components/pages/PagePropsInterface/page_props_interface";
+import HeroSection from "@components/shared/VererinaryDoctorLocatorComponent/HeroSection/HeroSection.astro";
+
+const { content } = Astro.props as IVeterinaryDoctorsPageProps;
+---
+
+<AppDownloadBar content={content} />
+<Navbar location={content.meta.location} srNumber={content.meta.srNumber} />
+<HeroSection  content={content}/>
+<DoctorsLocatorCityWise  content={content}/>
+
+<Footer />

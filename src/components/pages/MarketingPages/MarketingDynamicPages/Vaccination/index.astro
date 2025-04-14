@@ -1,0 +1,40 @@
+---
+import ServiceNavbarV1 from "@components/shared/MarketingPagesComponents/ServiceNavbarV1/ServiceNavbarV1.astro";
+import BookAppointmentSection from "@components/shared/MarketingPagesComponents/BookAppointmentSectionV1/BookAppointmentSection.astro";
+import FAQComponent from "@components/shared/MarketingPagesComponents/FAQComponent/FAQComponent.astro";
+import ContactUsSectionV1 from "@components/shared/MarketingPagesComponents/ContactUsSectionV1/ContactSectionV1.astro";
+import TestimonialSectionV1 from "@components/shared/MarketingPagesComponents/TestimonialSectionV1/TestimonialSectionV1.astro";
+import type { IVaccinationSlugPageProps } from  "@components/pages/PagePropsInterface/page_props_interface";
+import ClinicSection from "@components/shared/MarketingPagesComponents/ClinicSection/ClinicSection.astro";
+import DoctorSection from "@components/shared/MarketingPagesComponents/DoctorSection/DoctorSection.astro";
+import { reduceFAQs } from "@utils/global_utils";
+import BannerSectionV1 from "@components/shared/MarketingPagesComponents/BannerSectionV1/BannerSectionV1.astro";
+import PetSurgeryTable from "@components/shared/MarketingPagesComponents/SurgeryTable/PetSurgeryTable.astro";
+import VaccinationCards from "@components/shared/MarketingPagesComponents/VaccinationCards/VaccinationCards.astro";
+import VaccinationServices from "@components/shared/MarketingPagesComponents/VaccinationServices/VaccinationServices.astro";
+
+const { content, srNumber, location } =
+  Astro.props as IVaccinationSlugPageProps;
+const reducedFAQs = reduceFAQs(
+  content?.Faq?.data ?? content?.Faq?.FAQ,
+  "title",
+  "content"
+);
+---
+
+<ServiceNavbarV1 location={location} srNumber={srNumber} />
+<BannerSectionV1 content={content} />
+<BookAppointmentSection content={content} location={location} />
+<TestimonialSectionV1 content={content} />
+<VaccinationCards content={content}/>
+<PetSurgeryTable content={content} />
+<VaccinationServices content={content}/>
+<DoctorSection content={content} />
+<ClinicSection content={content} />
+<FAQComponent hideHeading={false} faqs={reducedFAQs} />
+<ContactUsSectionV1
+  title="Hello"
+  location={location}
+  content={content}
+  srNumber={srNumber}
+/>

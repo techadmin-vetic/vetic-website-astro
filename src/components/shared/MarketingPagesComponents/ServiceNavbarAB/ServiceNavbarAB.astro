@@ -1,0 +1,19 @@
+---
+import ServiceHeaderComponent from "@components/core/headers/ServiceHeader.astro";
+import CallNowButtonAB from "@components/ui/CallNowButtonAB.astro";
+
+interface Props {
+  location: string;
+  srNumber: string;
+}
+
+const { location, srNumber } = Astro.props;
+---
+
+<div class="h-[70px] sticky inset-x-0 top-0 left-0 z-50">
+  <ServiceHeaderComponent srNumber={srNumber} location={location} />
+  <slot />
+  <CallNowButtonAB srNumber={srNumber} location={location} variant="floating" />
+</div>
+
+<!-- <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script> -->

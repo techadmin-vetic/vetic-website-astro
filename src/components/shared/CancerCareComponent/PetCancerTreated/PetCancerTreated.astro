@@ -1,0 +1,69 @@
+---
+import { Image } from "astro:assets";
+
+const {
+  content: { petCancerTreated },
+} = Astro.props;
+// console.log(petCancerTreated);
+---
+
+<style>
+  .vetic-infastructure-bg {
+    background-image: url("https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/Banner+Image/bgIconM.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top right;
+  }
+
+  @media (min-width: 768px) {
+    .vetic-infastructure-bg {
+      background-image: url("https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/Banner+Image/bgIconD.webp");
+      background-position: top right;
+    }
+  }
+</style>
+
+<div class="sm:py-12 vetic-infastructure-bg">
+  <div class="container w-11/12 mx-auto py-4">
+    <div class="max-w-4xl">
+      <p
+        class="mt-2 text-[24px] tracking-tight font-primaryFont text-gray-900 sm:text-4xl"
+      >
+        {petCancerTreated?.heading}
+      </p>
+    </div>
+
+    <div
+      class="mx-auto mt-4 sm:mt-10 grid max-w-full grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-2"
+    >
+      {
+        petCancerTreated?.cards?.map((healthCare) => (
+          <div class="bg-white rounded-xl shadow-md p-4 flex flex-col h-full">
+            <a href={healthCare?.serviceLink} class="block h-full">
+              <div class="flex flex-col h-full">
+                <img
+                  src={healthCare?.image}
+                  alt={healthCare?.heading}
+                  class="sm:w-full sm:h-[220px] lg:h-[340px] w-full h-[200px] rounded-xl mb-2 object-fill"
+                />
+                <h3 class="text-xl font-primaryFont text-gray-800 mb-2">
+                  <span>{healthCare?.heading1}</span>
+                  <span class="text-primaryFontColor">
+                    {healthCare?.heading2}
+                  </span>
+                  <span>{healthCare?.heading3}</span>
+                </h3>
+                <ul class="list-disc list-inside text-sm text-gray-600 flex-grow">
+                  {healthCare?.points?.map((item) => (
+                    <li class="font-secondaryFont">{item?.heading}</li>
+                  ))}
+                </ul>
+                <p class="text-sm text-gray-600 mt-4">{healthCare?.para}</p>
+              </div>
+            </a>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>

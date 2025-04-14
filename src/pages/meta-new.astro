@@ -1,0 +1,30 @@
+---
+import MetaPage from "@components/pages/MarketingPages/Meta/index.astro";
+import ModalContainer from "@components/ui/ModalContainer.astro";
+import BookNowFormModal from "@components/ui/BookNowFormModal.astro";
+import { GETMetaNewSiteData } from "@api/api_functions";
+import MainLayout from "@layouts/_main_layout.astro";
+
+const {
+  data: {
+    page_content: {
+      body: { main: mainContent },
+    },
+  },
+} = await GETMetaNewSiteData();
+---
+
+<MainLayout
+  title={mainContent?.meta?.title}
+  description={mainContent?.meta?.description}
+  canonicalTag={mainContent?.meta?.canonicalTag}
+>
+  <MetaPage
+    content={mainContent}
+    location={mainContent.meta.location}
+    srNumber={mainContent.meta.srNumber}
+  />
+  <ModalContainer>
+    <BookNowFormModal location={mainContent.meta.location} />
+  </ModalContainer>
+</MainLayout>

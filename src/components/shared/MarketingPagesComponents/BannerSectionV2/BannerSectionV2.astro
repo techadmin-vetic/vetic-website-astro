@@ -1,0 +1,23 @@
+---
+import BookNowButtonMarketing from "@components/ui/BookNowButtonMarketing.astro";
+const {
+  content: { BannerSection },
+} = Astro.props;
+---
+
+<div class="w-full bg-gradient-to-b from-sky-50 relative">
+  <p
+    class="mx-auto w-11/12 text-2xl tracking-wide font-semibold text-gray-800 font-bricolage py-4 lg:py-8"
+  >
+    {BannerSection.heading}
+  </p>
+  <BookNowButtonMarketing>
+    <div
+      class="w-11/12 h-[12rem] sm:h-[25rem] md:h-[36rem] rounded-xl overflow-hidden mx-auto bg-center bg-contain sm:bg-contain bg-no-repeat border-[1px] border-sky-900 relative tracking-image"
+      style={{
+        backgroundImage: `url("${BannerSection.mobileImage}")`,
+      }}
+    > 
+    </div>
+  </BookNowButtonMarketing>
+</div>

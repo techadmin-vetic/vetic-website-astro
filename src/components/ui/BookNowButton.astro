@@ -1,0 +1,21 @@
+---
+interface Props {
+  className?: string;
+}
+const { className } = Astro.props;
+---
+
+<button
+  x-data=`{className: '${className}'}`
+  :class="className"
+  @click="$store.ui.toggleBookNow();"
+>
+  <slot />
+</button>
+
+<script>
+  window.addEventListener("toggle-book-now", () => {
+    // @ts-ignore
+    Alpine.store("ui").toggleBookNow();
+  });
+</script>

@@ -1,0 +1,128 @@
+---
+import { Image } from "astro:assets";
+import BookNowButtonMarketing from "@components/ui/BookNowButtonMarketing.astro";
+
+const {
+  content: { InsuranceCards },
+} = Astro.props;
+// console.log(InsuranceCards);
+---
+
+<!-- card 1 -->
+<div class="max-w-md sm:max-w-full mx-auto px-4 bg-gradient-to-b from-blue-50 sm:pb-12 sm:w-11/12 sm:rounded-3xl sm:mt-12">
+  <h2 class="text-2xl sm:text-[36px] sm:leading-[43.2px] font-semibold font-bricolage text-left mb-2 pt-3 mx-auto sm:w-11/12">
+    {InsuranceCards?.card[0]?.heading}
+  </h2>
+  <div class="font-bricolage text-base sm:text-2xl font-normal mb-2 sm:mb-4 sm:text-gray-500 mx-auto sm:w-11/12">
+    {InsuranceCards?.card[0]?.subHeading}
+  </div>
+  <div class="font-bricolage text-base sm:text-2xl font-normal mb-4 sm:mb-6 sm:text-gray-500 mx-auto sm:w-11/12">
+    {InsuranceCards?.card[0]?.description}
+  </div>
+
+  <div class="border-gray-300 rounded-3xl mx-auto sm:w-11/12 ">
+    <!-- card starts -->
+    <div class="">
+      <div class="rounded-3xl w-full border-[1px] sm:border-none sm:bg-none sm:flex sm:items-star ">
+        <BookNowButtonMarketing className="sm:w-1/2 ">
+          <img
+            class="rounded-t-3xl sm:rounded-3xl sm:max-w-[90%] w-full  overflow-hidden max-h-full object-cover sm:h-auto"
+            src={InsuranceCards?.card[0]?.mobileImage}
+            alt="banner_image"
+          />
+        </BookNowButtonMarketing>
+       
+      
+        <div class="px-4 mt-4 sm:w-1/2 sm:px-16 sm:py-10 sm:flex sm:flex-col sm:justify-between mx-auto ">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
+            {
+              InsuranceCards?.card[0]?.serviceIncludes?.map((data, idx) => {
+                return (
+                  <ul>
+                    <li class="flex items-start mb-1 sm:mb-8 font-bricolage text-sm sm:text-xl tracking-wide">
+                      <img
+                        src="https://vetic-img.s3.ap-south-1.amazonaws.com/website/landing+page/image+1.png"
+                        alt="check"
+                        class="mr-3 h-6 sm:h-10 w-6 sm:w-10 rounded-lg "
+                      />
+                      <div class="font-bricolage text-base sm:text-xl font-normal sm:font-semibold">
+                        {data}
+                      </div>
+                    </li>
+                  </ul>
+                );
+              })
+            }
+          </div>
+          <div class="mt-2 mb-2 flex items-center pt-4 pb-2">
+           
+            <BookNowButtonMarketing
+              className="bg-[#152239] text-white sm:text-xl px-7 sm:px-16 py-2 sm:py-3 w-full text-center rounded-xl font-bricolage tracking-button sm:w-auto"
+            >
+              {InsuranceCards?.card[0]?.buttonText}
+            </BookNowButtonMarketing>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- card 2 -->
+
+<div class="max-w-md sm:max-w-full mx-auto px-4 bg-gradient-to-b from-green-50 sm:pb-10 sm:w-11/12 sm:rounded-3xl mt-8">
+  <h2 class="text-2xl sm:text-[36px] sm:leading-[43.2px] font-semibold font-bricolage text-left mb-2 pt-3 mx-auto sm:w-11/12">
+    {InsuranceCards?.card[1]?.heading}
+  </h2>
+  <div class="font-bricolage text-base sm:text-2xl font-normal mb-4 lg:mb-6 lg:text-gray-500 mx-auto sm:w-11/12 sm:mb-10">
+    {InsuranceCards?.card[1]?.subHeading}
+  </div>
+
+  <div class="border-gray-300 rounded-3xl mx-auto sm:w-11/12 ">
+    <!-- card starts -->
+    <div class="">
+      <div class="rounded-3xl w-full border-[1px] sm:border-none sm:bg-none sm:flex sm:items-start  ">
+        <BookNowButtonMarketing className="sm:w-1/2 ">
+          <img
+            class="rounded-t-3xl sm:rounded-3xl sm:max-w-[90%] w-full  overflow-hidden max-h-full object-cover sm:h-auto"
+            src={InsuranceCards?.card[1]?.mobileImage}
+            alt="banner_image"
+          />
+        </BookNowButtonMarketing>
+
+        <div class="px-4 mt-4 sm:w-1/2 sm:px-16 sm:py-10 sm:flex sm:flex-col sm:justify-between mx-auto ">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
+            {
+              InsuranceCards?.card[1]?.serviceIncludes?.map((data, idx) => {
+                return (
+                  <ul>
+                    <li class="flex items-start mb-1 sm:mb-8 font-bricolage text-sm sm:text-xl tracking-wide">
+                      <img
+                        src="https://vetic-img.s3.ap-south-1.amazonaws.com/website/landing+page/image+1.png"
+                        alt="check"
+                        class="mr-3 h-6 sm:h-10 w-6 sm:w-10 rounded-lg "
+                      />
+                      <div class="font-bricolage text-base sm:text-xl font-normal sm:font-semibold">
+                        {data}
+                      </div>
+                    </li>
+                  </ul>
+                );
+              })
+            }
+          </div>
+          <div class="mt-2 mb-2 flex items-center pt-4 pb-2">
+           
+            <BookNowButtonMarketing
+              className="bg-[#152239] text-white sm:text-xl px-7 sm:px-16 py-2 sm:py-3 w-full text-center rounded-xl font-bricolage tracking-button sm:w-auto"
+            >
+              {InsuranceCards?.card[0]?.buttonText}
+            </BookNowButtonMarketing>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

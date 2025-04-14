@@ -1,0 +1,53 @@
+---
+import { Image } from "astro:assets";
+import type { IAboutUsPageProps } from "@components/pages/PagePropsInterface/page_props_interface";
+const {
+  content: { bannerSection },
+} = Astro.props as IAboutUsPageProps;
+---
+
+<div
+  class="hidden lg:block rounded-3xl mx-auto h-[575px] w-full overflow-hidden"
+  style={{
+    backgroundImage: `url('${bannerSection?.desktopImage}')`, 
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    width: "90%",
+  }}
+>
+  <div
+    class="relative top-20 left-12 bottom-0 text-center md:text-left space-y-6"
+  >
+    <h1
+      class="text-[64px] tracking-wide text-primaryFontColor font-primaryFont"
+    >
+      {bannerSection?.bannerHeading1}
+      {bannerSection?.bannerHeading2}
+    </h1>
+  </div>
+</div>
+
+<!-- mobile screen -->
+
+<div
+  class="lg:hidden h-52 rounded-xl mx-auto overflow-hidden"
+  style={{
+    backgroundImage: `url('${bannerSection?.mobileImage}')`,
+    backgroundSize: "cover", 
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    width: "90%",
+  }}
+>
+<div
+    class="relative top-2 left-0 bottom-0  text-center md:text-left space-y-6"
+  >
+    <h1
+      class="text-[24px] tracking-wide text-primaryFontColor font-primaryFont w-40"
+    >
+      {bannerSection?.bannerHeading1}
+      {bannerSection?.bannerHeading2}
+    </h1>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+---
+import ServiceNavbarV1 from "@components/shared/MarketingPagesComponents/ServiceNavbarV1/ServiceNavbarV1.astro";
+import BannerSectionV2 from "@components/shared/MarketingPagesComponents/BannerSectionV2/BannerSectionV2.astro";
+import BookAppointmentSection from "@components/shared/MarketingPagesComponents/BookAppointmentSectionV1/BookAppointmentSection.astro";
+import FAQComponent from "@components/shared/MarketingPagesComponents/FAQComponent/FAQComponent.astro";
+import ContactUsSectionV1 from "@components/shared/MarketingPagesComponents/ContactUsSectionV1/ContactSectionV1.astro";
+import ServiceSectionV1 from "@components/shared/MarketingPagesComponents/ServiceSectionV1/ServiceSectionV1.astro";
+import TestimonialSectionV1 from "@components/shared/MarketingPagesComponents/TestimonialSectionV1/TestimonialSectionV1.astro";
+import type { IMetaNewPageProps } from "@components/pages/PagePropsInterface/page_props_interface";
+import DoctorSection from "@components/shared/MarketingPagesComponents/DoctorSection/DoctorSection.astro";
+import { reduceFAQs } from "@utils/global_utils";
+import AboutSection from "@components/shared/MarketingPagesComponents/AboutSection/AboutSection.astro";
+// import CarouselContainer from "@components/ui/CarouselContainer.astro";
+import StaticCityClinics from "@components/shared/MarketingPagesComponents/StaticCityClinics/StaticCityClinics.astro";
+import VeticServices from "@components/shared/MarketingPagesComponents/VeticServices/VeticServices.astro";
+
+const { content, srNumber, location } = Astro.props as IMetaNewPageProps;
+const reducedFAQs = reduceFAQs(
+  content?.Faq?.data ?? content?.Faq?.FAQ,
+  "title",
+  "content"
+);
+---
+
+<ServiceNavbarV1 location={location} srNumber={srNumber} />
+<BannerSectionV2 content={content} />
+<BookAppointmentSection content={content} location={location} />
+<TestimonialSectionV1 content={content} />
+<AboutSection content={content} />
+<VeticServices content={content} />
+<ServiceSectionV1 showDuration={false} content={content} />
+<DoctorSection content={content} />
+<StaticCityClinics content={content} />
+<FAQComponent hideHeading={false} faqs={reducedFAQs} />
+<ContactUsSectionV1
+  title="Hello"
+  location={location}
+  content={content}
+  srNumber={srNumber}
+/>

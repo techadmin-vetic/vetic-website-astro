@@ -1,0 +1,11 @@
+---
+interface Props {
+  carouselId: string;
+}
+
+const { carouselId } = Astro.props;
+---
+
+<div class=`${carouselId} w-full mx-auto`>
+  <slot />
+</div>

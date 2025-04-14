@@ -1,0 +1,55 @@
+---
+import BookNowButton from "@components/ui/BookNowButton.astro";
+import CarouselContainer from "@components/ui/CarouselContainer.astro";
+
+// import type { IBrandSlugPageProps } from "@components/pages/pages_props_interface";
+const {
+  content: { aboutSection },
+} = Astro.props;
+---
+
+<div
+  class="font-bricolage w-full mt-6 [background:linear-gradient(178.96deg,_#ffe8e8,_#fff)] pb-4 px-4 sm:px-16 box-border gap-[12px] leading-[normal] tracking-[normal] text-left text-[24px] text-gray"
+>
+  <h1 class="font-bricolage text-xl sm:text-2xl font-bold pb-4 lg:pb-6 pt-8">
+    {aboutSection.heading}
+  </h1>
+  <img
+    class="rounded-lg max-w-full w-full overflow-hidden max-h-full md:h-[350px] lg:h-[400px] object-cover lg:contain"
+    src={aboutSection.aboutBannerImage}
+    alt="about_banner_image"
+  />
+  <CarouselContainer carouselId="about_carousel">
+    {
+      aboutSection.aboutSliderData.map((about) => {
+        return (
+          <div class=" bg-white mt-4 lg:mt-8 w-1/2 px-3 lg:h-[100px] mr-3 my-3 lg:rounded-lg rounded-md">
+            <p class="text-[13px] lg:text-[16px] font-normal my-2 mt-3">
+              {about.heading}
+            </p>
+            <p class="text-[10px] lg:text-[13px] text-gray-500 mb-2 ">
+              {about.description}
+            </p>
+          </div>
+        );
+      })
+    }
+  </CarouselContainer>
+</div>
+
+<script>
+  import Flickity from "flickity";
+  import "flickity/css/flickity.css";
+  var elem = document.querySelector(".about_carousel");
+
+  new Flickity(elem, {
+    // options
+    cellAlign: "left",
+    contain: true,
+    prevNextButtons: false,
+    pauseAutoPlayOnHover: false,
+    pageDots: false,
+    autoPlay: false,
+    wrapAround: true,
+  });
+</script>

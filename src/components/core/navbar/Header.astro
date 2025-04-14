@@ -1,0 +1,28 @@
+---
+import { Image } from "astro:assets";
+import CallNowButton from "@components/ui/CallNowButton.astro";
+---
+
+<header class="sticky inset-x-0 top-0 left-0 z-50 text-center bg-white pb-2">
+  <div class="container mx-auto">
+    <div class="px-4 py-3 w-full sm:px-0">
+      <nav class="flex items-center w-full justify-between" aria-label="Global">
+        <a href="/" class="-m-1.5 p-1.5">
+          <span class="sr-only">Vetic Logo</span>
+          <Image
+            width="1"
+            height="1"
+            alt="Vetic Logo"
+            class="h-8 sm:h-10 w-auto"
+            src="https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/Footer/LogoandLocation.webp"
+          />
+        </a>
+        <CallNowButton
+          srNumber="8929043121"
+          location="gurgaon"
+          variant="button"
+        />
+      </nav>
+    </div>
+  </div>
+</header>

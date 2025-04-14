@@ -1,0 +1,102 @@
+---
+import BookNowButtonMarketing from "@components/ui/BookNowButtonMarketing.astro";
+import CarouselContainer from "@components/ui/CarouselContainer.astro";
+
+const ClinicsDataStatic = [
+{
+    clinicName: "Vetic Pet Clinic, Mylapore, Chennai",
+    clinicImage:
+      "https://vetic-img.s3.ap-south-1.amazonaws.com/CDP/Bangalore+-+Nagarbhavi+/Fac1.jpg",
+  },
+  {
+    clinicName: "Vetic Pet Clinic, Adyar, Channai",
+    clinicImage:
+      "https://vetic-img.s3.ap-south-1.amazonaws.com/CDP/Electronic+city/Fac1.png",
+  },
+  
+];
+const { content, srNumber, location } = Astro.props;
+---
+
+<div class="bg-gradient-to-b from-gray-50 w-11/12 mx-auto">
+  <div class="space-y-4 px-4 pt-6 w-full lg:w-11/12 mx-auto">
+    <div class="text-left">
+      <h1
+        class="text-2xl tracking-wide font-bricolage font-semibold py-2 lg:py-4"
+      >
+        {content.Clinics.heading}
+      </h1>
+    </div>
+    <BookNowButtonMarketing>
+      <div
+        class="h-96 bg-center bg-cover bg-no-repeat relative rounded-3xl overflow-hidden tracking-image"
+        style={{
+          backgroundImage: `url("${content.Clinics.clinicBannerImage}")`,
+        }}
+      >
+      </div>
+      <div class="flex justify-between align-center w-full mx-auto mt-3">
+        <div class="w-full grid grid-cols-2 gap-4">
+          {
+            content.Clinics.usp.map((USPContentClinics) => {
+              return (
+                <div class="flex items-center h-10">
+                  <img
+                    src={USPContentClinics.logo}
+                    alt="USP Logo"
+                    class="w-6 h-6 sm:w-8 sm:h-8"
+                  />
+                  <p class="pl-2 text-sm sm:text-lg font-normal font-bricolage tracking-wide">
+                    {USPContentClinics.heading}
+                  </p>
+                </div>
+              );
+            })
+          }
+        </div>
+      </div>
+    </BookNowButtonMarketing>
+  </div>
+
+  <CarouselContainer carouselId="static_clinic_carousel">
+    {
+      ClinicsDataStatic.map((clinics) => {
+        return (
+          <>
+            <div class="mr-3">
+              <div class="my-4">
+                <BookNowButtonMarketing>
+                  <div
+                    class="w-[220px] sm:w-[18rem] h-[130px] sm:h-[12rem] relative overflow-hidden rounded-t-xl tracking-image"
+                    style={{
+                      backgroundSize: "contain",
+                      backgroundImage: `url("${clinics.clinicImage}")`,
+                    }}
+                  />
+                </BookNowButtonMarketing>
+              </div>
+              <p class="text-xs sm:text-base rounded-b-xl font-light absolute bottom-0 bg-gray-950 text-white w-full text-center py-1 font-bricolage">
+                {clinics.clinicName}
+              </p>
+            </div>
+          </>
+        );
+      })
+    }
+  </CarouselContainer>
+</div>
+
+<script>
+  import Flickity from "flickity";
+  import "flickity/css/flickity.css";
+  var elem = document.querySelector(".static_clinic_carousel");
+  new Flickity(elem, {
+    // options
+    cellAlign: "left",
+    contain: true,
+    prevNextButtons: false,
+    pauseAutoPlayOnHover: false,
+    pageDots: false,
+    autoPlay: 1500,
+  });
+</script>

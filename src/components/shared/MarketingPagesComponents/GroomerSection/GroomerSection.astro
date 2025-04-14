@@ -1,0 +1,37 @@
+---
+import GroomerCarousel from "../GroomerCarousel/GroomerCarousel.astro";
+import BookNowButtonMarketing from "@components/ui/BookNowButtonMarketing.astro";
+
+const {
+  content: { groomerSection },
+} = Astro.props ;
+// console.log(Clinics);
+---
+
+<div class="bg-gradient-to-b from-green-50 py-4 mt-10 px-4 max-w-sm mx-auto">
+  <div class="space-y-4">
+    <div class="text-left">
+      <h1 class="text-2xl font-bricolage font-semibold">
+        {groomerSection?.heading}
+      </h1>
+    </div>
+    <BookNowButtonMarketing>
+      <div
+        class="h-96 bg-center bg-cover border-[1px] border-green-600 bg-no-repeat relative rounded-3xl overflow-hidden tracking-image"
+        style={{
+          backgroundImage: `url("${groomerSection?.groomerBannerImage}")`,
+        }}
+      >
+      </div>
+    </BookNowButtonMarketing>
+
+    <GroomerCarousel />
+    <div class="text-center mt-4">
+      <BookNowButtonMarketing
+        className="bg-[#152239] w-full text-white px-4 py-3 rounded-xl font-bricolage tracking-button"
+      >
+        {groomerSection?.buttonText}
+      </BookNowButtonMarketing>
+    </div>
+  </div>
+</div>

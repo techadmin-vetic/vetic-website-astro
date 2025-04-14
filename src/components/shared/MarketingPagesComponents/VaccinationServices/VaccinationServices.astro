@@ -1,0 +1,39 @@
+---
+// import BookNowButton from "@components/ui/BookNowButton.astro";
+
+const {
+  content: {vaccinationServices},
+} = Astro.props;
+// console.log();
+---
+
+<div
+  class="font-bricolage w-full [background:linear-gradient(178.96deg,_#F3FFE8,_#fff)] pb-2 px-4 sm:px-16 box-border gap-[12px] leading-[normal] tracking-[normal] text-left text-[24px] text-gray"
+>
+  <h1 class="font-bricolage text-xl sm:text-2xl font-bold pb-4 lg:pb-6 pt-8">
+    {vaccinationServices.heading}
+  </h1>
+  <img
+    class="rounded-lg max-w-full w-full overflow-hidden max-h-full md:h-[350px] lg:h-[400px] object-cover lg:contain"
+    src={vaccinationServices.mobileImage}
+    alt="banner_image"
+  />
+  
+  <div class="bg-white mt-4 rounded-xl pt-2 px-2">
+    {vaccinationServices.servicesComponent.map((data, index) => {
+      const isLastItem = index === vaccinationServices.servicesComponent.length - 1;
+      return (
+        <div class="bg-white mt-4 px-3 lg:rounded-lg rounded-md">
+          <p class="text-base lg:text-xl font-semibold my-2 mt-3">
+            {data.heading}
+          </p>
+          <p class="text-sm lg:text-xl text-gray-500 mb-2">
+            {data.description}
+          </p>
+          {!isLastItem && <p class="border-b-[1px] mt-4 border-gray-200"></p>}
+        </div>
+      );
+    })}
+  </div>
+  
+</div>

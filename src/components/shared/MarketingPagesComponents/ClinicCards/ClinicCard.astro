@@ -1,0 +1,55 @@
+---
+import { Image } from "astro:assets";
+import BookNowButton from "@components/ui/BookNowButton.astro";
+import { convertTo12HourFormat } from "@utils/global_utils";
+interface Props {
+  imageUrl: string;
+  clinicName: string;
+  fridayStartTime: string;
+  fridayEndTime: string;
+}
+const { clinicName, fridayEndTime, fridayStartTime, imageUrl } = Astro.props;
+---
+
+<div class="flex items-center justify-center px-2 sm:px-6 pb-4 sm:pt-6">
+  <article
+    class="border-2 rounded-2xl p-4 border-round flex flex-col items-start justify-between shadow-xl mb-6"
+  >
+    <div class="relative w-full">
+      <BookNowButton>
+        <img
+         
+          src={imageUrl}
+          loading="eager"
+          alt="Clinic image click"
+          class="tracking-image aspect-[16/9] w-full h-72 rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
+        />
+      </BookNowButton>
+    </div>
+    <div class="w-full">
+      <div class="group relative">
+        <h3
+          class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600 line-clamp-1"
+        >
+          {clinicName}
+        </h3>
+      </div>
+      <div class="relative mt-2 flex align-center justify-between gap-x-4">
+        <p class="font-semibold text-gray-500">
+          {
+            fridayStartTime === "00:00:00"
+              ? "Open 24 hours"
+              : `${convertTo12HourFormat(
+                  fridayStartTime.substring(0, 5)
+                )}- ${convertTo12HourFormat(fridayEndTime.substring(0, 5))}`
+          }
+        </p>
+        <BookNowButton
+          className="tracking-button rounded-md bg-blue-950 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-950"
+        >
+          Book Now
+        </BookNowButton>
+      </div>
+    </div>
+  </article>
+</div>

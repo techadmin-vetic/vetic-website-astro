@@ -1,0 +1,35 @@
+---
+import MainLayout from "@layouts/_main_layout.astro";
+import ModalContainer from "@components/ui/ModalContainer.astro";
+import BookNowFormModal from "@components/ui/BookNowFormModal.astro";
+import { GETVaccinationNearMepageSiteData } from "@api/api_functions";
+import VaccinationNearMe from "@components/pages/VaccinationPage/index.astro";
+import BookNowPackageModal from "@components/ui/BookNowPackageModal.astro";
+
+const {
+  data: {
+    page_content: {
+      body: { main: mainContent },
+    },
+  },
+} = await GETVaccinationNearMepageSiteData();
+---
+
+<MainLayout title={mainContent?.meta?.title} description={mainContent?.meta?.description} canonicalTag={mainContent?.meta?.canonicalTag}>
+  <VaccinationNearMe
+    content={mainContent}
+    location={mainContent.meta.location}
+    srNumber={mainContent.meta.srNumber}
+  />
+
+  <ModalContainer>
+    <BookNowFormModal location={mainContent.meta.location} />
+  </ModalContainer>
+  <ModalContainer>
+    <BookNowPackageModal
+      slot="package"
+      location={mainContent.meta.location}
+      content={mainContent}
+    />
+  </ModalContainer>
+</MainLayout>

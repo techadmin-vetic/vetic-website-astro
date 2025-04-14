@@ -1,0 +1,32 @@
+---
+import AppDownloadBar from "@components/shared/CommonComponents/AppDownloadBar/AppDownloadBar.astro";
+import HeroSection from "@components/shared/CommonComponents/HeroSection/HeroSection.astro";
+import type { ICancerCarePageProps } from "@components/pages/PagePropsInterface/page_props_interface";
+import AppDownload from "@components/shared/CommonComponents/AppDownload/AppDownload.astro";
+import Footer from "@components/core/footer/Footer.astro";
+import Navbar from "@components/core/navbar/Navbar.astro";
+import HealthService from "@components/shared/OurServiceComponent/HealthcareService/HealthService.astro";
+import PetCancerTreated from "@components/shared/CancerCareComponent/PetCancerTreated/PetCancerTreated.astro";
+import { reduceFAQs } from "@utils/global_utils";
+import FAQComponent from "@components/shared/CommonComponents/FAQComponent/FAQComponent.astro";
+import VeticLocations from "@components/shared/AboutUsComponents/VeticLocations/VeticLocations.astro";
+
+const { content } = Astro.props as ICancerCarePageProps;
+
+const reducedFAQs = reduceFAQs(content?.Faq?.data ?? [], "title", "content");
+---
+
+<AppDownloadBar content={content} />
+<Navbar location={content.meta.location} srNumber={content.meta.srNumber} />
+<HeroSection content={content} />
+<HealthService content={content} isCancerCarePage/>
+<PetCancerTreated content={content} />
+<VeticLocations content={content} />
+<FAQComponent 
+        heading={content?.Faq?.heading}
+        subHeading={content?.Faq?.subHeading}
+        faqs={reducedFAQs}
+        hideHeading={true}
+/>
+<AppDownload content={content} />
+<Footer />

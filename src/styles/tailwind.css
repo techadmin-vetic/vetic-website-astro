@@ -1,0 +1,7 @@
+/* @import url("https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/fonts/HelveticaNeue.ttc");
+@import url("https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/fonts/Arial_Rounded_Bold.ttf"); */
+
+@import "./fonts.css";
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";

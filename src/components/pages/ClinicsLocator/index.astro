@@ -1,0 +1,14 @@
+---
+import ClinicsLocator from "@components/shared/CommonComponents/ClinicsLocator/ClinicsLocator.astro";
+import Footer from "@components/core/footer/Footer.astro";
+import Navbar from "@components/core/navbar/Navbar.astro";
+import AppDownloadBar from "@components/shared/CommonComponents/AppDownloadBar/AppDownloadBar.astro";
+import type { IClinicsLocatorPageProps } from "@components/pages/PagePropsInterface/page_props_interface";
+
+const { content } = Astro.props as IClinicsLocatorPageProps;
+---
+
+<AppDownloadBar content={content} />
+<Navbar location={content.meta.location} srNumber={content.meta.srNumber} />
+<ClinicsLocator />
+<Footer />

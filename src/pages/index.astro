@@ -1,0 +1,37 @@
+---
+import MainLayout from "@layouts/_main_layout.astro";
+import ModalContainer from "@components/ui/ModalContainer.astro";
+import BookNowFormModal from "@components/ui/BookNowFormModal.astro";
+import { GETHomepageSiteData } from "@api/api_functions";
+import Homepage from "@components/pages/Homepage/index.astro";
+
+const {
+  data: {
+    page_content: {
+      body: { main: mainContent },
+    },
+  },
+} = await GETHomepageSiteData();
+// console.log(mainContent?.meta?.schemaData);
+---
+
+<MainLayout
+  title={mainContent?.meta?.title}
+  description={mainContent?.meta?.description}
+  canonicalTag={mainContent?.meta?.canonicalTag}
+  schemaData={mainContent?.meta?.schemaData}
+>
+  <Homepage
+    content={mainContent}
+    location={mainContent.meta.location}
+    srNumber={mainContent.meta.srNumber}
+  />
+
+  <script type="application/ld+json"
+  set:html={JSON.stringify(mainContent?.meta?.schemaData)}> 
+</script>
+
+  <ModalContainer>
+    <BookNowFormModal location={mainContent.meta.location} />
+  </ModalContainer>
+</MainLayout>

@@ -1,0 +1,168 @@
+---
+export const prerender = true;
+
+import type { GetStaticPaths } from "astro";
+import WebsiteClinicsPage from "@components/pages/ClinicsPage/index.astro";
+import WebsiteGroomingPage from "@components/pages/Groomingpage/index.astro";
+import WebsiteConsultationPage from "@components/pages/ConsultationPage/index.astro";
+import WebsiteVaccinationPage from "@components/pages/VaccinationPage/index.astro";
+import WebsiteEmergencyPage from "@components/pages/EmergencyPage/index.astro";
+import WebsiteSurgeryPage from "@components/pages/SurgeryPage/index.astro";
+import WebsiteDiagnosticPage from "@components/pages/DiagnosticPage/index.astro";
+import HomePage from "@pages/index.astro";
+import MainLayout from "@layouts/_main_layout.astro";
+import ModalContainer from "@components/ui/ModalContainer.astro";
+import BookNowFormModal from "@components/ui/BookNowFormModal.astro";
+import type {
+  IClinicPageGETResponseData,
+  IGroomingPageGETResponseData,
+  IConsultationPageGETResponseData,
+  IVaccinationPageGETResponseData,
+  IEmergencyPageGETResponseData,
+  ISurgeryPageGETResponseData,
+  IDiagnosticPageGETResponseData,
+} from "@api/api_modals";
+import BookNowPackageModal from "@components/ui/BookNowPackageModal.astro";
+
+export const getStaticPaths = (async () => {
+  const res = await fetch("https://static.vetic.in/api/website-new/");
+  const resdata = await res.json();
+  const data = resdata.data;
+
+  const paths = data.map((res: IClinicPageGETResponseData) => {
+    if (res.page_slug === "home-page") {
+      return {
+        params: { slug_pages: res.page_slug },
+        props: { redirect: true },
+      };
+    }
+
+    return {
+      props: {
+        ...res,
+      },
+      params: {
+        slug_pages: res.page_slug,
+      },
+    };
+  });
+  return paths;
+}) satisfies GetStaticPaths;
+
+const { redirect } = Astro.props;
+if (redirect) {
+  return Astro.redirect("/");
+}
+
+const {
+  page_content: {
+    body: { main: mainContent },
+  },
+}: IClinicPageGETResponseData = Astro.props;
+const {
+  page_content: {
+    body: { main: MainContent },
+  },
+}: IGroomingPageGETResponseData = Astro.props;
+const {
+  page_content: {
+    body: { main: ConsultationContent },
+  },
+}: IConsultationPageGETResponseData = Astro.props;
+const {
+  page_content: {
+    body: { main: VaccinationContent },
+  },
+}: IVaccinationPageGETResponseData = Astro.props;
+const {
+  page_content: {
+    body: { main: EmergencyContent },
+  },
+}: IEmergencyPageGETResponseData = Astro.props;
+const {
+  page_content: {
+    body: { main: SurgeryContent },
+  },
+}: ISurgeryPageGETResponseData = Astro.props;
+const {
+  page_content: {
+    body: { main: DiagnosticContent },
+  },
+}: IDiagnosticPageGETResponseData = Astro.props;
+// console.log(VaccinationContent, "VaccinationContent");
+
+const clinicsPage = mainContent?.pageCategory?.includes("Clinic");
+const groomingPage = mainContent?.pageCategory?.includes("Grooming");
+const consultationPage = mainContent?.pageCategory?.includes("Consultation");
+const vaccinationPage = mainContent?.pageCategory?.includes("Vaccination");
+const emergencyPage = mainContent?.pageCategory?.includes("Emergency");
+const surgeryPage = mainContent?.pageCategory?.includes("Surgery");
+const diagnosticPage = mainContent?.pageCategory?.includes("Diagnostic");
+---
+
+<MainLayout
+  withServiceLayout={false}
+  title={mainContent?.meta?.title}
+  description={mainContent?.meta?.description}
+  canonicalTag={mainContent?.meta?.canonicalTag}
+>
+  {
+    clinicsPage ? (
+      <WebsiteClinicsPage
+        content={mainContent}
+        location={mainContent.meta.location}
+        srNumber={mainContent.meta.srNumber}
+      />
+    ) : consultationPage ? (
+      <WebsiteConsultationPage
+        content={ConsultationContent}
+        location={ConsultationContent.meta.location}
+        srNumber={ConsultationContent.meta.srNumber}
+      />
+    ) : groomingPage ? (
+      <WebsiteGroomingPage
+        content={MainContent}
+        location={MainContent.meta.location}
+        srNumber={MainContent.meta.srNumber}
+      />
+    ) : vaccinationPage ? (
+      <WebsiteVaccinationPage
+        content={VaccinationContent}
+        location={VaccinationContent.meta.location}
+        srNumber={VaccinationContent.meta.srNumber}
+      />
+    ) : emergencyPage ? (
+      <WebsiteEmergencyPage
+        content={EmergencyContent}
+        location={EmergencyContent.meta.location}
+        srNumber={EmergencyContent.meta.srNumber}
+        showVideo={true}
+      />
+    ) : surgeryPage ? (
+      <WebsiteSurgeryPage
+        content={SurgeryContent}
+        location={SurgeryContent.meta.location}
+        srNumber={SurgeryContent.meta.srNumber}
+        showVideo={true}
+      />
+    ) : diagnosticPage ? (
+      <WebsiteDiagnosticPage
+        content={DiagnosticContent}
+        location={DiagnosticContent.meta.location}
+        srNumber={DiagnosticContent.meta.srNumber}
+      />
+    ) : (
+      <HomePage />
+    )
+  }
+  <ModalContainer>
+    <BookNowFormModal location={mainContent.meta.location} />
+  </ModalContainer>
+  <ModalContainer>
+    <BookNowPackageModal
+      slot="package"
+      location={mainContent.meta.location}
+      content={mainContent}
+    />
+  </ModalContainer>
+</MainLayout>

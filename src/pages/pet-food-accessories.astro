@@ -1,0 +1,29 @@
+---
+export const prerender = true;
+import MainLayout from "@layouts/_main_layout.astro";
+import ModalContainer from "@components/ui/ModalContainer.astro";
+import BookNowFormModal from "@components/ui/BookNowFormModal.astro";
+import { GETPetFoodAccessoriespageSiteData } from "@api/api_functions";
+import PetFoodAccessoriesPage from "@components/pages/PetFood&Accessorie/index.astro";
+
+const {
+  data: {
+    page_content: {
+      body: { main: mainContent },
+    },
+  },
+} = await GETPetFoodAccessoriespageSiteData();
+---
+
+<MainLayout title={mainContent?.meta?.title} description={mainContent?.meta?.description} canonicalTag={mainContent?.meta?.canonicalTag}>
+  <PetFoodAccessoriesPage
+    content={mainContent}
+    location={mainContent.meta.location}
+    srNumber={mainContent.meta.srNumber}
+    showVideo={true}
+  />
+
+  <ModalContainer>
+    <BookNowFormModal location={mainContent.meta.location} />
+  </ModalContainer>
+</MainLayout>

@@ -1,0 +1,214 @@
+---
+import { Image } from "astro:assets";
+import CityDropDownMobile from "@components/core/cityDropDown/CityDropDownMobile.astro";
+import CityDropDownDesktop from "@components/core/cityDropDown/CityDropDownDesktop.astro";
+import CallNowButton from "@components/ui/CallNowButton.astro";
+
+interface Props {
+  location: string;
+  srNumber: string;
+}
+
+const { location, srNumber } = Astro.props;
+---
+
+<style>
+  [x-cloak] {
+    display: none !important;
+  }
+</style>
+
+<header
+  x-data="{ showSideMenuBar :  false }"
+  class="px-4 z-[5] sticky top-0 bg-white"
+>
+  <nav class="mx-auto w-11/12 container flex items-center justify-between h-20">
+    <div class="flex justify-center items-center rounded-full">
+      <a href="/" class="">
+        <Image
+          class=""
+          src="https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/Footer/LogoandLocation.webp"
+          alt="vetic logo"
+          width="140"
+          height="7"
+        />
+      </a>
+    </div>
+    <div class="flex lg:hidden bg-slate-100 p-1 rounded-md">
+      <button
+        x-on:click="showSideMenuBar = !showSideMenuBar"
+        type="button"
+        class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 bg-grey"
+      >
+        <span class="sr-only">Open main menu</span>
+        <svg
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+        </svg>
+      </button>
+    </div>
+    <div
+      class="hidden rounded-3xl h-14 items-center lg:flex lg:gap-x-6 text-center"
+    >
+      <a href="/" class="text-md leading-6 font-primaryFont text-gray-900"
+        >Home</a
+      >
+      <CityDropDownDesktop />
+      <a
+        href="/pet-food-accessories"
+        class="text-md leading-6 font-primaryFont text-gray-900"
+        >Food & Accessories</a
+      >
+      <a
+        href="/pet-grooming-near-me"
+        class="text-md leading-6 font-primaryFont text-gray-900">Grooming</a
+      >
+
+      <a
+        href="/pet-consultation-near-me"
+        class="text-md leading-6 font-primaryFont text-gray-900">Medical Care</a
+      >
+      <a
+        href="/our-services"
+        class="text-md leading-6 font-primaryFont text-gray-900">Our Services</a
+      >
+      <a
+        href="/about-us"
+        class="text-md leading-6 font-primaryFont text-gray-900">About Us</a
+      >
+      <a
+        href="https://vetic.in/blog/"
+        target="_blank"
+        class="text-md leading-6 font-primaryFont text-gray-900">Blog</a
+      >
+
+      <!-- New Dropdown component -->
+    </div>
+
+    <!-- Mobile menu, show/hide based on menu open state. -->
+    <div
+      x-show="showSideMenuBar"
+      x-cloak
+      class="lg:hidden"
+      role="dialog"
+      aria-modal="true"
+    >
+      <!-- Background backdrop, show/hide based on slide-over state. -->
+      <div class="fixed inset-0 border-2 z-50"></div>
+      <div
+        class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-4 py-4 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
+      >
+        <div class="flex items-center justify-between">
+          <a href="#" class="-m-1.5 p-1.5">
+            <span class="sr-only">Vetic Logo</span>
+            <Image
+              class=""
+              src="https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/Footer/LogoandLocation.webp"
+              alt="vetic logo"
+              width="140"
+              height="7"
+            />
+          </a>
+          <button
+            x-cloak
+            x-transition
+            x-on:click="showSideMenuBar = !showSideMenuBar"
+            type="button"
+            class="rounded-md m-2 p-1 text-gray-700 bg-slate-100"
+          >
+            <span class="sr-only">Close menu</span>
+            <svg
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="mt-6 flow-root">
+          <div class="-my-6 divide-y divide-gray-500/10">
+            <div class="space-y-2 py-2 px-4">
+              <a
+                href="/"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >Home</a
+              >
+
+              <CityDropDownMobile />
+
+              <a
+                href="/pet-food-accessories"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >Food & Accessories</a
+              >
+              <a
+                href="/pet-grooming-near-me"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >Grooming</a
+              >
+              <a
+                href="/pet-consultation-near-me"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+              >
+                Medical Care</a
+              >
+
+              <a
+                href="/our-services"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >Our Services</a
+              >
+
+              <!-- <a
+                href="/consultation-near-me"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >Our Veterinarians</a
+              > -->
+
+              <a
+                href="/about-us"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >About Us</a
+              >
+
+              <a
+                href="https://vetic.in/blog/"
+                target="_blank"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >Blog</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add CallNowButton here, outside of any conditional rendering -->
+  </nav>
+  <div class="lg:hidden fixed bottom-4 right-5 z-50">
+    <CallNowButton srNumber={srNumber} location={location} variant="floating" />
+  </div>
+</header>
+
+<script
+  is:inline
+  src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+  defer></script>
+
+<script is:inline></script>

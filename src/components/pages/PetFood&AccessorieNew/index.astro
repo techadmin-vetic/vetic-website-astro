@@ -1,0 +1,36 @@
+---
+import AppDownloadBar from "@components/shared/CommonComponents/AppDownloadBar/AppDownloadBar.astro";
+import HeroSection from "@components/shared/PetFoodAccessories/HeroSection.astro";
+import type { IPetFoodAccessoriesPageProps } from "@components/pages/PagePropsInterface/page_props_interface";
+import Navbar from "@components/core/navbar/Navbar.astro";
+import Testimonials from "@components/shared/CommonComponents/Testimonials/Testimonials.astro";
+import BrandSection from "@components/shared/PetFoodAccessories/BrandSection.astro";
+import FAQComponent from "@components/shared/CommonComponents/FAQComponent/FAQComponent.astro";
+import Categories from "@components/shared/PetFoodAccessories/Categories.astro";
+import { reduceFAQs } from "@utils/global_utils";
+import Services from "@components/shared/PetFoodAccessories/Services.astro";
+import TreadingCategories from "@components/shared/PetFoodAccessories/TreadingCategories.astro";
+import DownloadNow from "@components/ui/DownloadNow.astro";
+import RecoveryVideoSection from "@components/shared/EmergencyPageComponents/RecoveryVideoSection.astro";
+import Header from "@components/core/navbar/Header.astro";
+
+const { content, showVideo } = Astro.props as IPetFoodAccessoriesPageProps;
+const reducedFAQs = reduceFAQs(content?.Faq?.data ?? [], "title", "content");
+---
+
+<!-- <AppDownloadBar content={content} /> -->
+<Header />
+<HeroSection content={content} />
+<BrandSection content={content} />
+<Categories content={content} />
+<Services content={content} />
+<TreadingCategories content={content} />
+<RecoveryVideoSection content={content} showVideo={showVideo} />
+<Testimonials content={content} />
+<FAQComponent
+  heading={content?.Faq?.heading}
+  subHeading={content?.Faq?.subHeading}
+  faqs={reducedFAQs}
+  hideHeading={true}
+/>
+<DownloadNow content={content} />

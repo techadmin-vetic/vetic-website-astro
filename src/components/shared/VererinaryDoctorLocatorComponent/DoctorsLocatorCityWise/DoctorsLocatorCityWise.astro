@@ -1,0 +1,131 @@
+---
+import CarouselContainer from "@components/ui/CarouselContainer.astro";
+import { Image } from "astro:assets";
+import BookNowButton from "@components/ui/BookNowButton.astro";
+import type { IAllDoctorsCarouselProps } from "@components/pages/PagePropsInterface/page_props_interface";
+import { GETAllDoctorsSiteDataByLocation } from "@api/api_functions";
+
+// const { heading } = Astro.props ;
+---
+
+<!-- City Selector -->
+<div id="doctor-search" class="py-12 container w-11/12 mx-auto">
+  <h1 class="text-3xl md:text-4xl font-bold text-gray-800 font-primaryFont mb-4">
+    Find your Vetic Doctor near you
+  </h1>
+  <div class="flex items-center space-x-4">
+    <select
+      id="city-selector"
+      class="border font-primaryFont border-gray-300 rounded-md py-2 px-4 w-48"
+    >
+      <option value="Gurgaon">Gurgaon</option>
+      <option value="Delhi">Delhi</option>
+      <option value="Noida">Noida</option>
+      <option value="Ghaziabad">Ghaziabad</option>
+      <option value="Faridabad">Faridabad</option>
+      <option value="Hyderabad">Hyderabad</option>
+      <option value="Mumbai">Mumbai</option>
+      <option value="Bengaluru">Bengaluru</option>
+      <option value="Pune">Pune</option>
+    </select>
+    <button
+      id="search-button"
+      class="bg-black text-white rounded-md py-2 px-6"
+    >
+      Search
+    </button>
+  </div>
+</div>
+
+<!-- Doctor List -->
+<div class="container w-11/12 mx-auto">
+  <div
+    id="doctors-list"
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12"
+  >
+    <!-- Doctors will be loaded here -->
+  </div>
+</div>
+
+<script>
+  import { GETAllDoctorsSiteDataByLocation } from "@api/api_functions";
+
+  window.onload = function () {
+    const citySelector = document.getElementById("city-selector") as HTMLSelectElement;
+    const searchButton = document.getElementById("search-button") as HTMLButtonElement;
+    const doctorsList = document.getElementById("doctors-list");
+
+    if (!citySelector || !searchButton || !doctorsList) {
+      console.error("One or more elements are missing from the DOM.");
+      return;
+    }
+
+    async function fetchDoctors(city: string) {
+      doctorsList.innerHTML = "<p class='text-center col-span-3 py-8'>Loading...</p>";
+
+      try {
+        const response = await GETAllDoctorsSiteDataByLocation(city);
+        
+        if (response.status && response.data.length > 0) {
+          const doctors = response.data;
+          doctorsList.innerHTML = doctors.map(doctor => `
+            <div class="bg-white p-4 rounded-lg shadow">
+              <div class=" flex flex-row h-full ">
+                <img 
+                  src="${doctor.image_url || 'https://ssmc.ae/assets/uploads/2024/12/xMale-1-e1677070450488.png.pagespeed.ic_.26fSvc-qMr.webp'}" 
+                  alt="${doctor.name || ''}"
+                  class="w-1/2 h-40 object-fill rounded-lg "
+                >
+               <div class=" flex flex-col h-full ml-6">
+                  <h3 class="text-xl font-primaryFont mb-2">${doctor.name || 'Updating...'}</h3>
+                  <p class="text-[#787878] font-secondaryFont mb-1">${doctor.experience || 'Updating...'}</p>
+                  <p class="text-[#787878] font-secondaryFont mb-1">${doctor.expertise || 'Updating...'}</p>
+                  <BookNowButton class="pt-4">
+                  <button class="book-now-btn bg-black text-white text-xs sm:text-[14px] font-primaryFont px-6 sm:px-4 lg:px-2 py-2 rounded-md cursor-pointer">
+                    Book Appointment
+                  </button>
+                  </BookNowButton>
+                </div>
+              </div>
+            </div>
+          `).join("");
+
+          // Add event listeners to book now buttons
+          document.querySelectorAll(".book-now-btn").forEach((button) => {
+            button.addEventListener("click", () => {
+              window.dispatchEvent(new CustomEvent("toggle-book-now"));
+            });
+          });
+        } else {
+          doctorsList.innerHTML = "<p class='text-center col-span-3 py-8'>No doctors found for this location.</p>";
+        }
+      } catch (error) {
+        console.error("Error fetching doctors:", error);
+        doctorsList.innerHTML = "<p class='text-center col-span-3 py-8'>Error loading doctors. Please try again.</p>";
+      }
+    }
+
+    // Fetch doctors on button click
+    searchButton.addEventListener("click", () => {
+      const selectedCity = citySelector.value;
+      fetchDoctors(selectedCity);
+    });
+
+    // Fetch doctors on city selection change
+    citySelector.addEventListener("", () => {
+      const selectedCity = citySelector.value;
+      fetchDoctors(selectedCity);
+    });
+
+    // Fetch all doctors on initial load
+    fetchDoctors("");
+  };
+</script>
+
+<script>
+  // Handle book now button clicks
+  window.addEventListener("toggle-book-now", () => {
+    // @ts-ignore
+    Alpine.store("ui").toggleBookNow();
+  });
+</script>

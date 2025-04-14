@@ -1,0 +1,61 @@
+---
+import { Image } from "astro:assets";
+import BookNowButton from "@components/ui/BookNowButton.astro";
+
+const {
+  content: { petEmergencies },
+  isEmergencyPage
+} = Astro.props;
+// console.log( petEmergencies);
+---
+
+<style>
+  .vetic-services-bg {
+    background-image: url("https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/Banner+Image/bgIconM.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top right;
+  }
+
+  @media (min-width: 768px) {
+    .vetic-services-bg {
+      background-image: url("https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/Banner+Image/bgIconD.webp");
+      background-position: top right;
+    }
+  }
+</style>
+
+<div class="bg-cover bg-center vetic-services-bg">
+  <div class="container w-11/12 mx-auto py-10 sm:py-12">
+    <h2 class="text-2xl sm:text-4xl text-gray-900 mb-2 font-primaryFont">
+      {petEmergencies?.heading ?? ""}<span class="text-primaryFontColor">{petEmergencies?.heading1 ?? ""}</span>
+    </h2>
+    <p class="text-md sm:text-[20px] text-gray-700 mb-6 font-secondaryFont">
+      {petEmergencies?.subHeading}
+    </p>
+
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {
+        petEmergencies?.emergencies?.map((data) => {
+          return (
+            <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+              {isEmergencyPage && (
+                <div class="flex-shrink-0">
+                  <img class="h-10 w-10 rounded-md" src={data?.icon} alt="" />
+                </div>
+              )}
+              <div class="min-w-0 flex-1">
+                <p class="text-[20px] sm:text-[24px] font-primaryFont text-gray-900">
+                  {data?.cardHeading}
+                </p>
+                <p class="text-[16px] sm:text-[18px] font-secondaryFont text-gray-500 mt-2">
+                  {data?.cardDescription}
+                </p>
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+</div>

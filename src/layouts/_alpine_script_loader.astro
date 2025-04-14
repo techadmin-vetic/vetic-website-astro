@@ -1,0 +1,37 @@
+<script
+  is:inline
+  src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+  defer></script>
+
+<script is:inline>
+  document.addEventListener("alpine:init", () => {
+    Alpine.store("ui", {
+      book_now: false,
+      book_now_package: false,
+      thank_you: false,
+      toggleThankYou() {
+        this.thank_you = !this.thank_you;
+      },
+      openBookNow() {
+        this.book_now = true;
+      },
+      closeBookNow() {
+        this.book_now = false;
+      },
+      toggleBookNow() {
+        this.book_now = !this.book_now;
+        this.book_now_package = false;
+      },
+      openBookNowPackage() {
+        this.book_now_package = true;
+      },
+      closeBookNowPackage() {
+        this.book_now_package = false;
+      },
+      toggleBookNowPackage() {
+        this.book_now_package = !this.book_now_package;
+        this.book_now = false;
+      },
+    });
+  });
+</script>

@@ -1,0 +1,16 @@
+---
+interface Props {
+  className?: string;
+  packageData: any;
+}
+
+const { className, packageData } = Astro.props;
+---
+
+<button
+  x-data=`{className: '${className}', packageData: JSON.parse(atob('${btoa(JSON.stringify(packageData))}')) }`
+  :class="className"
+  @click="console.log('BookNowPackageButton - Received packageData:', packageData);$store.ui.toggleBookNowPackage(); $dispatch('package-selected', packageData)"
+>
+  <slot />
+</button>

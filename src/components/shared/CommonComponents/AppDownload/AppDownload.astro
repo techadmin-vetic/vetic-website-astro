@@ -1,0 +1,136 @@
+---
+const {
+  content: { appBanner },
+} = Astro.props;
+// console.log(appBanner);
+---
+
+<!-- Desktop View  -->
+<div
+  class="bg-gradient-to-r from-pink-100 via-white to-orange-100 pt-12 my-10 hidden md:block sm:pt-14"
+>
+  <div
+    class="flex container w-11/12 mx-auto flex-row items-center justify-between"
+  >
+    <div class="flex justify-center w-full md:w-1/2">
+      <div class="mt-6">
+        <h2
+          class="sm:text-[40px] md:text-[50px] xl:text-[64px] text-[#3b2c2a] mb-8 font-primaryFont leading-tight"
+        >
+          {appBanner?.heading1}
+          <br />{appBanner?.heading2}
+        </h2>
+        <ul class="mb-12">
+          {
+            appBanner?.appBannerContent?.map((data) => {
+              return (
+                <li class="flex items-center space-x-2">
+                  {/* right check icon image */}
+                  <img
+                    src="https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/Footer/RightCheckIcon_AppBanner.png"
+                    alt="Check icon"
+                    class="w-4 h-4"
+                  />
+                  <span class="text-[20px] mb-2">{data?.heading}</span>
+                </li>
+              );
+            })
+          }
+        </ul>
+
+        <div class="flex space-x-2 md:space-x-4 mt-2 mb-6 md:mt-4">
+          <a
+            href="https://vetic.sng.link/Awgsc/rjr7/2cek"
+            target="_blank"
+            class="w-30 md:w-40"
+          >
+            <img
+              src={appBanner?.appleStoreImage}
+              alt="Download on the App Store"
+            />
+          </a>
+
+          <a
+            href="https://vetic.sng.link/Awgsc/rjr7/2cek"
+            target="_blank"
+            class="w-30 md:w-40"
+          >
+            <img
+              src={appBanner?.androidStoreImage}
+              alt="Get it on Google Play"
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-center w-full md:w-1/2">
+      <!-- Desktop View image -->
+      <img
+        src={appBanner?.desktopImage}
+        alt="Vetic App on Phone"
+        class="hidden md:block w-[480px] h-[530px]"
+      />
+    </div>
+  </div>
+</div>
+
+<!----------------------------------------------------------- Mobile View  ---------------------------------------------------------------->
+<div
+  class="bg-gradient-to-r from-pink-100 via-white px-3 sm:px-6 py-8 rounded-xl my-6 md:hidden"
+>
+  <div>
+    <h2 class="text-2xl font-bold text-[#3b2c2a] mb-4 font-primaryFont">
+      {appBanner?.heading1}
+      <br />{appBanner?.heading2}
+    </h2>
+  </div>
+  <div class="flex flex-row items-center justify-between">
+    <div class="flex justify-center w-full">
+      <div class="mt-6">
+        <ul class="text-base text-[#3b2c2a] mb-4 space-y-3 font-secondaryFont">
+          {
+            appBanner?.appBannerContent?.map((data) => {
+              return (
+                <li class="flex items-center space-x-2">
+                  {/* right check icon image */}
+                  <img
+                    src="https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/Footer/RightCheckIcon_AppBanner.png"
+                    alt="Check icon"
+                    class="w-4 h-4"
+                  />
+                  <span class="text-[16px]">{data?.heading}</span>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="flex justify-center w-full mb-4">
+      <!-- Mobile View Image -->
+      <img
+        src={appBanner?.mobileImage}
+        alt="Vetic App on Phone Mobile View"
+        class="w-[167px] h-[200px]"
+      />
+    </div>
+  </div>
+  <div class="flex space-x-2 mt-2 items-center justify-center">
+    <a href="https://vetic.sng.link/Awgsc/rjr7/2cek" target="_blank">
+      <img
+        src={appBanner?.appleStoreImage}
+        alt="Download on the App Store"
+        class="w-[136px] h-[40px] pr-2"
+      />
+    </a>
+    <a href="https://vetic.sng.link/Awgsc/rjr7/2cek" target="_blank">
+      <img
+        src={appBanner?.androidStoreImage}
+        alt="Get it on Google Play"
+        class="w-[136px] h-[40px]"
+      />
+    </a>
+  </div>
+</div>

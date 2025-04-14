@@ -1,0 +1,167 @@
+---
+import { Image } from "astro:assets";
+import BookNowButtonMarketing from "@components/ui/BookNowButtonMarketing.astro";
+
+const {
+  content: { ServiceCards },
+  showDuration,
+} = Astro.props;
+// console.log(ServiceCards);
+---
+
+<style>
+  /* external css: flickity.css */
+
+  .carousel-cell {
+    margin-right: 10px;
+    border-radius: 5px;
+    counter-increment: carousel-cell;
+  }
+  @media screen and (min-width: 800px) {
+    .carousel-cell.is-selected {
+      border: 1px solid gray;
+    }
+  }
+
+  .carousel-main .carousel-cell.is-nav-selected {
+    background: #101828 !important;
+    color: #ffffff;
+  }
+</style>
+<div
+  class="max-w-md sm:max-w-full px-4 mt-2 bg-gradient-to-b from-blue-50 pt-4 lg:py-8"
+>
+  <h2
+    class="text-2xl font-semibold font-bricolage text-left mb-4 pt-3 mx-auto sm:w-11/12"
+  >
+    {ServiceCards.headingForCard}
+  </h2>
+  <div
+    class="carousel-main mb-6 lg:mb-10"
+    data-flickity='{ "asNavFor": ".carousel-nav", "contain": true, "pageDots": false, "prevNextButtons": false   }'
+  >
+    <button
+      class="carousel-cell button !bg-white text-black text-xs rounded-lg h-8 px-2 mr-2 font-bricolage"
+    >
+      {ServiceCards?.card[0]?.cardTitle}
+    </button>
+    <button
+      class="carousel-cell button !bg-white text-black text-xs rounded-lg h-8 px-2 mr-2 font-bricolage"
+    >
+      {ServiceCards?.card[1]?.cardTitle}
+    </button>
+    <button
+      class="carousel-cell button !bg-white text-black text-xs rounded-lg h-8 px-2 mr-2 font-bricolage"
+    >
+      {ServiceCards?.card[2]?.cardTitle}
+    </button>
+    <button
+      class="carousel-cell button !bg-white text-black text-xs rounded-lg h-8 px-2 mr-2 font-bricolage"
+    >
+      {ServiceCards?.card[3]?.cardTitle}
+    </button>
+  </div>
+  <div class="border-gray-300 rounded-3xl">
+    <!-- service card starts -->
+    <div
+      class="carousel-nav"
+      data-flickity='{"contain": true, "pageDots": false, "prevNextButtons": false }'
+    >
+      {
+        ServiceCards.card.map((serviceContent) => {
+          return (
+            <div class="carousel-cell py-4 mx-2 rounded-3xl w-[90%] sm:w-[30%] border-[1px] bg-white realtive">
+              <div class="text-center mb-4 px-4">
+                <p class="text-lg text-left font-semibold font-bricolage ">
+                  {serviceContent.price}{" "}
+                  <span class="line-through text-sm font-semibold font-bricolage text-zinc-500">
+                    {serviceContent.cutPrice}
+                  </span>
+                </p>
+                <p class="text-green-700 text-left text-semibold font-semibold text-sm font-bricolage">
+                  {serviceContent.discount}
+                </p>
+              </div>
+              <BookNowButtonMarketing>
+                <div
+                  class="h-[236px] bg-center bg-no-repeat relative tracking-image"
+                  style={{
+                    backgroundSize: "contain",
+                    backgroundImage: `url("${serviceContent.mobileImage}")`,
+                  }}
+                >
+                  {showDuration && (
+                    <div class="flex items-center justify-center w-20 bg-white opacity-1 rounded-xl h-8 absolute bottom-4 right-2">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-5 h-5 text-center overflow-hidden text-black align-middle"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                        />
+                      </svg>
+
+                      <p class="mb-2 pt-2 pl-2 text-sm font-bricolage font-light">
+                        <strong>{serviceContent.timeDuraction}</strong>
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </BookNowButtonMarketing>
+              <div class="px-4">
+                <h3 class="font-bricolage font-normal text-md mb-2 py-2">
+                  {serviceContent.serviceInclusionText}
+                </h3>
+                {serviceContent.serviceIncludes.map((data, idx) => {
+                  const isObject =
+                    typeof data === "object" &&
+                    data !== null &&
+                    "content" in data &&
+                    "price" in data &&
+                    "cutPrice" in data;
+                  return (
+                    <ul>
+                      <li class="flex items-center mb-1 font-bricolage text-sm tracking-wide">
+                        <img
+                          src="https://vetic-img.s3.ap-south-1.amazonaws.com/website/grooming_page/usp_logo_v1.png"
+                          alt="check"
+                          class="mr-3 h-6 rounded-lg w-6"
+                        />
+                        {isObject ? (
+                          <div class="font-bricolage text-sm font-normal">
+                            {data.content}
+                            {data.price}
+                            <span class="line-through pl-1">
+                              {data.cutPrice}
+                            </span>
+                          </div>
+                        ) : (
+                          <span>{data}</span>
+                        )}
+                      </li>
+                    </ul>
+                  );
+                })}
+                <div class="mt-4 flex items-center justify-between pt-4 pb-2">
+                  <p class="text-sm font-bricolage font-light pl-1">
+                    {serviceContent.serviceInclusion}
+                  </p>
+                  <BookNowButtonMarketing className=" bg-[#152239] text-white px-7 py-2 rounded-xl font-bricolage tracking-button">
+                    {serviceContent.buttonText}
+                  </BookNowButtonMarketing>
+                </div>
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+</div>
+<script src="https://npmcdn.com/flickity@2/dist/flickity.pkgd.js"></script>

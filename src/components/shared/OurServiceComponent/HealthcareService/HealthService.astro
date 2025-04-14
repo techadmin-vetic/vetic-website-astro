@@ -1,0 +1,85 @@
+---
+import BookNowButton from "@components/ui/BookNowButton.astro";
+import { Image } from "astro:assets";
+
+const {
+  content: { healthCareServices },
+  isCancerCarePage
+} = Astro.props;
+---
+<style>
+  .vetic-infastructure-bg {
+    background-image: url("https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/Banner+Image/bgIconM.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top right;
+  }
+
+  @media (min-width: 768px) {
+    .vetic-infastructure-bg {
+      background-image: url("https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/Banner+Image/bgIconD.webp");
+      background-position: top right;
+    }
+  }
+</style>
+
+<section class=" py-12 vetic-infastructure-bg">
+  <div class="container w-11/12 mx-auto sm:py-4">
+    <h2 class="text-[24px] sm:text-4xl font-primaryFont text-gray-800 sm:mb-8 mb-4">
+      {healthCareServices?.heading}
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {
+        healthCareServices?.cards?.map((healthCare) => (
+          
+            <div class="bg-white rounded-xl shadow-md p-4">
+              <a 
+            href={healthCare?.serviceLink} 
+            class="block"
+          >
+              <div>
+              <img
+                src={healthCare?.image}
+                alt={healthCare?.heading}
+                class="w-full h-full rounded-xl mb-2 object-fill"
+              />
+              <h3 class="text-xl font-primaryFont text-gray-800 mb-2">
+                {healthCare.heading}
+              </h3>
+              <p class="text-sm text-gray-600 mb-4">{healthCare?.subHeading}</p>
+              <ul class="list-disc list-inside text-sm text-gray-600">
+                {healthCare?.points?.map((item) => {
+                  return <li class="font-secondaryFont">{item?.heading}</li>;
+                })}
+              </ul>
+            </div>
+          </a>
+          </div>
+        ))
+      }
+          {
+            isCancerCarePage && (
+              <div class="max-w-lg p-6 bg-white rounded-lg relative overflow-hidden hidden lg:block">
+                <div class="space-y-4">
+                  <h2 class="text-lg sm:text-xl font-bold text-gray-900 w-60 font-primaryFont">
+                    {healthCareServices?.cardHeading}
+                  </h2>
+                  <p class="text-sm italic text-gray-600 font-secondaryFont">
+                    {healthCareServices?.cardSubHeading}
+                  </p>
+                  <BookNowButton className="px-4 py-2 w-1/2 text-center bg-black text-white text-sm font-semibold rounded-md font-primaryFont">
+                    {healthCareServices?.buttonText}
+                  </BookNowButton>
+                </div>
+                <img
+                  src={healthCareServices?.image}
+                  alt="Pets"
+                  class="absolute bottom-0 right-0 w-[200px] object-cover"
+                />
+              </div>
+            )
+          }
+    </div>
+
+  </div>
+</section>

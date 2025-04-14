@@ -1,0 +1,71 @@
+---
+import { Image } from "astro:assets";
+import BookNowButtonMarketing from "@components/ui/BookNowButtonMarketing.astro";
+
+const {
+  content: { BannerSection },
+} = Astro.props;
+---
+
+<div class="w-full bg-gradient-to-b from-sky-50 relative">
+  <p
+    class="mx-auto w-11/12 text-2xl tracking-wide font-semibold text-gray-800 font-bricolage py-4 sm:py-6 lg:py-8"
+  >
+    {BannerSection.heading}
+  </p>
+  <BookNowButtonMarketing>
+    <div class="flex h-50 mx-4">
+      <div class="w-1/2 flex justify-center items-center relative">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 27 24"
+          fill="none"
+          class="absolute top-[30px] left-[25px] w-8 h-8 sm:top-[5rem] sm:left-[4rem] md:top-[7rem] md:left-[8rem] xl:top-[7rem] xl:left-[19.5rem] sm:w-12 sm:h-12"
+        >
+          <path
+            d="M2.34954 15.8445C1.70692 15.8445 1.1178 16.0068 0.705484 16.3001C0.0926333 16.736 -0.12693 17.4233 0.0703284 18.2878C0.45533 19.974 2.01426 21.1229 3.15331 21.8403C3.96648 22.3526 4.81946 22.8315 5.64431 23.2945C6.0598 23.528 6.47559 23.7613 6.88863 24C7.58885 23.0407 10.014 18.1011 10.156 17.4665C10.3599 16.5541 10.2243 15.1833 9.64411 14.4681C9.34566 14.1002 8.97191 13.9516 8.49841 14.0137C7.56215 14.1374 6.53442 15.0342 5.44326 16.6788L5.20569 17.0368L4.88668 16.7652C4.13806 16.1274 3.19751 15.8445 2.34954 15.8445Z"
+            fill="#DD8070"></path>
+          <path
+            d="M17.0696 9C16.9902 9 16.913 9.00476 16.8382 9.0145C16.1803 9.09934 15.7817 9.5335 15.6203 10.3419C15.2766 12.0616 16.252 13.9225 17.015 15.1726C17.5786 16.0957 18.1978 17.011 18.7964 17.8962C19.0449 18.2635 19.2933 18.6308 19.5392 19C20.8843 18.1871 24.8119 15.1278 25.2797 14.564C25.8136 13.8701 26.2572 12.5718 26.0379 11.6909C25.9379 11.2896 25.7119 11.0338 25.3264 10.8849C24.4449 10.5451 23.1306 10.8719 21.4204 11.8543L20.7276 12.2523L20.3876 11.4818C19.7061 9.93693 18.1841 9 17.0696 9Z"
+            fill="#DD8070"></path>
+          <path
+            d="M7.8099 2.31939C7.11112 2.31939 6.4716 2.51032 6.04713 2.84505C5.51971 3.26091 5.3676 3.84115 5.58168 4.61849C6.03781 6.27279 7.68576 7.36001 8.88554 8.03371C9.77197 8.53197 10.7031 8.99455 11.6033 9.44163C11.9761 9.62662 12.3489 9.81204 12.7201 10C13.5193 8.60142 15.5527 3.9295 15.7077 3.20228C15.8631 2.32894 15.6772 0.983458 15.1045 0.342681C14.844 0.0508593 14.5369 -0.0493888 14.1431 0.0221863C13.2392 0.190186 12.2547 1.15528 11.2159 2.8905L10.7954 3.59308L10.1675 3.10947C9.45415 2.56066 8.59453 2.31939 7.8099 2.31939Z"
+            fill="#DD8070"></path>
+        </svg>
+        <p
+          class="text-left font-bricolage text-[26px] sm:text-[36px] font-semibold leading-[24px] sm:leading-[40px]"
+        >
+          {BannerSection.discountContent}
+          <br />
+          {BannerSection.discount}
+        </p>
+      </div>
+      <div class="w-1/2 text-center flex items-center justify-center">
+        <Image
+          src={BannerSection.mobileImage}
+          alt="banner_image"
+          class="sm:h-[18rem] sm:w-[18rem] md:h-[20rem] md:w-[20rem] xl:h-[25rem] xl:w-[25rem]"
+          width={200}
+          height={200}
+          format="webp"
+          quality={80}
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </BookNowButtonMarketing>
+
+  <div class="px-6 py-1 sm:pt-3 sm:px-3.5 sm:before:flex-1">
+    <p
+      class="text-md sm:text-xl text-center font-bricolage leading-6 text-[#193A6A]"
+    >
+      {BannerSection.imageSubHeading}
+      <span class="text-xl font-semibold"
+        >{BannerSection?.imageSubHeadingPrice}</span
+      >
+      <span class="line-through text-[#AFACAC]"
+        >{BannerSection?.imageSubHeadingCutPrice}</span
+      >
+    </p>
+  </div>
+</div>

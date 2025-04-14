@@ -1,0 +1,67 @@
+---
+import BookNowButtonMarketing from "@components/ui/BookNowButtonMarketing.astro";
+
+interface Props {
+  imageUrl: string;
+  displayName: string;
+  doctorName: string;
+  expertise: string;
+  experience: string;
+  totalGrooming: string;
+  rating: string;
+}
+const { doctorName, experience, imageUrl, rating, totalGrooming } = Astro.props;
+---
+
+<>
+  <div class="max-w-xs sm:w-full rounded-lg overflow-hidden mx-auto my-3">
+    <div class="relative">
+      <BookNowButtonMarketing>
+        <div
+          class="mx-auto w-20 h-20 sm:w-32 sm:h-32 rounded-full bg-center bg-contain bg-no-repeat relative overflow-hidden"
+          style={{
+            backgroundSize: "cover",
+            backgroundImage: `url("${imageUrl}")`,
+          }}
+        >
+        </div>
+      </BookNowButtonMarketing>
+      <div
+        class="flex justify-center items-center w-10 h-4 bg-gray-100 rounded-2xl absolute right-7 bottom-2"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="h-3 w-3 sm:h-6 sm:w-6 text-yellow-400"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+            clip-rule="evenodd"></path>
+        </svg>
+
+        <span
+          class="text-[10px] sm:text-[12px] font-semibold mb-2 pt-2 pl-1 text-black"
+          >{rating}
+        </span>
+      </div>
+    </div>
+
+    <p class="font-bricolage text-center sm:text-lg py-2">{doctorName}</p>
+    <div class="text-left px-2 pb-2">
+      <p class="font-bricolage text-sm sm:text-base text-center">
+        <span class="pr-4 text-gray-500 text-xs sm:text-base font-light"
+          >Experience</span
+        >{experience}
+      </p>
+      <p class="font-bricolage text-sm sm:text-base text-center">
+        <span class="pr-4 text-gray-500 text-xs sm:text-base font-light"
+          >Pet's Treated</span
+        >{totalGrooming} Pets
+      </p>
+    </div>
+  </div>
+
+  <p class="border-s-2 mx-2 border-gray-200 sm:h-20 h-12 top-14"></p>
+</>

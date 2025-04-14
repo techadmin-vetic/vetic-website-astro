@@ -1,0 +1,151 @@
+---
+import type { IHomePageProps } from "@components/pages/PagePropsInterface/page_props_interface";
+import BookNowButton from "@components/ui/BookNowButton.astro";
+
+const {
+  content: { veticServices },
+  isEmergencyPage,
+  isHomePage,
+} = Astro.props as IHomePageProps;
+---
+
+<style>
+  .vetic-services-bg {
+    background-image: url("https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/Banner+Image/bgIconM.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top right;
+  }
+
+  @media (min-width: 768px) {
+    .vetic-services-bg {
+      background-image: url("https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/Banner+Image/bgIconD.webp");
+      background-position: top right;
+    }
+  }
+</style>
+
+<div class="bg-cover bg-center vetic-services-bg">
+  <div class="container w-11/12 mx-auto py-10 sm:py-12">
+    <h2 class="text-2xl sm:text-4xl text-gray-900 mb-2 font-primaryFont">
+      {veticServices?.heading ?? ""}
+    </h2>
+    <p class="text-md text-gray-700 mb-6 font-secondaryFont">
+      {veticServices?.subHeading}
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
+      <!-- cards-->
+      {
+        veticServices?.serviceCards?.map((cards) => {
+          return (
+          <div
+  x-data="{ isOpen: window.innerWidth >= 640 }"
+  x-init="$watch('isOpen', value => {}); 
+      window.addEventListener('resize', () => { isOpen = window.innerWidth >= 640 })"
+  class="bg-white p-3 py-4 sm:p-6 rounded-2xl border-[1px] border-primaryColor flex flex-col h-full"
+>
+  <h2
+    @click="if (window.innerWidth < 640) isOpen = !isOpen"
+    class="text-xl font-semibold text-gray-800 flex items-center justify-between cursor-pointer sm:cursor-auto"
+  >
+    <span class="flex items-center">
+      <img
+        class="w-10 h-10 mr-2"
+        src={cards.icon}
+        alt="cards_icons"
+      />
+      <span class="font-primaryFont text-lg sm:text-xl font-light">
+        {cards?.cardHeading}{" "}
+      </span>
+    </span>
+    <span
+      x-show="window.innerWidth < 640"
+      class="text-gray-600 block sm:hidden p-2"
+    >
+      <svg
+        x-show="!isOpen"
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 1024 1024"
+        class="inline-block"
+      >
+        <path
+          fill="currentColor"
+          d="M104.704 338.752a64 64 0 0 1 90.496 0l316.8 316.8l316.8-316.8a64 64 0 0 1 90.496 90.496L557.248 791.296a64 64 0 0 1-90.496 0L104.704 429.248a64 64 0 0 1 0-90.496"
+        />
+      </svg>
+      <svg
+        x-show="isOpen"
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 1024 1024"
+        class="inline-block"
+      >
+        <path
+          fill="currentColor"
+          d="M104.704 685.248a64 64 0 0 0 90.496 0l316.8-316.8l316.8 316.8a64 64 0 0 0 90.496-90.496L557.248 232.704a64 64 0 0 0-90.496 0L104.704 594.752a64 64 0 0 0 0 90.496"
+        />
+      </svg>
+    </span>
+  </h2>
+
+  <ul
+    x-show="isOpen || window.innerWidth >= 640"
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="opacity-0 transform scale-95"
+    x-transition:enter-end="opacity-100 transform scale-100"
+    x-transition:leave="transition ease-in duration-200"
+    x-transition:leave-start="opacity-100 transform scale-100"
+    x-transition:leave-end="opacity-0 transform scale-95"
+    class="list-disc list-inside mt-4 text-[#787878]"
+  >
+    {cards?.serviceCardsData?.map((list) => {
+      return <li class="text-sm font-secondaryFont">{list}</li>;
+    })}
+
+    {isEmergencyPage && (
+      <p class="text-sm font-secondaryFont">
+        {cards?.cardDescription}
+      </p>
+    )}
+  </ul>
+
+  {isEmergencyPage && (
+    <div class="mt-auto pt-6 hidden md:block"> <!-- Hide on mobile, show on desktop -->
+      <BookNowButton className="border-[1px] border-black rounded-lg py-2 px-4 hover:bg-buttonColor hover:text-white">
+        {cards?.buttonText}
+      </BookNowButton>
+    </div>
+  )}
+</div>
+          );
+        })
+      }
+
+      {
+        isHomePage && (
+          <div class="max-w-lg p-6 bg-white rounded-lg relative overflow-hidden">
+            <div class="space-y-4">
+              <h2 class="text-lg sm:text-xl font-bold text-gray-900 w-60 font-primaryFont">
+                {veticServices?.cardHeading}
+              </h2>
+              <p class="text-sm italic text-gray-600 font-secondaryFont">
+                {veticServices?.cardSubHeading}
+              </p>
+              <BookNowButton className="px-4 py-2 w-1/2 text-center bg-black text-white text-sm font-semibold rounded-md font-secondaryFont">
+                {veticServices?.buttonText}
+              </BookNowButton>
+            </div>
+            <img
+              src={veticServices?.image}
+              alt="Pets"
+              class="absolute bottom-0 right-0 w-32 sm:w-36 object-cover"
+            />
+          </div>
+        )
+      }
+    </div>
+  </div>
+</div>

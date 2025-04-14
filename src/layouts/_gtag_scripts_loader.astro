@@ -1,0 +1,71 @@
+---
+
+---
+
+<slot />
+<!-- Initialize Data Layer On Every Page -->
+<script
+  is:inline
+  defer
+  src="https://www.googletagmanager.com/gtag/js?id=G-06GNMRQG81"></script>
+
+<script is:inline defer>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    window.dataLayer.push(arguments);
+  }
+
+  gtag("js", new Date());
+  gtag("config", "G-06GNMRQG81", { anonymize_ip: true });
+
+  function getUTMData() {
+    const queryParams = new URLSearchParams(window.location.search);
+    return {
+      utm_source: queryParams.get("utm_source") || "",
+      utm_medium: queryParams.get("utm_medium") || "",
+      utm_campaign: queryParams.get("utm_campaign") || "",
+      utm_mobile: queryParams.get("utm_mobile") || "",
+      utm_term: queryParams.get("utm_term") || "",
+      fbclid: queryParams.get("fbclid") || "",
+      gclid: queryParams.get("gclid") || "",
+    };
+  }
+
+  function getMobileFromURL(add91 = false) {
+    const searchParams = new URLSearchParams(window.location.search);
+    const mobileNumber = searchParams.get("mobile");
+    return add91 ? `+91${mobileNumber}` : mobileNumber;
+  }
+
+  function sendGTAGEvent(eventAction, eventLabel) {
+    const utmSourceData = window.getUTMData();
+    window.gtag("event", eventAction, {
+      event_category: "Button",
+      event_label: eventLabel,
+      ...utmSourceData,
+    });
+  }
+
+  window.getUTMData = getUTMData;
+  window.gtag = gtag;
+  window.getMobileFromURL = getMobileFromURL;
+  window.sendGTAGEvent = sendGTAGEvent;
+  window.userScrolled = false;
+</script>
+
+<!-- Google Tag Manager -->
+<script is:inline defer>
+  (function (w, d, s, l, i) {
+    w[l] = w[l] || [];
+    w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+    var f = d.getElementsByTagName(s)[0],
+      j = d.createElement(s),
+      dl = l != "dataLayer" ? "&l=" + l : "";
+    j.async = true;
+    j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+    f.parentNode.insertBefore(j, f);
+  })(window, document, "script", "dataLayer", "GTM-NPS952B");
+</script>
+
+<!--  End Google Tag Manager  -->

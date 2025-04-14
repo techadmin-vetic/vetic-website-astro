@@ -1,0 +1,311 @@
+---
+// import { Image } from "astro:assets";
+import BookNowButton from "@components/ui/BookNowButton.astro";
+import CarouselContainer from "@components/ui/CarouselContainer.astro";
+import { Image } from "astro:assets";
+import type { IHomePageProps } from "@components/pages/PagePropsInterface/page_props_interface";
+const {
+  content: { testimonials },
+} = Astro.props as IHomePageProps;
+
+---
+
+<style>
+  .testimonials-bg {
+    background-image: url("https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/Banner+Image/bgIconM.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+  }
+
+  @media (min-width: 768px) {
+    .testimonials-bg {
+      background-image: url("https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/Banner+Image/bgIconD.webp");
+      background-position: bottom;
+    }
+  }
+</style>
+
+<div class="py-10 bg-cover bg-center testimonials-bg sm:rounded-3xl">
+  <div class="container w-11/12 mx-auto">
+    <div class="flex justify-between items-center w-full lg:pt-4">
+      <h2 class="text-2xl sm:text-3xl font-primaryFont">
+        {testimonials?.heading}
+      </h2>
+      <div class="">
+        <div class="flex items-center">
+          <span class="text-[24px] sm:text-2xl font-primaryFont"
+            >{testimonials?.rating}</span
+          >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="h-4 w-4 ml-1 text-yellow-300"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        <p
+          class="text-zinc-600 text-[14px] font-secondaryFont whitespace-nowrap overflow-hidden"
+        >
+          {testimonials?.ratingData}
+        </p>
+      </div>
+    </div>
+    <div class="carousel">
+  <div class="carousel-container">
+    {([...testimonials?.testimonialData, ...testimonials?.testimonialData]).map((reviews, index) => (
+      <div class="carousel-slide p-2" key={index}>
+        <div class="bg-white border-[1px] border-primaryColor w-[94%] p-4 rounded-lg flex flex-col items-start">
+          <div class="flex items-center justify-between mb-2 w-full">
+            <div class="flex">
+              <BookNowButton>
+                <Image
+                  width={200}
+                  height={200}
+                  class="w-12 h-12 rounded-full mr-2 tracking-image"
+                  src={reviews.image}
+                  alt="User profile picture"
+                  loading="lazy"
+                />
+              </BookNowButton>
+              <div>
+                <div class="font-secondaryFont text-md">
+                  {reviews.petOwner}
+                </div>
+                <div class="text-sm text-zinc-500 font-secondaryFont">
+                  {reviews.petName}
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="font-secondaryFont font-light text-sm">
+            {reviews.content}
+          </p>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+  </div>
+</div>
+
+<style>
+  .carousel {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+
+  .carousel-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    transform: translateX(0);
+    cursor: grab;
+  }
+
+  .carousel-container.grabbing {
+    cursor: grabbing;
+    transition: none;
+  }
+
+  .carousel-slide {
+    flex: 0 0 100%;
+  }
+
+  @media (min-width: 768px) {
+    .carousel-slide {
+      flex: 0 0 25%;
+    }
+  }
+
+  .card {
+    transition: transform 0.3s ease;
+    user-select: none;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+  }
+</style>
+
+<script>
+  class Carousel {
+    carousel: HTMLElement;
+    slides: NodeListOf<Element>;
+    currentIndex: number;
+    interval: number | null;
+    isDragging: boolean;
+    startPos: number;
+    currentTranslate: number;
+    prevTranslate: number;
+    animationID: number;
+    currentSlideWidth: number;
+
+    constructor() {
+      this.carousel = document.querySelector('.carousel-container') as HTMLElement;
+      this.slides = document.querySelectorAll('.carousel-slide');
+      this.currentIndex = 0;
+      this.interval = null;
+      this.isDragging = false;
+      this.startPos = 0;
+      this.currentTranslate = 0;
+      this.prevTranslate = 0;
+      this.animationID = 0;
+      this.currentSlideWidth = 0;
+      this.init();
+    }
+
+    init() {
+      this.updateCarouselPosition();
+      this.setupDragListeners();
+      this.startAutoSlide();
+      this.setupResizeHandler();
+    }
+
+    setupDragListeners() {
+      // Mouse events
+      this.carousel.addEventListener('mousedown', this.dragStart.bind(this));
+      this.carousel.addEventListener('mousemove', this.drag.bind(this));
+      this.carousel.addEventListener('mouseup', this.dragEnd.bind(this));
+      this.carousel.addEventListener('mouseleave', this.dragEnd.bind(this));
+
+      // Touch events
+      this.carousel.addEventListener('touchstart', this.dragStart.bind(this));
+      this.carousel.addEventListener('touchmove', this.drag.bind(this));
+      this.carousel.addEventListener('touchend', this.dragEnd.bind(this));
+
+      // Prevent context menu
+      this.carousel.addEventListener('contextmenu', (e) => e.preventDefault());
+    }
+
+    dragStart(e: MouseEvent | TouchEvent) {
+      if (this.interval) clearInterval(this.interval);
+      
+      this.isDragging = true;
+      this.carousel.classList.add('grabbing');
+      
+      // Get the starting position
+      this.startPos = this.getPositionX(e);
+      this.currentSlideWidth = this.slides[0].clientWidth;
+      
+      // Cancel any ongoing animation
+      cancelAnimationFrame(this.animationID);
+    }
+
+    drag(e: MouseEvent | TouchEvent) {
+      if (!this.isDragging) return;
+      
+      // Calculate how far we've dragged
+      const currentPosition = this.getPositionX(e);
+      const diff = currentPosition - this.startPos;
+      
+      // Update the current translate position
+      this.currentTranslate = this.prevTranslate + diff;
+      
+      // Apply the transform
+      this.setCarouselPosition(this.currentTranslate);
+    }
+
+    dragEnd() {
+      this.isDragging = false;
+      this.carousel.classList.remove('grabbing');
+      
+      // Calculate how many slides to move
+      const movedBy = this.prevTranslate - this.currentTranslate;
+      const slideThreshold = this.currentSlideWidth * 0.2; // 20% threshold
+      
+      if (Math.abs(movedBy) > slideThreshold) {
+        if (movedBy > 0) {
+          this.currentIndex++;
+        } else {
+          this.currentIndex--;
+        }
+      }
+      
+      // Keep index within bounds
+      const maxIndex = this.slides.length - (window.innerWidth >= 768 ? 4 : 1);
+      if (this.currentIndex < 0) this.currentIndex = maxIndex;
+      if (this.currentIndex > maxIndex) this.currentIndex = 0;
+      
+      // Update position and restart auto-slide
+      this.carousel.style.transition = 'transform 0.5s ease-in-out';
+      this.updateCarouselPosition();
+      this.startAutoSlide();
+    }
+
+    getPositionX(e: MouseEvent | TouchEvent): number {
+      return e instanceof MouseEvent ? e.clientX : e.touches[0].clientX;
+    }
+
+    setCarouselPosition(position: number) {
+      this.carousel.style.transform = `translateX(${position}px)`;
+    }
+
+    moveCarousel() {
+  const slideWidth = this.slides[0].clientWidth;
+  const maxIndex = this.slides.length - (window.innerWidth >= 768 ? 4 : 1);
+
+  this.currentIndex++;
+
+  if (this.currentIndex > maxIndex) {
+    this.currentIndex = 0;
+    this.carousel.style.transition = 'none';
+    this.updateCarouselPosition();
+
+    void this.carousel.offsetWidth; // Force reflow
+    this.carousel.style.transition = 'transform 0.5s ease-in-out';
+  } else {
+    this.updateCarouselPosition();
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+  const carousel = document.querySelector(".carousel-container");
+
+  function cloneSlides() {
+    const slides = document.querySelectorAll(".carousel-slide");
+    slides.forEach(slide => {
+      const clone = slide.cloneNode(true);
+      carousel.appendChild(clone);
+    });
+  }
+
+  cloneSlides(); // Duplicate slides once the page loads
+});
+
+}
+
+
+    updateCarouselPosition() {
+      const slideWidth = this.slides[0].clientWidth;
+      this.prevTranslate = -this.currentIndex * slideWidth;
+      this.currentTranslate = this.prevTranslate;
+      this.setCarouselPosition(this.currentTranslate);
+    }
+
+    startAutoSlide() {
+  if (this.interval) clearInterval(this.interval);
+  this.interval = setInterval(() => this.moveCarousel(), 3000);
+}
+
+
+    setupResizeHandler() {
+      window.addEventListener('resize', () => {
+        const maxIndex = this.slides.length - (window.innerWidth >= 768 ? 4 : 1);
+        this.currentIndex = Math.min(this.currentIndex, maxIndex);
+        this.carousel.style.transition = 'none';
+        this.updateCarouselPosition();
+      });
+    }
+  }
+
+  // Initialize carousel when the DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    new Carousel();
+  });
+</script>

@@ -1,0 +1,30 @@
+---
+import InsuranceBanner from "@components/shared/MarketingPagesComponents/Insurance/InsuranceBanner/InsuranceBanner.astro";
+
+import FAQComponent from "@components/shared/MarketingPagesComponents/FAQComponent/FAQComponent.astro";
+import ContactUsSectionV1 from "@components/shared/MarketingPagesComponents/ContactUsSectionV1/ContactSectionV1.astro";
+
+import TestimonialSectionV1 from "@components/shared/MarketingPagesComponents/TestimonialSectionV1/TestimonialSectionV1.astro";
+import type { IInsurancePageProps } from "@components/pages/PagePropsInterface/page_props_interface";
+import { reduceFAQs } from "@utils/global_utils";
+import ServiceNavbarV1 from "@components/shared/MarketingPagesComponents/ServiceNavbarV1/ServiceNavbarV1.astro";
+import InsuranceCard from "@components/shared/MarketingPagesComponents/Insurance/InsuranceCard/InsuranceCard.astro";
+import InsuranceFeature from "@components/shared/MarketingPagesComponents/Insurance/InsuranceFeature/InsuranceFeature.astro";
+
+const { content, srNumber, location } = Astro.props as IInsurancePageProps;
+// console.log(content, "insurance");
+const reducedFAQs = reduceFAQs(content?.Faq?.data, "title", "content");
+---
+
+<ServiceNavbarV1 location={location} srNumber={srNumber} />
+<InsuranceBanner content={content} />
+<InsuranceFeature content={content} />
+<InsuranceCard content={content} /> 
+<TestimonialSectionV1 content={content} />
+<FAQComponent hideHeading={false} faqs={reducedFAQs} />
+<ContactUsSectionV1
+  title="Hello"
+  location={location}
+  content={content}
+  srNumber={srNumber}
+/>

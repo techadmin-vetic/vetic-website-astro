@@ -1,0 +1,124 @@
+---
+import type { IHomePageProps } from "@components/pages/PagePropsInterface/page_props_interface";
+const {
+  content: { veticInfastructure },
+} = Astro.props as IHomePageProps;
+---
+
+<style>
+  .vetic-infastructure-bg {
+    background-image: url("https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/Banner+Image/bgIconM.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top right;
+  }
+
+  @media (min-width: 768px) {
+    .vetic-infastructure-bg {
+      background-image: url("https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/Banner+Image/bgIconD.webp");
+      background-position: top right;
+    }
+  }
+</style>
+
+<div class="bg-cover bg-center vetic-infastructure-bg">
+  <div
+    x-data="{
+    activeButton: 'Clinics',
+    mobileImage: {
+      'Clinics': ['https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/Clinic+Mobile+(11).webp', 'https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/Clinic+mobile+(13).webp','https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/Clinic+mobile+(12).webp'],
+      'Expert Vets': ['https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/Expert+Vets+(5).webp','https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/Expert+Vets+(3).webp' , 'https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/Expert+Vets+(4).webp','https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/247+Care+(10).webp'],
+      'Grooming': ['https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/Grooming+(11).webp','https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/Grooming+(9).webp','https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/Grooming+(10).webp'],
+      '24/7 Care': ['https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/247+Care+(11).webp','https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/247+Care+(9).webp','https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/247+Care+(10).webp','https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/247+Care+(10).webp'],
+      'Retail': ['https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/Retail+(5).webp', 'https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/Retail+(3).webp', 'https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/Retail+(4).webp']
+    },
+    desktopImage: {
+      'Clinics': ['https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/Clinic+Desktop+(8).webp','https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/Clinic+Desktop+(10).webp','https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/Clinic+Desktop(9).webp'],
+      'Expert Vets': ['https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/Expert+Vets.webp','https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/Expert+Vets+(2).webp','https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/Expert+Vets+(1).webp'],
+      'Grooming': ['https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/Grooming+(6).webp','https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/Grooming+(7).webp','https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/Grooming+(8).webp'],
+      '24/7 Care': ['https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/247+Care+(6).webp','https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/247+Care+(8).webp','https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/247+Care+(7).webp'],
+      'Retail': ['https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/Retail.webp', 'https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/Retail+(1).webp', 'https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/home_page_image/vetic_infrastructure/Retail+(2).webp']
+    },
+    isMobile: window.innerWidth < 768
+  }"
+    x-init="window.addEventListener('resize', () => { isMobile = window.innerWidth < 768; })"
+    class="mx-auto py-10 w-11/12 container"
+  >
+    <!-- Heading -->
+    <h2 class="text-2xl sm:text-4xl font-primaryFont text-gray-800 mb-4">
+      {veticInfastructure?.heading}
+    </h2>
+
+    <!-- Buttons Container with Horizontal Scroll -->
+    <div
+      class="flex overflow-x-auto scrollbar-hide font-secondaryFont mb-8 mt-2"
+    >
+      <button
+        class="flex-shrink-0 mr-2 px-4 py-2 rounded-xl border-[1px] border-primaryColor focus:outline-none"
+        :class="activeButton === 'Clinics' ? 'bg-black text-white' : 'bg-white text-gray-800 hover:bg-gray-50'"
+        @click="activeButton = 'Clinics'"
+      >
+        {veticInfastructure?.button[0]?.buttonText}
+      </button>
+      <button
+        class="flex-shrink-0 mr-2 px-4 py-2 rounded-xl border-[1px] border-primaryColor focus:outline-none"
+        :class="activeButton === 'Expert Vets' ? 'bg-black text-white' : 'bg-white text-gray-800 hover:bg-gray-50'"
+        @click="activeButton = 'Expert Vets'"
+      >
+        {veticInfastructure?.button[1]?.buttonText}
+      </button>
+      <button
+        class="flex-shrink-0 mr-2 px-4 py-2 rounded-xl border-[1px] border-primaryColor focus:outline-none"
+        :class="activeButton === 'Grooming' ? 'bg-black text-white' : 'bg-white text-gray-800 hover:bg-gray-50'"
+        @click="activeButton = 'Grooming'"
+      >
+        {veticInfastructure?.button[2]?.buttonText}
+      </button>
+      <button
+        class="flex-shrink-0 mr-2 px-4 py-2 rounded-xl border-[1px] border-primaryColor focus:outline-none"
+        :class="activeButton === '24/7 Care' ? 'bg-black text-white' : 'bg-white text-gray-800 hover:bg-gray-50'"
+        @click="activeButton = '24/7 Care'"
+      >
+        {veticInfastructure?.button[3]?.buttonText}
+      </button>
+      <button
+        class="flex-shrink-0 mr-2 px-4 py-2 rounded-xl border-[1px] border-primaryColor focus:outline-none"
+        :class="activeButton === 'Retail' ? 'bg-black text-white' : 'bg-white text-gray-800 hover:bg-gray-50'"
+        @click="activeButton = 'Retail'"
+      >
+        {veticInfastructure?.button[4]?.buttonText}
+      </button>
+    </div>
+
+    <!-- Image Section -->
+    <a href="/pet-clinic-near-me">
+      <div class="grid grid-cols-3 gap-4">
+        <!-- Main Large Image -->
+
+        <div class="col-span-2">
+          <img
+            :src="isMobile ? mobileImage[activeButton][0] : desktopImage[activeButton][0]"
+            alt="Main Image"
+            class="w-full h-[216px] sm:h-[500px] rounded-xl shadow-md"
+            loading="lazy"
+          />
+        </div>
+        <!-- Small Images -->
+        <div class="flex flex-col space-y-4">
+          <img
+            :src="isMobile ? mobileImage[activeButton][1] : desktopImage[activeButton][1]"
+            alt="Small Image 1"
+            class="w-full h-[100px] sm:h-[240px] rounded-xl shadow-md"
+            loading="lazy"
+          />
+          <img
+            :src="isMobile ? mobileImage[activeButton][2] : desktopImage[activeButton][2]"
+            alt="Small Image 2"
+            class="w-full h-[100px] sm:h-[240px] rounded-xl shadow-md"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </a>
+  </div>
+</div>

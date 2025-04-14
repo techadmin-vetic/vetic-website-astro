@@ -1,0 +1,50 @@
+---
+import type { IBrandSlugPageProps } from "@components/pages/PagePropsInterface/page_props_interface";
+import BookNowFormV1 from "@components/shared/MarketingPagesComponents/BookNowForms/BookNowFormV1";
+import BookNowFormV1Captcha from "@components/shared/MarketingPagesComponents/BookNowForms/BookNowFromV1Captcha";
+interface Props {
+  location: string;
+}
+const {
+  content: { BannerSection },
+} = Astro.props as IBrandSlugPageProps;
+const { location } = Astro.props;
+
+// const {
+//   content: { BannerSection },
+// } = Astro.props;
+
+// Get the current URL path
+const currentPath = Astro.url.pathname;
+const isPmUrl = currentPath.includes("-pm");
+// console.log(isPmUrl, "Check Pm URL");
+---
+
+<div
+  class="w-11/12 mx-auto bg-white rounded-lg lg:flex md:flex items-center justify-between lg:mt-8"
+>
+  <div
+    class="sm:w-full py-4 lg:w-2/5 grid grid-cols-2 lg:grid-cols-1 gap-2 sm:gap-6"
+  >
+    {
+      BannerSection.usp.map((data, id) => (
+        <div class="flex items-center h-10 sm:h-15 sm:p-6">
+          <img src={data?.logo} alt="usp_logo" class="w-6 h-6 lg:w-8 lg:h-8" />
+          <p class="pl-2 lg:pl-6 text-xs sm:text-base tracking-wider font-semibold font-bricolage">
+            {data?.heading}
+          </p>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="lg:w-2/5 mb-4">
+    {
+      isPmUrl ? (
+        <BookNowFormV1Captcha  client:load  inSideModal={false}  location={location}  />
+      ) : (
+        <BookNowFormV1 client:load inSideModal={false} location={location} />
+      )
+    }
+  </div>
+</div>

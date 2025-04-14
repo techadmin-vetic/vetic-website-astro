@@ -1,0 +1,127 @@
+---
+const {
+  content: { processSection },
+} = Astro.props;
+---
+
+<div class="bg-white py-6 sm:py-10">
+  <div class="container mx-auto w-11/12">
+    <h2
+      class="text-2xl sm:text-4xl font-primaryFont text-gray-800 sm:pb-8 pb-4"
+    >
+      {processSection?.heading}
+    </h2>
+    <div class="flex h-[300px] sm:h-[350px]">
+      <!-- scroll text -->
+      <div class="w-full sm:w-1/2 relative overflow-hidden">
+        <div
+          class="list-container h-full overflow-y-auto py-[100px] px-5 scrollbar-hide"
+        >
+          {
+            processSection?.groomingSteps?.map((step) => (
+              <div class="step-container h-[100px] flex items-center">
+                <div class="step flex items-center text-[#777] text-[22px] transition-all duration-300 ease-in-out opacity-50 w-full">
+                  <svg
+                    width="44"
+                    height="44"
+                    viewBox="0 0 44 44"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      width="43.8857"
+                      height="43.1751"
+                      rx="10"
+                      fill="#F05B72"
+                    />
+                    <path
+                      d="M31.8016 15.8941C31.9356 15.8883 32.0737 15.8899 32.2059 15.9137L32.2284 15.9179C32.4655 15.961 32.6873 16.0433 32.8847 16.1838L32.9091 16.2014C33.6392 16.7219 33.8808 17.6786 33.8856 18.5299C33.8937 20.0049 33.158 21.9443 31.5514 22.2122C29.7661 22.3485 29.2504 19.7401 29.5626 18.3936C29.8222 17.2734 30.5344 16.013 31.8016 15.8941Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M11.7987 15.91L11.8043 15.9084C13.2171 15.7791 14.1702 17.3623 14.3652 18.5696C14.561 19.7816 14.1723 22.0281 12.6926 22.2449C9.70023 22.3328 8.92059 16.1503 11.7987 15.91Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M25.3212 10.0169C26.2622 9.88812 27.2037 10.5127 27.6342 11.3343L27.8052 11.6398C28.8801 13.8007 27.8561 16.729 25.4419 17.3756C24.5579 17.5476 23.9815 17.2284 23.4529 16.542C22.3535 15.1142 22.3037 13.1605 23.1962 11.604C23.6244 10.8575 24.4423 10.094 25.3212 10.0169Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M18.1424 10.0175C19.8755 9.95689 21.1821 11.8379 21.3319 13.4359C21.4738 14.9493 20.6879 17.2961 18.9256 17.4511C17.285 17.4411 15.9712 15.8162 15.7324 14.301C15.4783 12.6877 16.2108 10.1379 18.1424 10.0175Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M21.5766 18.6192C23.1653 18.5433 24.5394 19.1032 25.8368 20.0053C28.5972 21.9247 31.1538 25.417 30.6528 28.9247C30.203 32.0727 26.9903 33.9741 24.0537 32.8488C23.4602 32.6214 22.9455 32.2857 22.3045 32.1938C21.0896 32.051 20.1673 32.8331 19.033 33.0761L18.6608 33.141C18.6 33.1547 18.5398 33.1608 18.4776 33.1646C15.5549 33.3401 13.3392 31.196 13.2085 28.3086C13.0388 24.5605 16.0398 20.7737 19.2665 19.2041C20.0244 18.8354 20.7325 18.6557 21.5766 18.6192Z"
+                      fill="white"
+                    />
+                  </svg>
+
+                  <span class="pl-6 text-[18px]">{step?.text}</span>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+        <div class="center-line absolute top-1/2 left-0 right-0 h-0.5"></div>
+        <div
+          class="fade-overlay absolute inset-0 bg-gradient-to-b from-white via-transparent to-white pointer-events-none"
+        >
+        </div>
+      </div>
+      <!-- gif cards -->
+      <div
+        class="static-image sm:flex hidden sm:w-1/2 justify-center items-center"
+      >
+        <img
+          src={processSection?.desktopImage}
+          alt="Grooming Process"
+          class="object-contain rounded-3xl"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .list-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .list-container {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .step.active {
+    @apply text-[#DE334E] opacity-100 font-bold;
+  }
+</style>
+
+<script>
+  const listContainer = document.querySelector(".list-container");
+  const steps = document.querySelectorAll(".step");
+
+  function updateActiveStep() {
+    const containerRect = listContainer.getBoundingClientRect();
+    const containerCenter = containerRect.top + containerRect.height / 2;
+
+    steps.forEach((step) => {
+      const stepContainer = step.closest(".step-container");
+      const stepRect = stepContainer.getBoundingClientRect();
+
+      if (
+        stepRect.top <= containerCenter &&
+        stepRect.bottom >= containerCenter
+      ) {
+        step.classList.add("active");
+      } else {
+        step.classList.remove("active");
+      }
+    });
+  }
+
+  listContainer.addEventListener("scroll", updateActiveStep);
+
+  // Initial update
+  updateActiveStep();
+</script>

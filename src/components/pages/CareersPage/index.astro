@@ -1,0 +1,36 @@
+---
+import AppDownloadBar from "@components/shared/CommonComponents/AppDownloadBar/AppDownloadBar.astro";
+import HeroSection from "@components/shared/CareersPageComponents/HeroSection/HeroSection.astro";
+import type { ICareersPageProps } from "@components/pages/PagePropsInterface/page_props_interface";
+import AppDownload from "@components/shared/CommonComponents/AppDownload/AppDownload.astro";
+import Footer from "@components/core/footer/Footer.astro";
+import Navbar from "@components/core/navbar/Navbar.astro";
+import VeticStory from "@components/shared/AboutUsComponents/VeticStory/VeticStory.astro";
+import VeticGrowthSection from "@components/shared/AboutUsComponents/VeticGrowthSection/VeticGrowthSection.astro";
+import VeticLocations from "@components/shared/AboutUsComponents/VeticLocations/VeticLocations.astro";
+import VeticCommunity from "@components/shared/AboutUsComponents/VeticCommunity/VeticCommunity.astro";
+import JoinVeticSection from "@components/shared/AboutUsComponents/JoinVeticSection/JoinVeticSection.astro";
+import VeticInfastructure from "@components/shared/HomePageComponent/VeticInfastructure/VeticInfastructure.astro";
+import Testimonials from "@components/shared/CommonComponents/Testimonials/Testimonials.astro";
+import DescriptionSection from "@components/shared/CommonComponents/DescriptionSection/DescriptionSection.astro";
+import FAQComponent from "@components/shared/CommonComponents/FAQComponent/FAQComponent.astro";
+import { reduceFAQs } from "@utils/global_utils";
+import PetEmergencies from "@components/shared/EmergencyPageComponents/PetEmergencies/PetEmergencies.astro";
+import VeticServices from "@components/shared/HomePageComponent/VeticServices/VeticServices.astro";
+import OurClinicsLocation from "@components/shared/CareersPageComponents/OurClinicsLocation/OurClinicsLocation.astro";
+import WhyChoose from "@components/shared/CareersPageComponents/WhyChoose/WhyChoose.astro";
+
+const { content } = Astro.props as ICareersPageProps;
+
+const reducedFAQs = reduceFAQs(content?.Faq?.data ?? [], "title", "content");
+---
+
+<AppDownloadBar content={content} />
+<Navbar location={content.meta.location} srNumber={content.meta.srNumber} />
+<HeroSection content={content} />
+<VeticGrowthSection content={content} />
+<PetEmergencies content={content}  />
+<WhyChoose content={content}/>
+<JoinVeticSection content={content} />
+<OurClinicsLocation content={content} />
+<Footer />

@@ -1,0 +1,185 @@
+---
+import BookNowButton from "@components/ui/BookNowButton.astro";
+import { Image } from "astro:assets";
+
+const {
+  content: { bannerSection },
+} = Astro.props;
+---
+
+<style>
+  @media (max-width: 1023px) {
+    .desktop-section {
+      display: none !important;
+      height: 0 !important;
+      overflow: hidden !important;
+    }
+  }
+  @media (min-width: 1024px) {
+    .mobile-section {
+      display: none !important;
+    }
+  }
+</style>
+
+<!-- Desktop Screen -->
+<section
+  class="desktop-section py-20 relative hidden lg:block"
+  style={{
+    backgroundImage: `url(${bannerSection?.desktopImage})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    width: "100%",
+  }}
+>
+  <div
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "40%" /* 20% width for left-side effect */,
+      height: "100%",
+      backgroundImage: "linear-gradient(to right, white, transparent)",
+      filter: "blur(0px)" /* Adjust blur as needed */,
+      zIndex: 0 /* Ensure this appears behind content */,
+    }}
+  >
+  </div>
+
+  <!--  Section Content button, usp , heading , description -->
+  <div style={{ position: "relative", zIndex: 0 }}>
+    <div
+      class="container w-11/12 mx-auto py-4 flex flex-col md:flex-row items-center justify-between"
+    >
+      <div class="text-center md:text-left md:w-1/2 space-y-6">
+        <h1 class="text-5xl text-gray-900 font-primaryFont">
+          <span class="text-primaryFontColor">{bannerSection?.heading1}</span>
+          {bannerSection?.heading2}
+        </h1>
+        <h2 class="text-xl text-gray-700 font-secondaryFont">
+          {bannerSection?.subHeadingSpan1}
+          <span class="text-primaryFontColor font-semibold"
+            >{bannerSection?.subHeadingSpan2}</span
+          >
+          {bannerSection?.subHeadingSpan3}
+          <span class="text-primaryFontColor font-semibold"
+            >{bannerSection?.subHeadingSpan4}</span
+          >
+        </h2>
+        <BookNowButton
+          className=" bg-gray-950 text-white text-center w-52 py-3 rounded-xl font-primaryFont tracking-button"
+        >
+          {bannerSection?.buttonText}
+        </BookNowButton>
+        <div class="">
+          <div
+            class="container mx-auto mt-12 flex flex-col h-28 sm:flex-row items-center justify-start space-y-4 sm:space-y-0"
+          >
+            {
+              bannerSection?.usp?.map((usps) => (
+                <div class="grid place-items-center w-32 h-40 rounded-2xl mr-4 py-2 text-center bg-gradient-to-b from-pink-50 from-10%">
+                  <div class="bg-white rounded-xl grid place-items-center w-16 h-16">
+                    <Image
+                      src={usps.uspIcon}
+                      width={40}
+                      height={40}
+                      format="webp"
+                      quality={80}
+                      alt="Pet Care"
+                      loading="lazy"
+                    />
+                  </div>
+                  <p class=" text-sm text-gray-700">{usps.heading}</p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mobile screen -->
+<section
+  class="mobile-section bg-gradient-to-t from-primaryColor border-primaryColor block lg:hidden"
+>
+  <div
+    class="container relative"
+    style={{
+      backgroundImage: `url(${bannerSection?.mobileImage})`,
+      backgroundSize: "contain",
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
+      height: "500px",
+      width: "100%",
+    }}
+  >
+    <div
+      class="mt-4"
+      style={{
+        position: "absolute",
+        top: 0,
+        right: 0,
+        left: 0,
+        width: "100%",
+        height: "50%",
+        backgroundImage: "linear-gradient(to bottom, white, transparent)",
+        filter: "blur(0px)",
+        zIndex: 0,
+      }}
+    >
+    </div>
+    <!-- Content of the section -->
+    <div style="position: relative;">
+      <div class="w-11/12 mx-auto mb-60">
+        <h1
+          class="text-2xl sm:text-4xl font-primaryFont font-semibold text-gray-900"
+        >
+          <span class="">{bannerSection?.heading1}</span>{
+            bannerSection?.heading2
+          }
+        </h1>
+        <!-- <p class="text-md text-gray-700">
+          {bannerSection?.subHeadingSpan1}
+          <span class="text-primaryFontColor font-semibold"
+            >{bannerSection?.subHeadingSpan2}</span
+          >{bannerSection?.subHeadingSpan3}
+          <span class="text-primaryFontColor font-semibold"
+            >{bannerSection?.subHeadingSpan4}</span
+          >
+        </p> -->
+      </div>
+    </div>
+  </div>
+  <div class="bg-white rounded-t-3xl overflow-hidden relative -mt-[7.3rem]">
+    <div class="mx-auto mt-4 w-11/12 flex h-32 mb-4 items-center justify-start">
+      {
+        bannerSection?.usp.map((usps) => (
+          <div class="flex flex-col w-32 h-full items-center rounded-2xl mr-4 text-center bg-gradient-to-b from-pink-50 from-10%">
+            <div class="bg-white rounded-xl mt-2 flex items-center justify-center w-12 h-12">
+              <Image
+                src={usps.uspIcon}
+                width={40}
+                height={40}
+                format="webp"
+                quality={80}
+                alt="Pet Care"
+                class="w-2/3 h-2/3"
+                loading="lazy"
+              />
+            </div>
+            <p class="mt-2 text-sm text-gray-700">{usps.heading}</p>
+          </div>
+        ))
+      }
+    </div>
+    <div class="flex items-center justify-center">
+      <BookNowButton
+        className="bg-gray-950 text-white text-center w-11/12 mx-auto py-3 rounded-2xl font-bricolage tracking-button"
+      >
+        {bannerSection?.buttonText}
+      </BookNowButton>
+    </div>
+  </div>
+</section>

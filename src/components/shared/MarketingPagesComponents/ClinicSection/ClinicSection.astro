@@ -1,0 +1,65 @@
+---
+import { Image } from "astro:assets";
+import BookNowButtonMarketing from "@components/ui/BookNowButtonMarketing.astro";
+import ClinicCarousel from "../ClinicsCarousel/ClinicCarousel.astro";
+
+const {
+  content: { Clinics, meta },
+} = Astro.props;
+---
+
+<div class="bg-gradient-to-b mt-4 from-gray-100">
+  <div class="space-y-4 px-4 pt-6 w-full lg:w-11/12 mx-auto">
+    <div class="text-left">
+      <h1
+        class="text-2xl tracking-wide font-bricolage font-semibold py-2 lg:py-4"
+      >
+        {Clinics.heading}
+      </h1>
+    </div>
+    <BookNowButtonMarketing>
+      <div
+        class="h-96 bg-center bg-cover bg-no-repeat relative rounded-3xl overflow-hidden tracking-image"
+        style={{
+          backgroundImage: `url("${Clinics.clinicBannerImage}")`,
+        }}
+      >
+      </div>
+      <div class="flex justify-between align-center w-full mx-auto mt-3">
+        <div class="w-full grid grid-cols-2 gap-4">
+          {
+            Clinics.usp.map((USPContentClinics) => {
+              return (
+                <div class="flex items-center h-10">
+                  <img
+                    src={USPContentClinics.logo}
+                    alt="USP Logo"
+                    class="w-6 h-6 sm:w-8 sm:h-8"
+                  />
+                  <p class="pl-2 text-sm sm:text-lg font-normal font-bricolage tracking-wide">
+                    {USPContentClinics.heading}
+                  </p>
+                </div>
+              );
+            })
+          }
+        </div>
+      </div>
+    </BookNowButtonMarketing>
+  </div>
+
+  <ClinicCarousel
+    variant="NEW"
+    hideHeading={true}
+    heading="The Finest Pet Clinic At"
+    headingSuffix="Mumbai"
+    location={meta.location}
+  />
+  <div class="text-center px-4 lg:mt-8">
+    <BookNowButtonMarketing
+      className="bg-[#152239] w-full lg:w-1/2 mx-auto text-white px-4 py-3 rounded-xl font-bricolage tracking-button"
+    >
+      {Clinics.buttonText}
+    </BookNowButtonMarketing>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+---
+import TrackPageView from "./track_page_view";
+---
+
+<TrackPageView client:load />
+<!-- Meta Pixel Code Starts From Here -->
+<slot />
+
+<script defer>
+  if (typeof window !== "undefined") {
+    window.addEventListener("load", () => {
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        "script",
+        "https://connect.facebook.net/en_US/fbevents.js"
+      );
+      fbq("init", "520465736757688");
+      fbq("track", "PageView");
+
+      // Check if the current page is the thank you page
+      const isThankYouPage = window.location.pathname === "/thankyou";
+      if (isThankYouPage) {
+        fbq("track", "ThankYou");
+      }
+    });
+  }
+</script>
+
+<noscript>
+  <img
+    class="script_mgtag"
+    src="https://www.facebook.com/tr?id=520465736757688&ev=PageView&noscript=1"
+  />
+</noscript>
+
+<!-- End Meta Pixel Code -->

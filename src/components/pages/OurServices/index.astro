@@ -1,0 +1,30 @@
+---
+import AppDownloadBar from "@components/shared/CommonComponents/AppDownloadBar/AppDownloadBar.astro";
+import HeroSection from "@components/shared/CommonComponents/HeroSection/HeroSection.astro";
+import type { IOurServicesPageProps } from "@components/pages/PagePropsInterface/page_props_interface";
+import AppDownload from "@components/shared/CommonComponents/AppDownload/AppDownload.astro";
+import Footer from "@components/core/footer/Footer.astro";
+import Navbar from "@components/core/navbar/Navbar.astro";
+import DescriptionSection from "@components/shared/CommonComponents/DescriptionSection/DescriptionSection.astro";
+import HealthService from "@components/shared/OurServiceComponent/HealthcareService/HealthService.astro";
+import { reduceFAQs } from "@utils/global_utils";
+import FAQComponent from "@components/shared/CommonComponents/FAQComponent/FAQComponent.astro";
+
+const { content } = Astro.props as IOurServicesPageProps;
+
+const reducedFAQs = reduceFAQs(content?.Faq?.data ?? [], "title", "content");
+---
+
+<AppDownloadBar content={content} />
+<Navbar location={content.meta.location} srNumber={content.meta.srNumber} />
+<HeroSection content={content} />
+<DescriptionSection content={content} />
+<HealthService content={content} />
+<FAQComponent 
+        heading={content?.Faq?.heading}
+        subHeading={content?.Faq?.subHeading}
+        faqs={reducedFAQs}
+        hideHeading={true}
+/>
+<AppDownload content={content} />
+<Footer />

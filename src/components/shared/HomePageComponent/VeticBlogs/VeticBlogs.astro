@@ -1,0 +1,82 @@
+---
+// import { Image } from "astro:assets";
+// import BookNowButton from "@components/ui/BookNowButton.astro";
+import { GETBlogPostsSiteData } from "@api/api_functions";
+import BookNowButton from "@components/ui/BookNowButton.astro";
+
+const getBlogPostsResponse = async () => {
+  const response = await GETBlogPostsSiteData();
+  if (response.status) {
+    return response.data;
+  } else {
+    return [];
+  }
+};
+
+const blogPosts = await getBlogPostsResponse().then((data) => data);
+---
+
+<style>
+  .carousel-cell {
+    margin-right: 14px;
+    counter-increment: carousel-cell;
+  }
+  .carousel-main .carousel-cell.is-nav-selected {
+    background: #101828 !important;
+    color: #ffffff;
+  }
+  .vetic-blogs-bg {
+    background-image: url("https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/Banner+Image/bgIconM.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top right;
+  }
+
+  @media (min-width: 768px) {
+    .vetic-blogs-bg {
+      background-image: url("https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/Banner+Image/bgIconD.webp");
+      background-position: top right;
+    }
+  }
+</style>
+
+<div class="bg-cover bg-center vetic-blogs-bg py-10">
+  <div class="container w-11/12 mx-auto">
+    <h2 class="text-2xl sm:text-4xl font-primaryFont mb-4">
+      Explore Pet Parenting with Vetic Blogs
+    </h2>
+
+    <div class="rounded-3xl mt-4">
+      <div
+        class="carousel-nav"
+        data-flickity='{"contain": true, "pageDots": false, "prevNextButtons": false }'
+      >
+        {
+          blogPosts.map((blogPost) => (
+            <div class="carousel-cell sm:w-[30%] w-[90%] rounded-xl mx-auto bg-white">
+              <div class="w-11/12 mx-auto py-4">
+                <img
+                  class="object-cover rounded-xl"
+                  src={blogPost.og_image}
+                  alt="Blog Image"
+                />
+                <h3 class="text-gray-600 text-md font-secondaryFont mb-1 mt-4">
+                  Pet Health and Care
+                </h3>
+                <p class="text-lg font-primaryFont text-gray-900 mb-4 line-clamp-2">
+                  {blogPost.title}
+                </p>
+                <a href={blogPost.og_url}>
+                  <button class="bg-black text-center font-secondaryFont text-white px-6 py-3 rounded-xl uppercase text-xs font-medium">
+                    Read More
+                  </button>
+                </a>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+  <script src="https://npmcdn.com/flickity@2/dist/flickity.pkgd.js"></script>
+</div>
