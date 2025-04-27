@@ -30,7 +30,6 @@ export interface ISiteApis {
     META: string;
     PLUM:string;
     LOOP: string;
-    BLUSMART: string;
     CARS24: string;
     HAPPYLOCATE: string;
     INSURANCE: string;

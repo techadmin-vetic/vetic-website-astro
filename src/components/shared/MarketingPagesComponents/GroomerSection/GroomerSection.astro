@@ -1,37 +1,38 @@
 ---
 import GroomerCarousel from "../GroomerCarousel/GroomerCarousel.astro";
-import BookNowButtonMarketing from "@components/ui/BookNowButtonMarketing.astro";
+import BookNowButton from "@components/ui/BookNowButton.astro";
 
 const {
-  content: { groomerSection },
+  content: { groomerSection, location},
 } = Astro.props ;
 // console.log(Clinics);
 ---
 
-<div class="bg-gradient-to-b from-green-50 py-4 mt-10 px-4 max-w-sm mx-auto">
+<div class="bg-gradient-to-b from-green-50 py-4 mt-10 px-4 mx-auto">
   <div class="space-y-4">
-    <div class="text-left">
+    <div class="text-left sm:mb-10">
       <h1 class="text-2xl font-bricolage font-semibold">
         {groomerSection?.heading}
       </h1>
     </div>
-    <BookNowButtonMarketing>
-      <div
+  
+      <!-- <div
         class="h-96 bg-center bg-cover border-[1px] border-green-600 bg-no-repeat relative rounded-3xl overflow-hidden tracking-image"
         style={{
           backgroundImage: `url("${groomerSection?.groomerBannerImage}")`,
         }}
       >
-      </div>
-    </BookNowButtonMarketing>
+      </div> -->
 
     <GroomerCarousel />
-    <div class="text-center mt-4">
-      <BookNowButtonMarketing
-        className="bg-[#152239] w-full text-white px-4 py-3 rounded-xl font-bricolage tracking-button"
+ 
+    <div class="text-center lg:mt-8">
+      <BookNowButton
+        location={location}
+        className="bg-[#152239] w-full lg:w-1/2 mx-auto text-white px-4 py-3 rounded-xl font-bricolage tracking-button"
       >
-        {groomerSection?.buttonText}
-      </BookNowButtonMarketing>
+      {groomerSection?.buttonText}
+      </BookNowButton>
     </div>
   </div>
 </div>

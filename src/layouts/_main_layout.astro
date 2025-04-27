@@ -19,6 +19,11 @@ interface Props {
 const { title, description, canonicalTag, noIndex, schemaData } = Astro.props;
 
 // console.log(canonicalTag, "title");
+
+// Get the current URL path
+const currentPath = Astro.url.pathname;
+const isPmUrl = currentPath.includes("-pm");
+// console.log(isPmUrl, "Check Pm URL");
 ---
 
 <html lang="en">
@@ -55,8 +60,12 @@ const { title, description, canonicalTag, noIndex, schemaData } = Astro.props;
     />
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"
     ></script>
-    <script src="https://www.google.com/recaptcha/api.js" is:inline async defer
-    ></script>
+    {
+      isPmUrl ? (
+        <script
+          src="https://www.google.com/recaptcha/api.js" is:inline  async defer />
+      ) : ( "" )
+    }
 
     <!-- Notify Visitors Tracking Code -->
     <script is:inline>
@@ -73,6 +82,7 @@ const { title, description, canonicalTag, noIndex, schemaData } = Astro.props;
           "/mumbai/",
           "/pune/",
           "/chennai/",
+          "/kolkata/",
         ];
       }
 

@@ -11,22 +11,30 @@ import DoctorSection from "@components/shared/MarketingPagesComponents/DoctorSec
 import ChannaiDummyDoctors from "@components/shared/MarketingPagesComponents/ChennaiDummyDoctors/ChennaiDummyDoctors.astro";
 import { reduceFAQs } from "@utils/global_utils";
 import ServiceNavbarV1 from "@components/shared/MarketingPagesComponents/ServiceNavbarV1/ServiceNavbarV1.astro";
-import ServiceNavbarAB from "@components/shared/MarketingPagesComponents/ServiceNavbarAB/ServiceNavbarAB.astro";
 import ChennaiDummyClinics from "@components/shared/MarketingPagesComponents/ChennaiDummyClinics/ChennaiDummyClinics.astro";
+import ServiceNavbarFixBookNow from "@components/shared/MarketingPagesComponents/ServiceNavbarFixBookNow/ServiceNavbarFixBookNow.astro";
 
-const { content, srNumber, location } = Astro.props as IConsultationSlugPageProps;
+const { content, srNumber, location } =
+  Astro.props as IConsultationSlugPageProps;
 const reducedFAQs = reduceFAQs(
   content?.Faq?.data ?? content?.Faq?.FAQ,
   "title",
   "content"
 );
+
+const param = Astro.params;
+let isBengaluruClinicPage = false;
+if (location === "bengaluru" && typeof param["slug_bengaluru"] === "string") {
+  const paramsArray = param["slug_bengaluru"].split("-");
+  isBengaluruClinicPage = paramsArray.includes("pet") && paramsArray.includes("clinics") && paramsArray.includes("new");
+}
 ---
 
 {
-  location === "noida" ? (
-    <ServiceNavbarAB location={location} srNumber={srNumber} />
-  ) : (
+  location === "bengaluru" && isBengaluruClinicPage ? (
     <ServiceNavbarV1 location={location} srNumber={srNumber} />
+  ) : (
+    <ServiceNavbarFixBookNow location={location} srNumber={srNumber} />
   )
 }
 

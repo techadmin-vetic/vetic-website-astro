@@ -157,7 +157,7 @@ const Forms: React.FC<{ inSideModal: boolean; location: string }> = ({
 
   const isPhoneNumberValid =
     values.phoneNumber?.trim()?.length === 10 && values.fullname !== "";
-
+// console.log(location, "location from book now form");
   return (
     <>
       <div className={inSideModal ? "px-2" : "w-full h-full"}>

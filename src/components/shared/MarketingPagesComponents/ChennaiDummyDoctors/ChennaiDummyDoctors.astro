@@ -1,5 +1,5 @@
 ---
-import BookNowButtonMarketing from "@components/ui/BookNowButtonMarketing.astro";
+import BookNowButton from "@components/ui/BookNowButton.astro";
 import CarouselContainer from "@components/ui/CarouselContainer.astro";
 
 const {
@@ -37,7 +37,7 @@ const { content, srNumber, location } = Astro.props;
         {content.doctorSection.heading}
       </h1>
     </div>
-    <BookNowButtonMarketing>
+    <BookNowButton location={location}>
       <div
         class="h-96 bg-center bg-cover bg-no-repeat relative rounded-3xl overflow-hidden tracking-image"
         style={{
@@ -45,7 +45,7 @@ const { content, srNumber, location } = Astro.props;
         }}
       >
       </div>
-    </BookNowButtonMarketing>
+    </BookNowButton>
   </div>
 
   <CarouselContainer carouselId="static_doctor_carousel">
@@ -55,7 +55,7 @@ const { content, srNumber, location } = Astro.props;
           <>
             <div class="max-w-xs sm:w-full rounded-lg overflow-hidden mx-auto my-3">
               <div class="relative">
-                <BookNowButtonMarketing>
+                <BookNowButton location={location}>
                   <div
                     class="mx-auto w-20 h-20 sm:w-32 sm:h-32 rounded-full bg-center bg-contain bg-no-repeat relative overflow-hidden"
                     style={{
@@ -63,7 +63,7 @@ const { content, srNumber, location } = Astro.props;
                       backgroundImage: `url("${doctorsData.imageUrl}")`,
                     }}
                   />
-                </BookNowButtonMarketing>
+                </BookNowButton >
                 <div class="flex justify-center items-center w-10 h-4 bg-gray-100 rounded-2xl absolute right-7 bottom-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

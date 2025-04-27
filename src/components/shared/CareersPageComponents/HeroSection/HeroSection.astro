@@ -1,7 +1,7 @@
 ---
 import BookNowButton from "@components/ui/BookNowButton.astro";
 const {
-  content: { bannerSection },
+  content: { bannerSection , location },
 } = Astro.props;
 // console.log(bannerSection);
 ---
@@ -40,9 +40,14 @@ const {
         <p class="text-gray-600 text-sm sm:text-base mb-6 font-secondaryFont">
           {bannerSection?.subHeading}
         </p>
-        <BookNowButton className="bg-black text-white text-sm sm:text-base font-primaryFont py-3 px-10 rounded-xl hover:bg-gray-800">
-          {bannerSection?.buttonText}
-        </BookNowButton>
+        <div class="flex items-center justify-center">
+          <BookNowButton
+            location={location}
+            className="bg-black text-white text-center py-3 px-20 rounded-2xl font-bricolage tracking-button"
+          >
+            {bannerSection?.buttonText}
+          </BookNowButton>
+        </div>
       </div>
     </div>
   </div>

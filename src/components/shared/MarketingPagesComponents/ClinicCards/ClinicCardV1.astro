@@ -1,5 +1,4 @@
 ---
-import BookNowButton from "@components/ui/BookNowButton.astro";
 import { convertTo12HourFormat } from "@utils/global_utils";
 interface Props {
   imageUrl: string;
@@ -8,12 +7,12 @@ interface Props {
   fridayEndTime: string;
   rating: string;
 }
-const { clinicName, fridayEndTime, fridayStartTime, imageUrl, rating } =
+const { clinicName, fridayEndTime, fridayStartTime, imageUrl, rating} =
   Astro.props;
 ---
 
 <div class="max-w-sm rounded-lg overflow-hidden px-2 sm:px-6 mx-auto">
-  <BookNowButton>
+ 
     <div
       class="w-[220px] sm:w-[18rem] h-[130px] sm:h-[12rem] relative overflow-hidden rounded-xl tracking-image"
       style={{
@@ -47,7 +46,6 @@ const { clinicName, fridayEndTime, fridayStartTime, imageUrl, rating } =
         </span>
       </div>
     </div>
-  </BookNowButton>
 
   <div class="text-left px-2 pt-2">
     <p class="font-bricolage text-sm">

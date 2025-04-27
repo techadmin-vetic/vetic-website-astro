@@ -1,6 +1,6 @@
 ---
 import ServiceHeaderComponent from "@components/core/headers/ServiceHeader.astro";
-// import BookNowFixBtnOnly from "@components/ui/BookNowFixBtnOnly.astro";
+import BookNowFixBtnOnly from "@components/ui/BookNowFixBtnOnly.astro";
 import CallNowButton from "@components/ui/CallNowButton.astro";
 
 interface Props {
@@ -15,7 +15,5 @@ const { location, srNumber } = Astro.props;
   <ServiceHeaderComponent srNumber={srNumber} location={location} />
   <slot />
   <CallNowButton srNumber={srNumber} location={location} variant="floating" />
-  <!-- <BookNowFixBtnOnly srNumber={srNumber} location={location} variant="floating" /> -->
+  <BookNowFixBtnOnly srNumber={srNumber} location={location} variant="floating" />
 </div>
-
-<!-- <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script> -->

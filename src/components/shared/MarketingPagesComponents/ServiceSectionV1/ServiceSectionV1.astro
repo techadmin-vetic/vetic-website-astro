@@ -1,9 +1,9 @@
 ---
 import { Image } from "astro:assets";
-import BookNowButtonMarketing from "@components/ui/BookNowButtonMarketing.astro";
+import BookNowButton from "@components/ui/BookNowButton.astro";
 
 const {
-  content: { ServiceCards },
+  content: { ServiceCards ,location },
   showDuration,
 } = Astro.props;
 // console.log(ServiceCards);
@@ -28,6 +28,7 @@ const {
     color: #ffffff;
   }
 </style>
+
 <div
   class="max-w-md sm:max-w-full px-4 mt-2 bg-gradient-to-b from-blue-50 pt-4 lg:py-8"
 >
@@ -61,6 +62,7 @@ const {
       {ServiceCards?.card[3]?.cardTitle}
     </button>
   </div>
+  <BookNowButton location={location} >
   <div class="border-gray-300 rounded-3xl">
     <!-- service card starts -->
     <div
@@ -82,7 +84,7 @@ const {
                   {serviceContent.discount}
                 </p>
               </div>
-              <BookNowButtonMarketing>
+              
                 <div
                   class="h-[236px] bg-center bg-no-repeat relative tracking-image"
                   style={{
@@ -113,7 +115,7 @@ const {
                     </div>
                   )}
                 </div>
-              </BookNowButtonMarketing>
+             
               <div class="px-4">
                 <h3 class="font-bricolage font-normal text-md mb-2 py-2">
                   {serviceContent.serviceInclusionText}
@@ -152,9 +154,9 @@ const {
                   <p class="text-sm font-bricolage font-light pl-1">
                     {serviceContent.serviceInclusion}
                   </p>
-                  <BookNowButtonMarketing className=" bg-[#152239] text-white px-7 py-2 rounded-xl font-bricolage tracking-button">
+                  <button class=" bg-[#152239] text-white px-7 py-2 rounded-xl font-bricolage tracking-button">
                     {serviceContent.buttonText}
-                  </BookNowButtonMarketing>
+                  </button>
                 </div>
               </div>
             </div>
@@ -163,5 +165,6 @@ const {
       }
     </div>
   </div>
+</BookNowButton>
 </div>
-<script src="https://npmcdn.com/flickity@2/dist/flickity.pkgd.js"></script>
+<!-- <script src="https://npmcdn.com/flickity@2/dist/flickity.pkgd.js"></script> -->

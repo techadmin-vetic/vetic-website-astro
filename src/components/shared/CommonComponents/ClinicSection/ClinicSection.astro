@@ -258,7 +258,7 @@ const clinics = await getAllClinicsresponse().then((data) => data);
           ))
         }
       </div>
-      <BookNowButton
+      <BookNowButton location={location}
       className=" bg-gray-950 text-white text-center w-44 py-2 rounded-xl font-secondaryFont tracking-button"
     >
       Book Now
@@ -452,7 +452,7 @@ const clinics = await getAllClinicsresponse().then((data) => data);
         </div>
       </div>
       <div class="text-center ">
-        <BookNowButton
+        <BookNowButton location={location}
         className="bg-buttonColor w-full  mx-auto text-white py-3 rounded-xl font-secondaryFont"
       >
         Book Now

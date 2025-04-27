@@ -307,14 +307,7 @@ export const GETInsuranceSiteData =
     return response;
   };
 /* GET Insurance data API Function ends */
-/**************************************************** BLUSMART-WEBSITE-PAGE ************************************************************/
-export const GETblusmartData = async (): Promise<IPlumGETResponse> => {
-  const response: IPlumGETResponse = await fetch(SITE_APIS.BLUSMART).then(
-    async (res) => await res.json()
-  );
-  return response;
-};
-/* GET Blusmart data API Function ends */
+
 /**************************************************** CARS24-WEBSITE-PAGE ************************************************************/
 export const GETCars24Data = async (): Promise<IPlumGETResponse> => {
   const response: IPlumGETResponse = await fetch(SITE_APIS.CARS24).then(
@@ -323,7 +316,6 @@ export const GETCars24Data = async (): Promise<IPlumGETResponse> => {
   return response;
 };
 /* GET Cars24 data API Function ends */
-/* GET Blusmart data API Function ends */
 /**************************************************** HAPPY-LOCATE-WEBSITE-PAGE ************************************************************/
 export const GETHappyLocateData = async (): Promise<IPlumGETResponse> => {
   const response: IPlumGETResponse = await fetch(SITE_APIS.HAPPYLOCATE).then(

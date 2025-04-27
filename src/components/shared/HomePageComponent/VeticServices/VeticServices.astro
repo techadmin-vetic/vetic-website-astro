@@ -1,12 +1,13 @@
 ---
 import type { IHomePageProps } from "@components/pages/PagePropsInterface/page_props_interface";
 import BookNowButton from "@components/ui/BookNowButton.astro";
+import MetaNew from "@pages/meta-new.astro";
 
 const {
-  content: { veticServices },
+  content: { veticServices, location },
   isEmergencyPage,
   isHomePage,
-} = Astro.props as IHomePageProps;
+} = Astro.props;
 ---
 
 <style>
@@ -114,7 +115,7 @@ const {
 
   {isEmergencyPage && (
     <div class="mt-auto pt-6 hidden md:block"> <!-- Hide on mobile, show on desktop -->
-      <BookNowButton className="border-[1px] border-black rounded-lg py-2 px-4 hover:bg-buttonColor hover:text-white">
+      <BookNowButton location={location} className="border-[1px] border-black rounded-lg py-2 px-4 hover:bg-buttonColor hover:text-white">
         {cards?.buttonText}
       </BookNowButton>
     </div>
@@ -134,9 +135,11 @@ const {
               <p class="text-sm italic text-gray-600 font-secondaryFont">
                 {veticServices?.cardSubHeading}
               </p>
-              <BookNowButton className="px-4 py-2 w-1/2 text-center bg-black text-white text-sm font-semibold rounded-md font-secondaryFont">
+              <BookNowButton
+               location={location}
+               className="px-4 py-2 w-1/2 text-center bg-black text-white text-sm font-semibold rounded-md font-secondaryFont">
                 {veticServices?.buttonText}
-              </BookNowButton>
+               </BookNowButton>
             </div>
             <img
               src={veticServices?.image}

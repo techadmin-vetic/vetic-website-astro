@@ -1,7 +1,4 @@
 ---
-import BookNowButton from "@components/ui/BookNowButton.astro";
-import { Image } from "astro:assets";
-
 const {
   content: { bannerSection },
 } = Astro.props;
@@ -67,7 +64,7 @@ const {
           >
         </h2>
 
-        <a href={bannerSection.buttonLink}>
+        <a href={`${bannerSection.buttonLink}?utm_source=organic&utm_medium=website&utm_campaign=appdownloadbtn`}>
           <div
             class="bg-gray-950 text-white text-center w-52 py-3 rounded-xl font-primaryFont tracking-button mt-20"
           >
@@ -90,7 +87,7 @@ const {
       backgroundSize: "contain",
       backgroundRepeat: "no-repeat",
       backgroundPosition: "center",
-      height: "500px",
+      height: "300px",
       width: "100%",
     }}
   >
@@ -118,15 +115,6 @@ const {
             bannerSection?.heading2
           }
         </h1>
-        <!-- <p class="text-md text-gray-700">
-          {bannerSection?.subHeadingSpan1}
-          <span class="text-primaryFontColor font-semibold"
-            >{bannerSection?.subHeadingSpan2}</span
-          >{bannerSection?.subHeadingSpan3}
-          <span class="text-primaryFontColor font-semibold"
-            >{bannerSection?.subHeadingSpan4}</span
-          >
-        </p> -->
       </div>
     </div>
   </div>

@@ -28,6 +28,13 @@ function getRandomPetNumber(min, max) {
 function getRandomRating(min, max) {
   return (Math.random() * (max - min) + min).toFixed(1);
 }
+
+const filteredDoctors = doctors.filter((doctor) =>
+  doctor?.name?.toLowerCase()?.includes("dr")
+);
+
+// console.log(location, "doctors location");
+// console.log(filteredDoctors, "doctors");
 ---
 
 {
@@ -45,8 +52,8 @@ function getRandomRating(min, max) {
 <div class="w-full mx-auto sm:h-[18rem] mt-2 mb-2 sm:px-2">
   <CarouselContainer carouselId="doctors-carousel">
     {
-      doctors && doctors?.length > 0 ? (
-        doctors.map((doctor) => {
+      filteredDoctors && filteredDoctors?.length > 0 ? (
+      filteredDoctors.map((doctor) => {
           return variant === "OLD" ? (
             <DoctorCard
               displayName={doctor.display_name}

@@ -1,12 +1,12 @@
 ---
-import BookNowButtonMarketing from "@components/ui/BookNowButtonMarketing.astro";
+import BookNowButton from "@components/ui/BookNowButton.astro";
 const {
-  content: { BannerSection },
+  content: { BannerSection ,location},
 } = Astro.props;
 ---
 
 <div class="sm:mx-auto sm:w-11/12 sm:mt-2">
-  <BookNowButtonMarketing>
+  <BookNowButton location={location}>
     <div class="w-full h-[24rem] sm:hidden overflow-hidden mx-auto bg-center bg-cover bg-no-repeat relative tracking-image">
       <img src={BannerSection.mobileImage} alt="banner_image" class="w-full h-full object-cover" />
     </div>
@@ -14,7 +14,7 @@ const {
     <div class="hidden sm:block w-full h-full overflow-hidden mx-auto bg-center bg-cover bg-no-repeat relative tracking-image rounded-2xl">
       <img src={BannerSection.laptopImage} alt="banner_image" class="w-full h-full object-cover" />
     </div>
-  </BookNowButtonMarketing>
+  </BookNowButton>
 
   <div class="mx-4 mt-1 sm:mt-4">
     <h3 class="text-xl sm:text-[36px] sm:text-center font-bricolage py-2 pt-4">
@@ -25,10 +25,10 @@ const {
     </p>
 
     <div class="text-center flex items-center pt-4 sm:pt-6 pb-2">
-      <BookNowButtonMarketing
+      <BookNowButton location={location}
         className="bg-[#152239] text-white sm:text-xl mx-auto px-7 sm:px-16 py-2 sm:py-3 w-full text-center rounded-xl font-bricolage tracking-button lg:w-auto">
         {BannerSection.buttonText}
-      </BookNowButtonMarketing>
+      </BookNowButton>
     </div>
   </div>
 </div>

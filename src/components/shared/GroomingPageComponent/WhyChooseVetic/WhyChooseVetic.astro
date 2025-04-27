@@ -7,84 +7,178 @@ const {
 ---
 
 <div class="container w-11/12 mx-auto bg-white py-6 sm:py-10">
-  <div class="px-4">
+  <div class="">
     <h2
       class="text-2xl sm:text-[36px] font-primaryFont text-gray-800 mb-2 py-4 sm:mb-0"
     >
       {whyChooseVetic?.heading}
     </h2>
     <div
-      class="mt-4 grid grid-cols-1 gap-4 sm:mt-8 lg:grid-cols-6 lg:grid-rows-2"
-    >
-      {
-        whyChooseVetic?.card?.map((card, index) => (
-          <div
-            class={`relative ${
-              index === 0 || index === 1 ? "lg:col-span-3" : "lg:col-span-2"
-            }`}
-          >
-            <div
-              class={`absolute inset-px rounded-lg bg-white ${
-                index === 0
-                  ? "max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]"
-                  : index === 1
-                    ? "lg:rounded-tr-[2rem]"
-                    : index === 2
-                      ? "lg:rounded-bl-[2rem]"
-                      : index === 4
-                        ? "max-lg:rounded-b-[2rem] lg:rounded-br-[2rem]"
-                        : ""
-              }`}
-            />
-            <div
-              class={`relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] ${
-                index === 0
-                  ? "max-lg:rounded-t-[calc(2rem+1px)] lg:rounded-tl-[calc(2rem+1px)]"
-                  : index === 1
-                    ? "lg:rounded-tr-[calc(2rem+1px)]"
-                    : index === 2
-                      ? "lg:rounded-bl-[calc(2rem+1px)]"
-                      : index === 4
-                        ? "max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-br-[calc(2rem+1px)]"
-                        : ""
-              }`}
+      class="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
+      <div class="relative lg:col-span-3">
+        <div
+          class="absolute inset-px rounded-lg bg-white max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]"
+        >
+        </div>
+        <div
+          class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)] lg:rounded-tl-[calc(2rem+1px)]"
+        >
+          <img
+            src={whyChooseVetic?.card[0]?.mobileImage}
+            alt={whyChooseVetic?.card[0]?.mobileImageAlt}
+            class="block lg:hidden h-[180px] sm:h-[300px] lg:h-60 xl:h-72 w-full rounded-t-xl object-cover object-center"
+          />
+
+          <img
+            src={whyChooseVetic?.card[0]?.desktopImage}
+            alt={whyChooseVetic?.card[0]?.desktopImageAlt}
+            class="hidden lg:block h-[180px] sm:h-[300px] lg:h-60 xl:h-72 w-full rounded-t-xl object-cover object-center"
+          />
+          <div class="p-6 pt-2">
+            <h3
+              class="mt-2 text-[24px] font-medium font-primaryFont tracking-tight text-gray-950"
             >
-              <picture>
-                <source media="(min-width: 640px)" srcset={card.desktopImage} />
-                <source media="(max-width: 639px)" srcset={card.mobileImage} />
-                <img
-                  class="h-[180px] sm:h-[300px] lg:h-60 xl:h-72 w-full object-cover"
-                  src={card.mobileImage}
-                  srcset={`${card.mobileImage} 639w, ${card.desktopImage} 640w`}
-                  sizes="(min-width: 640px) 640px, 100vw"
-                  alt={card.heading}
-                />
-              </picture>
-              <div class="p-6 pt-2 sm:pt-4">
-                <p class="mt-2 text-[24px] font-medium font-primaryFont tracking-tight text-gray-950">
-                  {card.heading}
-                </p>
-                <p class="mt-2 max-w-lg text-[16px] text-gray-600">
-                  {card.subHeading}
-                </p>
-              </div>
-            </div>
-            <div
-              class={`pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 ${
-                index === 0
-                  ? "max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]"
-                  : index === 1
-                    ? "lg:rounded-tr-[2rem]"
-                    : index === 2
-                      ? "lg:rounded-bl-[2rem]"
-                      : index === 4
-                        ? "max-lg:rounded-b-[2rem] lg:rounded-br-[2rem]"
-                        : ""
-              }`}
-            />
+              {whyChooseVetic?.card[0]?.heading}
+            </h3>
+            <p class="mt-2 max-w-lg text-[16px] text-gray-600">
+              {whyChooseVetic?.card[0]?.subHeading}
+            </p>
           </div>
-        ))
-      }
+        </div>
+        <div
+          class="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]"
+        >
+        </div>
+      </div>
+      <div class="relative lg:col-span-3">
+        <div class="absolute inset-px rounded-lg bg-white lg:rounded-tr-[2rem]">
+        </div>
+        <div
+          class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-tr-[calc(2rem+1px)]"
+        >
+          <img
+            src={whyChooseVetic?.card[1]?.mobileImage}
+            alt={whyChooseVetic?.card[1]?.mobileImageAlt}
+            class="block lg:hidden h-[180px] sm:h-[300px] lg:h-60 xl:h-72 w-full rounded-t-xl object-cover object-center"
+          />
+          <img
+            src={whyChooseVetic?.card[1]?.desktopImage}
+            alt={whyChooseVetic?.card[1]?.desktopImageAlt}
+            class="hidden lg:block h-[180px] sm:h-[300px] lg:h-60 xl:h-72 w-full rounded-t-xl object-cover object-center"
+          />
+          <div class="p-6 pt-2">
+            <h3
+              class="mt-2 text-[24px] font-medium font-primaryFont tracking-tight text-gray-950"
+            >
+              {whyChooseVetic?.card[1]?.heading}
+            </h3>
+            <p class="mt-2 max-w-lg text-[16px] text-gray-600">
+              {whyChooseVetic?.card[1]?.subHeading}
+            </p>
+          </div>
+        </div>
+        <div
+          class="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 lg:rounded-tr-[2rem]"
+        >
+        </div>
+      </div>
+      <div class="relative lg:col-span-2">
+        <div class="absolute inset-px rounded-lg bg-white lg:rounded-bl-[2rem]">
+        </div>
+        <div
+          class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-bl-[calc(2rem+1px)]"
+        >
+          <img
+            src={whyChooseVetic?.card[2]?.mobileImage}
+            alt={whyChooseVetic?.card[2]?.mobileImageAlt}
+            class="block lg:hidden h-[180px] sm:h-[300px] lg:h-60 xl:h-72 w-full rounded-t-xl object-cover object-center"
+          />
+          <img
+            src={whyChooseVetic?.card[2]?.desktopImage}
+            alt={whyChooseVetic?.card[2]?.desktopImageAlt}
+            class="hidden lg:block h-[180px] sm:h-[300px] lg:h-60 xl:h-72 w-full rounded-t-xl object-cover object-center"
+          />
+          <div class="p-6 pt-2">
+            <h3
+              class="mt-2 text-[24px] font-medium font-primaryFont tracking-tight text-gray-950"
+            >
+              {whyChooseVetic?.card[2]?.heading}
+            </h3>
+            <p class="mt-2 max-w-lg text-[16px] text-gray-600">
+              {whyChooseVetic?.card[2]?.subHeading}
+            </p>
+          </div>
+        </div>
+        <div
+          class="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 lg:rounded-bl-[2rem]"
+        >
+        </div>
+      </div>
+      <div class="relative lg:col-span-2">
+        <div class="absolute inset-px rounded-lg bg-white"></div>
+        <div
+          class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]"
+        >
+          <img
+            src={whyChooseVetic?.card[3]?.mobileImage}
+            alt={whyChooseVetic?.card[3]?.mobileImageAlt}
+            class="block lg:hidden h-[180px] sm:h-[300px] lg:h-60 xl:h-72 w-full rounded-t-xl object-cover object-center"
+          />
+          <img
+            src={whyChooseVetic?.card[3]?.desktopImage}
+            alt={whyChooseVetic?.card[3]?.desktopImageAlt}
+            class="hidden lg:block h-[180px] sm:h-[300px] lg:h-60 xl:h-72 w-full rounded-t-xl object-cover object-center"
+          />
+          <div class="p-6 pt-2">
+            <h3
+              class="mt-2 text-[24px] font-medium font-primaryFont tracking-tight text-gray-950"
+            >
+              {whyChooseVetic?.card[3]?.heading}
+            </h3>
+            <p class="mt-2 max-w-lg text-[16px] text-gray-600">
+              {whyChooseVetic?.card[3]?.subHeading}
+            </p>
+          </div>
+        </div>
+        <div
+          class="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5"
+        >
+        </div>
+      </div>
+      <div class="relative lg:col-span-2">
+        <div
+          class="absolute inset-px rounded-lg bg-white max-lg:rounded-b-[2rem] lg:rounded-br-[2rem]"
+        >
+        </div>
+        <div
+          class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-br-[calc(2rem+1px)]"
+        >
+          <img
+            src={whyChooseVetic?.card[4]?.mobileImage}
+            alt={whyChooseVetic?.card[4]?.mobileImageAlt}
+            class="block lg:hidden h-[180px] sm:h-[300px] lg:h-60 xl:h-72 w-full rounded-t-xl object-cover object-center"
+          />
+          <img
+            src={whyChooseVetic?.card[4]?.desktopImage}
+            alt={whyChooseVetic?.card[4]?.desktopImageAlt}
+            class="hidden lg:block h-[180px] sm:h-[300px] lg:h-60 xl:h-72 w-full rounded-t-xl object-cover object-center"
+          />
+          <div class="p-6 pt-2">
+            <h3
+              class="mt-2 text-[24px] font-medium font-primaryFont tracking-tight text-gray-950"
+            >
+              {whyChooseVetic?.card[4]?.heading}
+            </h3>
+            <p class="mt-2 max-w-lg text-[16px] text-gray-600">
+              {whyChooseVetic?.card[4]?.subHeading}
+            </p>
+          </div>
+        </div>
+        <div
+          class="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 max-lg:rounded-b-[2rem] lg:rounded-br-[2rem]"
+        >
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -1,6 +1,5 @@
 ---
-import { Image } from "astro:assets";
-import BookNowButtonMarketing from "@components/ui/BookNowButtonMarketing.astro";
+import BookNowButton from "@components/ui/BookNowButton.astro";
 
 interface Props {
   imageUrl: string;
@@ -8,8 +7,9 @@ interface Props {
   doctorName: string;
   expertise: string;
   experience: string;
+  location: string;
 }
-const { displayName, doctorName, experience, expertise, imageUrl } =
+const { displayName, doctorName, experience, expertise, imageUrl, location } =
   Astro.props;
 ---
 
@@ -18,7 +18,7 @@ const { displayName, doctorName, experience, expertise, imageUrl } =
     class="border-2 rounded-2xl p-4 border-round flex flex-col items-start justify-between shadow-xl mb-6"
   >
     <div class="relative w-full">
-      <BookNowButtonMarketing>
+      <BookNowButton location={location}>
         <img
           
           loading="eager"
@@ -26,7 +26,7 @@ const { displayName, doctorName, experience, expertise, imageUrl } =
           alt={displayName}
           class="tracking-image aspect-[16/9] w-full h-72 rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
         />
-      </BookNowButtonMarketing>
+      </BookNowButton>
     </div>
     <div class="w-full">
       <div class="group relative">
@@ -46,11 +46,11 @@ const { displayName, doctorName, experience, expertise, imageUrl } =
           </p>
         </div>
         <div class="">
-          <BookNowButtonMarketing
+          <BookNowButton location={location}
             className="tracking-button rounded-md bg-blue-950 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-iblue-950"
           >
             Book Now
-          </BookNowButtonMarketing>
+          </BookNowButton>
         </div>
       </div>
     </div>

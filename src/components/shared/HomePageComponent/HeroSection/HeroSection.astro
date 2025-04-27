@@ -3,15 +3,15 @@ import BookNowButton from "@components/ui/BookNowButton.astro";
 import { Image } from "astro:assets";
 
 import type { IHomePageProps } from "@components/pages/PagePropsInterface/page_props_interface";
+import MetaNew from "@pages/meta-new.astro";
 const {
-  content: { bannerSection },
-} = Astro.props as IHomePageProps;
+  content: { bannerSection, location },
+} = Astro.props;
+// console.log(location, "location");
 ---
 
 <!----------------------------------------------------------- Desktop Screen ----------------------------------------------------------->
-<section
-  class="hidden lg:block relative bg-cover bg-cente"
->
+<section class="hidden lg:block relative bg-cover bg-cente">
   <Image
     src="https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/Footer/Component_bg_image_Desktop.webp"
     alt="Background Image"
@@ -22,7 +22,9 @@ const {
     class="absolute inset-0 w-full h-full object-fit"
     loading="lazy"
   />
-  <div class="container w-11/12 mx-auto py-4 flex items-center justify-between pt-20 relative">
+  <div
+    class="container w-11/12 mx-auto py-4 flex items-center justify-between pt-20 relative"
+  >
     <!-- Left Content Section -->
     <div class="text-center md:text-left md:w-1/2 space-y-6 pb-10">
       <h1 class="text-5xl text-gray-900 font-primaryFont leading-tight">
@@ -40,35 +42,38 @@ const {
         </span>
       </h2>
       <BookNowButton
+        location={location}
         className="bg-gray-950 text-white text-center w-52 py-3 rounded-xl font-primaryFont tracking-button"
       >
         {bannerSection?.buttonText}
       </BookNowButton>
       <!-- USP Section -->
       <div class="mt-12 flex flex-wrap items-center gap-4">
-        {bannerSection?.usp.map((usps) => (
-          <div
-            class="grid place-items-center w-32 h-40 rounded-2xl py-2 text-center bg-gradient-to-t from-white from-10%"
-          >
-            <div class="bg-white rounded-xl grid place-items-center w-16 h-16">
-              <Image
-                src={usps.uspIcon}
-                width={40}
-                height={40}
-                format="webp"
-                quality={80}
-                alt="Pet Care"
-                loading="lazy"
-              />
+        {
+          bannerSection?.usp.map((usps) => (
+            <div class="grid place-items-center w-32 h-40 rounded-2xl py-2 text-center bg-gradient-to-t from-white from-10%">
+              <div class="bg-white rounded-xl grid place-items-center w-16 h-16">
+                <Image
+                  src={usps.uspIcon}
+                  width={40}
+                  height={40}
+                  format="webp"
+                  quality={80}
+                  alt="Pet Care"
+                  loading="lazy"
+                />
+              </div>
+              <p class="text-sm text-gray-700">{usps.heading}</p>
             </div>
-            <p class="text-sm text-gray-700">{usps.heading}</p>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
 
     <!-- Right Image Section -->
-    <div class="md:w-1/2 flex items-end justify-center absolute bottom-0 right-0">
+    <div
+      class="md:w-1/2 flex items-end justify-center absolute bottom-0 right-0"
+    >
       <Image
         src={bannerSection?.desktopImage}
         width={500}
@@ -83,13 +88,9 @@ const {
   </div>
 </section>
 
+<!----------------------------------------------------------- Mobile View Screen ----------------------------------------------------------->
 
-
- <!----------------------------------------------------------- Mobile View Screen ----------------------------------------------------------->
-
-<section
-  class="lg:hidden pt-6 relative"
->
+<section class="lg:hidden pt-6 relative">
   <Image
     src="https://vetic-img.s3.ap-south-1.amazonaws.com/website/Website-Astro/Footer/Component_bg_image_mobile.webp"
     alt="Background_Image"
@@ -100,7 +101,7 @@ const {
     class="absolute inset-0 w-full h-full object-cover"
     loading="lazy"
   />
-  <div class="container mx-auto relative ">
+  <div class="container mx-auto relative">
     <div class="w-11/12 mx-auto space-y-6">
       <h1 class="text-3xl sm:text-4xl font-primaryFont font-bold text-gray-900">
         {bannerSection?.heading1}
@@ -158,7 +159,8 @@ const {
     </div>
     <div class="flex items-center justify-center">
       <BookNowButton
-        className="bg-black text-white text-center w-11/12 mx-auto py-3 rounded-2xl font-bricolage tracking-button"
+        location={location}
+        className="bg-black text-white text-center py-3 px-20 rounded-2xl font-bricolage tracking-button"
       >
         {bannerSection?.buttonText}
       </BookNowButton>

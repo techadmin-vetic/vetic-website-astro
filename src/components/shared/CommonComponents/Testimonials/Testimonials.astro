@@ -5,8 +5,8 @@ import CarouselContainer from "@components/ui/CarouselContainer.astro";
 import { Image } from "astro:assets";
 import type { IHomePageProps } from "@components/pages/PagePropsInterface/page_props_interface";
 const {
-  content: { testimonials },
-} = Astro.props as IHomePageProps;
+  content: { testimonials ,location},
+} = Astro.props;
 ---
 
 <style>
@@ -80,7 +80,7 @@ const {
             <div class="bg-white border-[1px] border-primaryColor w-[94%] p-4 rounded-lg flex flex-col items-start">
               <div class="flex items-center justify-between mb-2 w-full">
                 <div class="flex">
-                  <BookNowButton>
+                  <BookNowButton location={location}>
                     <Image
                       width={200}
                       height={200}

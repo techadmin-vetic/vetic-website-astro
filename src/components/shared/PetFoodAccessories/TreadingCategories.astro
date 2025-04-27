@@ -1,7 +1,4 @@
 ---
-import { Image } from "astro:assets";
-import BookNowButton from "@components/ui/BookNowButton.astro";
-
 const {
   content: { trending_categories },
 } = Astro.props;
@@ -24,7 +21,6 @@ const {
       {
         trending_categories?.cards?.map((data) => (
           <div class="carousel-cell bg-white shadow-lg rounded-3xl flex flex-col h-[350px] sm:h-[500px] border-[1px] mx-2  p-4 sm:m-4">
-            {/* Product Image */}
             <div class="flex justify-center items-center p-6 h-[60%] bg-slate-100 rounded-t-3xl">
               <img
                 src={data.image}
@@ -57,7 +53,7 @@ const {
                     {data.discount}
                   </p>
                 </div>
-                <a href={data.product_link} target="_blank">
+                <a href={`${data.product_link}?utm_source=organic&utm_medium=website&utm_campaign=appdownloadbtn`} target="_blank">
                   <button class="bg-black text-white font-primaryFont sm:text-xl text-md rounded-lg py-2 px-6">
                     {data.buttonText}
                   </button>

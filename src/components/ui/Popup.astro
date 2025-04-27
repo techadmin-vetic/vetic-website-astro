@@ -1,0 +1,91 @@
+---
+import BookNowForm from "../shared/CommonComponents/BookNowForms/BookNowForms.tsx";
+
+interface Props {
+  buttonText?: string;
+  popupText?: string;
+  location: string;
+}
+
+const { buttonText = "Click Me", popupText = "Hi!", location } = Astro.props;
+---
+
+<div x-data="{ isOpen: false }" class="popup-container">
+  <button class="popup-button" @click="isOpen = true">
+    {buttonText}
+  </button>
+
+  <div x-show="isOpen" class="popup" x-transition @click.self="isOpen = false">
+    <div class="popup-content">
+      <span class="close-button" @click="isOpen = false">&times;</span>
+
+      <div
+        class="relative inset-0 bg-opacity-5 overflow-y-auto w-full rounded-md"
+      >
+        <div
+          class="top-20 mx-auto px-2 border w-96 shadow-lg rounded-md bg-white"
+        >
+          <div class="px-4">
+            <h3
+              class="text-lg tracking-wide text-center leading-6 font-medium text-zinc-900"
+            >
+              Looking for Advanced, Human-Grade Care for Your Pet?
+            </h3>
+            <div class="mt-2 py-3 mb-2">
+              <BookNowForm inSideModal={true} client:load location={location} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .popup-container {
+    position: relative;
+    display: inline-block;
+  }
+
+  .popup-button {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .popup-button:hover {
+    background-color: #45a049;
+  }
+
+  .popup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+  }
+
+  .popup-content {
+    position: relative;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+  }
+
+  .close-button {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+</style>

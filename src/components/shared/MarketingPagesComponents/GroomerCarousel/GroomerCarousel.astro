@@ -1,51 +1,71 @@
 ---
-import BookNowButtonMarketing from "@components/ui/BookNowButtonMarketing.astro";
+import BookNowButton from "@components/ui/BookNowButton.astro";
 import CarouselContainer from "@components/ui/CarouselContainer.astro";
+
 const Groomers = [
   {
     name: "Arvind",
     experience: "5+ years",
     total_grooming: "500+",
     rating: "4.7",
-    image_url:
-      "https://vetic-img.s3.ap-south-1.amazonaws.com/website/grooming_page/1st.jpg",
+    image_url: "https://vetic-img.s3.ap-south-1.amazonaws.com/website/grooming_page/1st.jpg",
   },
   {
     name: "Harshit",
     experience: "3+ years",
     total_grooming: "300+",
     rating: "5.0",
-    image_url:
-      "https://vetic-img.s3.ap-south-1.amazonaws.com/website/grooming_page/2nd.jpg",
+    image_url: "https://vetic-img.s3.ap-south-1.amazonaws.com/website/grooming_page/2nd.jpg",
   },
   {
     name: "Anand",
     experience: "4+ years",
     total_grooming: "250+",
     rating: "4.5",
-    image_url:
-      "https://vetic-img.s3.ap-south-1.amazonaws.com/website/grooming_page/3rd.jpg",
+    image_url: "https://vetic-img.s3.ap-south-1.amazonaws.com/website/grooming_page/3rd.jpg",
+  },
+  {
+    name: "Abhishek Verma",
+    experience: "6+ years",
+    total_grooming: "600+",
+    rating: "4.9",
+    image_url: "https://ssmc.ae/assets/uploads/2024/12/xMale-1-e1677070450488.png.pagespeed.ic_.26fSvc-qMr.webp",
+  },
+  {
+    name: "Rahul Raghav",
+    experience: "2+ years",
+    total_grooming: "150+",
+    rating: "4.6",
+    image_url: "https://ssmc.ae/assets/uploads/2024/12/xMale-1-e1677070450488.png.pagespeed.ic_.26fSvc-qMr.webp",
+  },
+  {
+    name: "Sanchit Sharma",
+    experience: "3+ years",
+    total_grooming: "220+",
+    rating: "4.8",
+    image_url: "https://ssmc.ae/assets/uploads/2024/12/xMale-1-e1677070450488.png.pagespeed.ic_.26fSvc-qMr.webp",
   },
 ];
+
 ---
 
-<div class="mx-auto px-2 sm:h-[12rem] mt-2 mb-2">
+<div class="mx-auto px-2 mt-2 mb-2">
   <CarouselContainer carouselId="groomer-carousel">
     {
       Groomers.map((groomer) => {
         return (
           <>
-            <div class="max-w-sm rounded-lg overflow-hidden mx-auto my-4 ">
+            <div class="max-w-xs sm:w-full rounded-lg overflow-hidden mx-auto my-3">
               <div class=" relative">
-                <BookNowButtonMarketing>
+                <BookNowButton location={Astro.props.location}>
                   <div
-                    class="mx-auto w-20 h-20 rounded-full bg-center bg-contain bg-no-repeat relative overflow-hidden"
+                    class="mx-auto w-20 h-20 sm:w-32 sm:h-32 rounded-full bg-center bg-contain bg-no-repeat relative overflow-hidden"
                     style={{
                       backgroundSize: "cover",
                       backgroundImage: `url("${groomer.image_url}")`,
                     }}
                   />
-                </BookNowButtonMarketing>
+                </BookNowButton>
                 <div class="flex justify-center items-center w-10 h-4 bg-gray-100 rounded-2xl absolute right-7 bottom-2 ">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -65,23 +85,23 @@ const Groomers = [
                   </span>
                 </div>
               </div>
-              <p class="font-bricolage text-center py-2">{groomer.name}</p>
+              <p class="font-bricolage text-center sm:text-lg py-2">{groomer.name}</p>
               <div class="text-left px-2 pb-2">
-                <p class="font-bricolage text-sm">
-                  <span class="pr-4 text-gray-500 text-xs font-light">
+                <p class="font-bricolage text-sm sm:text-base text-center">
+                  <span class="pr-4 text-gray-500 text-xs sm:text-base font-light">
                     Experience
                   </span>
                   {groomer.experience}
                 </p>
-                <p class="font-bricolage text-sm">
-                  <span class="pr-4 text-gray-500 text-xs font-light">
+                <p class="font-bricolage text-sm sm:text-base text-center">
+                  <span class="pr-4 text-gray-500 text-xs sm:text-base font-light">
                     Total Grooming's
                   </span>
                   {groomer.total_grooming} Pets
                 </p>
               </div>
             </div>
-            <p class="border-s-2 mx-2 border-gray-200 h-12 top-14" />
+            <p class="border-s-2 mx-2 border-gray-200 sm:h-20 h-12 top-14" />
           </>
         );
       })

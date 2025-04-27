@@ -1,11 +1,11 @@
 ---
 import { Image } from "astro:assets";
-import BookNowButtonMarketing from "@components/ui/BookNowButtonMarketing.astro";
+import BookNowButton from "@components/ui/BookNowButton.astro";
 import CarouselContainer from "@components/ui/CarouselContainer.astro";
 
 // import type { IMumbaiDogGroomingPageProps } from "@components/pages/pages_props_interface";
 const {
-  content: { section8 },
+  content: { section8 , location},
 } = Astro.props ;
 // as IMumbaiDogGroomingPageProps;
 // console.log(section8);
@@ -48,7 +48,7 @@ const {
             <div class="bg-white border-[1px] border-yellow-200 w-[94%] p-4 rounded-lg flex flex-col items-start">
               <div class="flex items-center justify-between mb-2 w-full">
                 <div class="flex">
-                  <BookNowButtonMarketing>
+                  <BookNowButton location={location}>
                     <Image
                       class="w-12 h-12 rounded-full mr-2 tracking-image"
                       src={reviews.image}
@@ -57,7 +57,7 @@ const {
                       height={48}
                       loading="lazy"
                     />
-                  </BookNowButtonMarketing>
+                  </BookNowButton>
                   <div>
                     <div class="font-bricolage text-md">{reviews.petOwner}</div>
 

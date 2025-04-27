@@ -11,6 +11,7 @@ import ChennaiDummyClinics from "@components/shared/MarketingPagesComponents/Che
 import GroomerSection from "@components/shared/MarketingPagesComponents/GroomerSection/GroomerSection.astro";
 import { reduceFAQs } from "@utils/global_utils";
 import ClinicSection from "@components/shared/MarketingPagesComponents/ClinicSection/ClinicSection.astro";
+import ServiceNavbarFixBookNow from "@components/shared/MarketingPagesComponents/ServiceNavbarFixBookNow/ServiceNavbarFixBookNow.astro";
 
 const { content, srNumber, location } = Astro.props as IGroomingSlugPageProps;
 const reducedFAQs = reduceFAQs(
@@ -18,17 +19,9 @@ const reducedFAQs = reduceFAQs(
   "title",
   "content"
 );
-
-const param = Astro.params;
-let paramsArray;
-let isLpPage = false;
-if (location === "bengaluru") {
-  paramsArray = param["slug_bengaluru"].split("-");
-  isLpPage = paramsArray?.includes("lp");
-}
 ---
 
-<ServiceNavbarV1 location={location} srNumber={srNumber} />
+<ServiceNavbarFixBookNow location={location} srNumber={srNumber} />
 <BannerSectionV1 content={content} />
 <BookAppointmentSection content={content} location={location} />
 <TestimonialSectionV1 content={content} />
@@ -44,14 +37,9 @@ if (location === "bengaluru") {
 
 <GroomerSection content={content} />
 <FAQComponent hideHeading={false} faqs={reducedFAQs} />
-
-{
-  location === "bengaluru" && isLpPage ? null : (
-    <ContactUsSectionV1
-      title="Hello"
-      location={location}
-      content={content}
-      srNumber={srNumber}
-    />
-  )
-}
+<ContactUsSectionV1
+  title="Hello"
+  location={location}
+  content={content}
+  srNumber={srNumber}
+/>

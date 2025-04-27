@@ -1,19 +1,19 @@
 ---
-import BookNowButtonMarketing from "@components/ui/BookNowButtonMarketing.astro";
+import BookNowButton from "@components/ui/BookNowButton.astro";
 const {
-  content: { ContactUs },
+  content: { ContactUs , location },
   srNumber,
 } = Astro.props;
 ---
 
 <div class="mx-auto bg-gray-100 rounded-lg sm:rounded-2xl p-6 sm:p-12 sm:w-11/12  py-10 sm:mb-16 mt-4 sm:mt-10">
-  <BookNowButtonMarketing>
+  <BookNowButton location={location}>
     <img
       class="w-32 h-14 object-cover rounded-full mx-auto"
       src={ContactUs?.image_url}
       alt="User Group"
     />
-  </BookNowButtonMarketing>
+  </BookNowButton>
   <div>
     <h2
       class="text-xl sm:text-3xl font-semibold text-center font-bricolage text-gray-900 mt-5"

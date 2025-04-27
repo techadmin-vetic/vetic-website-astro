@@ -26,7 +26,7 @@ const reducedFAQs = reduceFAQs(content?.Faq?.data ?? [], "title", "content");
 <VeticServices content={content} isHomePage/>
 <DoctorSection content={content} location={content.meta.location} />
 <Testimonials content={content} />
-<FAQComponent  
+<FAQComponent
 heading={content?.Faq?.heading}
 subHeading={content?.Faq?.subHeading}
 faqs={reducedFAQs}

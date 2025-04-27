@@ -2,7 +2,7 @@
 import BookNowButton from "@components/ui/BookNowButton.astro";
 
 const {
-  content: { dogVaccinationCard, catVaccinationCard },
+  content: { dogVaccinationCard, catVaccinationCard ,location},
 } = Astro.props;
 // console.log(dogVaccinationCard);
 ---
@@ -50,7 +50,7 @@ const {
         );
       })
     }
-    <BookNowButton
+    <BookNowButton location={location}
       className=" bg-primaryColor text-white w-full text-center text-base px-7 py-2 mt-2 rounded-xl font-bricolage tracking-button "
     >
       {dogVaccinationCard.buttonText}
@@ -101,7 +101,7 @@ const {
         );
       })
     }
-    <BookNowButton
+    <BookNowButton location={location}
       className=" bg-primaryColor text-white w-full text-center text-base px-7 py-2 mt-2 rounded-xl font-bricolage tracking-button"
     >
       {catVaccinationCard.buttonText}

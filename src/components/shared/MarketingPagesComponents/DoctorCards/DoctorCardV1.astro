@@ -1,5 +1,5 @@
 ---
-import BookNowButtonMarketing from "@components/ui/BookNowButtonMarketing.astro";
+import BookNowButton from "@components/ui/BookNowButton.astro";
 
 interface Props {
   imageUrl: string;
@@ -9,14 +9,15 @@ interface Props {
   experience: string;
   totalGrooming: string;
   rating: string;
+  location: string;
 }
-const { doctorName, experience, imageUrl, rating, totalGrooming } = Astro.props;
+const { doctorName, experience, imageUrl, rating, totalGrooming , location} = Astro.props;
 ---
 
 <>
   <div class="max-w-xs sm:w-full rounded-lg overflow-hidden mx-auto my-3">
     <div class="relative">
-      <BookNowButtonMarketing>
+      <BookNowButton location={location}>
         <div
           class="mx-auto w-20 h-20 sm:w-32 sm:h-32 rounded-full bg-center bg-contain bg-no-repeat relative overflow-hidden"
           style={{
@@ -25,7 +26,7 @@ const { doctorName, experience, imageUrl, rating, totalGrooming } = Astro.props;
           }}
         >
         </div>
-      </BookNowButtonMarketing>
+      </BookNowButton>
       <div
         class="flex justify-center items-center w-10 h-4 bg-gray-100 rounded-2xl absolute right-7 bottom-2"
       >

@@ -1,9 +1,9 @@
 ---
 import DRCarousel from "../DoctorsCarousel/DRCarousel.astro";
-import BookNowButtonMarketing from "@components/ui/BookNowButtonMarketing.astro";
+import BookNowButton from "@components/ui/BookNowButton.astro";
 
 const {
-  content: { doctorSection, meta },
+  content: { doctorSection, meta ,location},
 } = Astro.props;
 ---
 
@@ -14,7 +14,7 @@ const {
         {doctorSection.heading}
       </h1>
     </div>
-    <BookNowButtonMarketing>
+    <BookNowButton location={location}>
       <div
         class="h-96 bg-center bg-cover border-[1px] border-green-600 bg-no-repeat relative rounded-3xl overflow-hidden tracking-image"
         style={{
@@ -22,14 +22,14 @@ const {
         }}
       >
       </div>
-    </BookNowButtonMarketing>
+    </BookNowButton>
     <DRCarousel variant="NEW" hideHeading={false} location={meta.location} />
     <div class="text-center mt-4">
-      <BookNowButtonMarketing
+      <BookNowButton location={location}
         className="bg-[#152239] w-full lg:w-1/2 mx-auto text-white px-4 py-3 rounded-xl font-bricolage tracking-button"
       >
         {doctorSection.buttonText}
-      </BookNowButtonMarketing>
+      </BookNowButton>
     </div>
   </div>
 </div>

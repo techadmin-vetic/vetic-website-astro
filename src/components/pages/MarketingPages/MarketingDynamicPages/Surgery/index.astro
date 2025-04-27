@@ -1,5 +1,4 @@
 ---
-import ServiceNavbarV1 from "@components/shared/MarketingPagesComponents/ServiceNavbarV1/ServiceNavbarV1.astro";
 import BookAppointmentSection from "@components/shared/MarketingPagesComponents/BookAppointmentSectionV1/BookAppointmentSection.astro";
 import FAQComponent from "@components/shared/MarketingPagesComponents/FAQComponent/FAQComponent.astro";
 import ContactUsSectionV1 from "@components/shared/MarketingPagesComponents/ContactUsSectionV1/ContactSectionV1.astro";
@@ -12,6 +11,7 @@ import { reduceFAQs } from "@utils/global_utils";
 import BannerSectionV1 from "@components/shared/MarketingPagesComponents/BannerSectionV1/BannerSectionV1.astro";
 import VeticServices from "@components/shared/MarketingPagesComponents/VeticServices/VeticServices.astro";
 import PetSurgeryTable from "@components/shared/MarketingPagesComponents/SurgeryTable/PetSurgeryTable.astro";
+import ServiceNavbarFixBookNow from "@components/shared/MarketingPagesComponents/ServiceNavbarFixBookNow/ServiceNavbarFixBookNow.astro";
 
 const { content, srNumber, location } = Astro.props as ISurgerySlugPageProps;
 const reducedFAQs = reduceFAQs(
@@ -21,7 +21,7 @@ const reducedFAQs = reduceFAQs(
 );
 ---
 
-<ServiceNavbarV1 location={location} srNumber={srNumber} />
+<ServiceNavbarFixBookNow location={location} srNumber={srNumber} />
 <BannerSectionV1 content={content} />
 <BookAppointmentSection content={content} location={location} />
 <TestimonialSectionV1 content={content} />

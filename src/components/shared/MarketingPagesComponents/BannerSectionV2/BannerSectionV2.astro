@@ -1,7 +1,7 @@
 ---
-import BookNowButtonMarketing from "@components/ui/BookNowButtonMarketing.astro";
+import BookNowButton from "@components/ui/BookNowButton.astro";
 const {
-  content: { BannerSection },
+  content: { BannerSection ,location },
 } = Astro.props;
 ---
 
@@ -11,7 +11,7 @@ const {
   >
     {BannerSection.heading}
   </p>
-  <BookNowButtonMarketing>
+  <BookNowButton location={location}>
     <div
       class="w-11/12 h-[12rem] sm:h-[25rem] md:h-[36rem] rounded-xl overflow-hidden mx-auto bg-center bg-contain sm:bg-contain bg-no-repeat border-[1px] border-sky-900 relative tracking-image"
       style={{
@@ -19,5 +19,5 @@ const {
       }}
     > 
     </div>
-  </BookNowButtonMarketing>
+  </BookNowButton>
 </div>

@@ -1,11 +1,8 @@
 ---
-import BookNowButtonMarketing from "@components/ui/BookNowButtonMarketing.astro";
+import BookNowButton from "@components/ui/BookNowButton.astro";
 import CarouselContainer from "@components/ui/CarouselContainer.astro";
-
-// import BookNowButton from "@components/ui/BookNowButton.astro";
-
 const {
-  content: { InsuranceFeatures },
+  content: { InsuranceFeatures , location },
 } = Astro.props;
 // console.log(InsuranceFeatures);
 ---
@@ -26,7 +23,7 @@ const {
           {
             InsuranceFeatures.mobileImage.map((value) => {
               return (
-                <BookNowButtonMarketing>
+                <BookNowButton location={location}>
                   <div class="carousel-cell">
                     <img
                       class="rounded-lg max-w-full w-full overflow-hidden max-h-full  object-cover lg:contain sm:p-6 "
@@ -34,7 +31,7 @@ const {
                       alt="insurance_image"
                     />
                   </div>
-                </BookNowButtonMarketing>
+                </BookNowButton>
               );
             })
           }
@@ -74,11 +71,11 @@ const {
 
       <!-- Button -->
       <div class="mt-2 mb-6 sm:mt-4 flex items-center sm:pt-4 ">
-        <BookNowButtonMarketing
+        <BookNowButton location={location}
           className="bg-[#152239] text-white text-sm sm:text-xl px-7 sm:px-16 py-2 sm:py-3 w-full text-center rounded-xl font-bricolage tracking-button lg:w-auto"
         >
           {InsuranceFeatures?.buttonText}
-        </BookNowButtonMarketing>
+        </BookNowButton>
       </div>
     </div>
   </div>

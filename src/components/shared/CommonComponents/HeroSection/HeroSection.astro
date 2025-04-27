@@ -3,7 +3,7 @@ import BookNowButton from "@components/ui/BookNowButton.astro";
 import { Image } from "astro:assets";
 
 const {
-  content: { bannerSection },
+  content: { bannerSection , location},
 } = Astro.props;
 ---
 
@@ -66,7 +66,7 @@ const {
             >{bannerSection?.subHeadingSpan4}</span
           >
         </h2>
-        <BookNowButton
+        <BookNowButton location={location}
           className=" bg-gray-950 text-white text-center w-52 py-3 rounded-xl font-primaryFont tracking-button"
         >
           {bannerSection?.buttonText}
@@ -176,7 +176,8 @@ const {
     </div>
     <div class="flex items-center justify-center">
       <BookNowButton
-        className="bg-gray-950 text-white text-center w-11/12 mx-auto py-3 rounded-2xl font-bricolage tracking-button"
+        location={location}
+        className="bg-black text-white text-center py-3 px-20 rounded-2xl font-bricolage tracking-button"
       >
         {bannerSection?.buttonText}
       </BookNowButton>

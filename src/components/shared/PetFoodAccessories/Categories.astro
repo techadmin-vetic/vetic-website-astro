@@ -1,7 +1,4 @@
 ---
-import { Image } from "astro:assets";
-import BookNowButton from "@components/ui/BookNowButton.astro";
-
 const {
   content: { categories },
 } = Astro.props;
@@ -24,7 +21,7 @@ const {
     >
       {
         categories?.data?.map((categoriesFood) => (
-          <a href={categoriesFood.categories_url_link}>
+          <a href={`${categoriesFood.categories_url_link}?utm_source=organic&utm_medium=website&utm_campaign=appdownloadbtn`}>
             <li class="rounded-2xl bg-gray-100 sm:px-8  sm:py-10 py-4">
               <img
                 class="mx-auto h-48 w-48 rounded-2xl md:h-56 md:w-56 "

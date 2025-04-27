@@ -1,11 +1,12 @@
 ---
 import { Image } from "astro:assets";
-import BookNowButtonMarketing from "@components/ui/BookNowButtonMarketing.astro";
+import BookNowButton from "@components/ui/BookNowButton.astro";
 
 const {
-  content: { InsuranceCards },
+  content: { InsuranceCards ,location },
 } = Astro.props;
 // console.log(InsuranceCards);
+// console.log(location);
 ---
 
 <!-- card 1 -->
@@ -24,13 +25,13 @@ const {
     <!-- card starts -->
     <div class="">
       <div class="rounded-3xl w-full border-[1px] sm:border-none sm:bg-none sm:flex sm:items-star ">
-        <BookNowButtonMarketing className="sm:w-1/2 ">
+        <BookNowButton location={location} className="sm:w-1/2 ">
           <img
             class="rounded-t-3xl sm:rounded-3xl sm:max-w-[90%] w-full  overflow-hidden max-h-full object-cover sm:h-auto"
             src={InsuranceCards?.card[0]?.mobileImage}
             alt="banner_image"
           />
-        </BookNowButtonMarketing>
+        </BookNowButton>
        
       
         <div class="px-4 mt-4 sm:w-1/2 sm:px-16 sm:py-10 sm:flex sm:flex-col sm:justify-between mx-auto ">
@@ -56,11 +57,11 @@ const {
           </div>
           <div class="mt-2 mb-2 flex items-center pt-4 pb-2">
            
-            <BookNowButtonMarketing
+            <BookNowButton location={location}
               className="bg-[#152239] text-white sm:text-xl px-7 sm:px-16 py-2 sm:py-3 w-full text-center rounded-xl font-bricolage tracking-button sm:w-auto"
             >
               {InsuranceCards?.card[0]?.buttonText}
-            </BookNowButtonMarketing>
+            </BookNowButton>
           </div>
         </div>
       </div>
@@ -84,13 +85,13 @@ const {
     <!-- card starts -->
     <div class="">
       <div class="rounded-3xl w-full border-[1px] sm:border-none sm:bg-none sm:flex sm:items-start  ">
-        <BookNowButtonMarketing className="sm:w-1/2 ">
+        <BookNowButton location={location} className="sm:w-1/2 ">
           <img
             class="rounded-t-3xl sm:rounded-3xl sm:max-w-[90%] w-full  overflow-hidden max-h-full object-cover sm:h-auto"
             src={InsuranceCards?.card[1]?.mobileImage}
             alt="banner_image"
           />
-        </BookNowButtonMarketing>
+        </BookNowButton>
 
         <div class="px-4 mt-4 sm:w-1/2 sm:px-16 sm:py-10 sm:flex sm:flex-col sm:justify-between mx-auto ">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
@@ -115,11 +116,11 @@ const {
           </div>
           <div class="mt-2 mb-2 flex items-center pt-4 pb-2">
            
-            <BookNowButtonMarketing
+            <BookNowButton location={Astro.props.location}
               className="bg-[#152239] text-white sm:text-xl px-7 sm:px-16 py-2 sm:py-3 w-full text-center rounded-xl font-bricolage tracking-button sm:w-auto"
             >
               {InsuranceCards?.card[0]?.buttonText}
-            </BookNowButtonMarketing>
+            </BookNowButton>
           </div>
         </div>
       </div>

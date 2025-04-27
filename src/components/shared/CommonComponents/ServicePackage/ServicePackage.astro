@@ -6,7 +6,7 @@ import CardDescription from "./CardDescription";
 import BookNowButton from "@components/ui/BookNowButton.astro";
 
 const {
-  content: { servicePackage },
+  content: { servicePackage ,location},
   showListItems,
 } = Astro.props;
 ---
@@ -78,7 +78,7 @@ const {
       };
 
       return (
-        <BookNowButton className="border-[1px] border-black rounded-lg py-2 px-4 hover:bg-buttonColor hover:text-white">
+        <BookNowButton location={location} className="border-[1px] border-black rounded-lg py-2 px-4 hover:bg-buttonColor hover:text-white">
           {data?.buttonText}
         </BookNowButton>
       );

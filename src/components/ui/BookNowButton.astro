@@ -1,21 +1,66 @@
 ---
+import BookNowForm from "../shared/CommonComponents/BookNowForms/BookNowForms.tsx";
+
 interface Props {
   className?: string;
+  location: string;
+  modalClassName?: string;
+  modalContentClassName?: string;
 }
-const { className } = Astro.props;
+const {
+  className,
+  location,
+  modalClassName = "",
+  modalContentClassName = "",
+} = Astro.props;
 ---
 
-<button
-  x-data=`{className: '${className}'}`
-  :class="className"
-  @click="$store.ui.toggleBookNow();"
->
-  <slot />
-</button>
+<!-- Alpine popup -->
+<div x-data="{ isOpen: false }" class="popup-container">
+  <!-- Trigger button -->
+  <div class={`popup-button ${className || ""}`} @click="isOpen = true">
+    <slot />
+  </div>
 
-<script>
-  window.addEventListener("toggle-book-now", () => {
-    // @ts-ignore
-    Alpine.store("ui").toggleBookNow();
-  });
-</script>
+  <!-- Backdrop + Modal -->
+  <template x-teleport="body">
+    <div
+      x-show="isOpen"
+      x-transition
+      x-cloak
+      class={`popup fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[9999] ${modalClassName}`}
+      @click.self="isOpen = false"
+    >
+      <div
+        class={`popup-content bg-white p-6 rounded-lg relative w-full max-w-md ${modalContentClassName}`}
+        @click.stop
+      >
+        <button
+          class="close-button absolute top-2 right-4 text-2xl rounded-full bg-grey-500"
+          @click="isOpen = false">&times;</button
+        >
+
+        <h3 class="text-lg font-medium text-center text-zinc-900 mb-2 mt-4">
+          Looking for Advanced, Human-Grade Care for Your Pet?
+        </h3>
+
+        <div class="mt-2 py-3 mb-2">
+          <BookNowForm inSideModal={true} client:load location={location} />
+        </div>
+      </div>
+    </div>
+  </template>
+</div>
+
+<style>
+  [x-cloak] {
+    display: none !important;
+  }
+  .popup-button {
+    cursor: pointer;
+  }
+
+  .close-button {
+    cursor: pointer;
+  }
+</style>

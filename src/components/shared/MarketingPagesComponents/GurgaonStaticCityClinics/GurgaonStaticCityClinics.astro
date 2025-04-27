@@ -1,6 +1,6 @@
 ---
 import type { IMetaNewPageProps } from "@components/pages/PagePropsInterface/page_props_interface";
-import BookNowButtonMarketing from "@components/ui/BookNowButtonMarketing.astro";
+import BookNowButton from "@components/ui/BookNowButton.astro";
 
 const { content, srNumber, location } = Astro.props as IMetaNewPageProps;
 ---
@@ -14,7 +14,7 @@ const { content, srNumber, location } = Astro.props as IMetaNewPageProps;
         {content.Clinics.heading}
       </h1>
     </div>
-    <BookNowButtonMarketing>
+    <BookNowButton location={location}>
       <div class="rounded-3xl overflow-hidden">
         <img
           src={content?.ClinicsDataStatic?.[0]?.clinicImage}
@@ -43,6 +43,6 @@ const { content, srNumber, location } = Astro.props as IMetaNewPageProps;
           }
         </div>
       </div>
-    </BookNowButtonMarketing>
+    </BookNowButton>
   </div>
 </div>
