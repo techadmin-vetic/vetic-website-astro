@@ -5,7 +5,7 @@ export default defineConfig({
     host: true,
     port: 4321,
     strictPort: true,
-    allowedHosts: ["vetic.in"],
+    allowedHosts: ["vetic.in" , "www.vetic.in"],
     // hmr: {
     //   protocol: "ws",
     //   host: "localhost",
