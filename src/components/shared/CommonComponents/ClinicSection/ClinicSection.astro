@@ -76,7 +76,7 @@ const clinics = await getAllClinicsresponse().then((data) => data);
 ---
 <!-- desktop screen -->
 <div class=" w-full mx-auto bg-gradient-to-t from-primaryColor  hidden lg:block my-6 py-4 ">
-<div class="container w-11/12 mx-auto py-10" x-data="carousel ">
+<div class="container w-11/12 mx-auto py-10" x-data="{ selectedIndex: '1' }">
   <div class="flex flex-col md:flex-row gap-6">
     <!-- Large Carousel -->
     
@@ -181,9 +181,9 @@ const clinics = await getAllClinicsresponse().then((data) => data);
     v-for="(item, index) in items"
     :key="index"
     class="mb-4 border-[1px] rounded-xl mr-8 carousel-cell cursor-pointer p-2 shadow-sm bg-white"
-    :class="{ 'border-blue-500': selectedIndex === (index + 1).toString() }"
-    @click="selectSlide((index + 1).toString())"
-    :data-index="index + 1"
+    :class="{ 'border-blue-500': selectedIndex === $el.dataset.index }"
+    @click="selectedIndex = $el.dataset.index"
+    data-index={index + 1}
 >
 <a href={`/clinics/${location}/${ clinic?.web_url_path }`}>
 <div
@@ -273,7 +273,7 @@ const clinics = await getAllClinicsresponse().then((data) => data);
 <!-- mobile screen -->
 
 <div class=" w-full mx-auto bg-gradient-to-t block lg:hidden from-primaryColor">
-  <div class="container w-11/12 mx-auto py-6" x-data="carousel ">
+  <div class="container w-11/12 mx-auto py-6" x-data="{ selectedIndex: '1' }">
     <div class="flex flex-col md:flex-row gap-6">
       <h2 class="text-2xl sm:text-[36px] leading-8 font-primaryFont ">
         <span class="text-primaryFontColor">{clinicSection?.heading1} </span>
@@ -373,8 +373,8 @@ const clinics = await getAllClinicsresponse().then((data) => data);
               <div 
                 class=" border-[1px] rounded-xl mr-8 carousel-cell cursor-pointer p-2 shadow-sm bg-white" 
                 :class="{ 'border-blue-500': selectedIndex === $el.dataset.index }"
-                @click="selectSlide($el.dataset.index)"
-                data-index={index}
+                @click="selectedIndex = $el.dataset.index"
+                data-index={index + 1}
                >
                 <a href={`/clinics/${location}/${ clinic?.web_url_path }`}>
 
