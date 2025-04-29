@@ -64,6 +64,11 @@ const getAllClinicsresponse = async () => {
           (e) => e.district === "352b32b3-49d4-419c-abef-6b2c9b2dcbcb"
         );
         break;
+        case "kolkata":
+        datalocation = res.filter(
+          (e) => e.district === "b1734c53-dd55-4c65-84af-2b22d4c4aee7"
+        );
+        break;
       default:
         datalocation = res;
     }
