@@ -61,6 +61,7 @@ const filteredDoctors = doctors.filter((doctor) =>
               experience={doctor.experience}
               expertise={doctor.expertise}
               imageUrl={doctor.image_url}
+              location={location}
             />
           ) : (
             <DoctorCardV1
@@ -71,6 +72,7 @@ const filteredDoctors = doctors.filter((doctor) =>
               totalGrooming={getRandomPetNumber(200, 400)}
               imageUrl={doctor.image_url}
               rating={getRandomRating(4.8, 5)}
+              location={location}
             />
           );
         })

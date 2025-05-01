@@ -14,15 +14,7 @@ const {
         {doctorSection.heading}
       </h1>
     </div>
-    <BookNowButton location={location}>
-      <div
-        class="h-96 bg-center bg-cover border-[1px] border-green-600 bg-no-repeat relative rounded-3xl overflow-hidden tracking-image"
-        style={{
-          backgroundImage: `url("${doctorSection.doctorBannerImage}")`,
-        }}
-      >
-      </div>
-    </BookNowButton>
+ 
     <DRCarousel variant="NEW" hideHeading={false} location={meta.location} />
     <div class="text-center mt-4">
       <BookNowButton location={location}

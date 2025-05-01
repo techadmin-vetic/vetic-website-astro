@@ -15,18 +15,20 @@ const { doctorName, experience, imageUrl, rating, totalGrooming , location} = As
 ---
 
 <>
-  <div class="max-w-xs sm:w-full rounded-lg overflow-hidden mx-auto my-3">
-    <div class="relative">
-      <BookNowButton location={location}>
-        <div
-          class="mx-auto w-20 h-20 sm:w-32 sm:h-32 rounded-full bg-center bg-contain bg-no-repeat relative overflow-hidden"
-          style={{
-            backgroundSize: "cover",
-            backgroundImage: `url("${imageUrl}")`,
-          }}
-        >
-        </div>
-      </BookNowButton>
+<div class="max-w-xs sm:w-full rounded-lg overflow-hidden mx-auto my-3">
+  <div class="relative">
+    <BookNowButton location={location}>
+      <div
+        class="mx-auto w-20 h-20 sm:w-32 sm:h-32 rounded-full relative overflow-hidden"
+      >
+        <img
+          src={imageUrl}
+          alt={doctorName}
+          class="w-full h-full object-cover rounded-full"
+          loading="lazy"
+        />
+      </div>
+    </BookNowButton>
       <div
         class="flex justify-center items-center w-10 h-4 bg-gray-100 rounded-2xl absolute right-7 bottom-2"
       >
