@@ -3,7 +3,7 @@ import ClinicCarousel from "../ClinicsCarousel/ClinicCarousel.astro";
 import BookNowButton from "@components/ui/BookNowButton.astro";
 
 const {
-  content: { Clinics, meta ,location },
+  content: { Clinics, meta, location },
 } = Astro.props;
 // console.log(meta.location, "city");
 ---
@@ -17,15 +17,7 @@ const {
         {Clinics.heading}
       </h1>
     </div>
-    <BookNowButton location={location}>
-      <div
-        class="h-96 bg-center bg-cover bg-no-repeat relative rounded-3xl overflow-hidden tracking-image"
-        style={{
-          backgroundImage: `url("${Clinics.clinicBannerImage}")`,
-        }}
-      >
-      </div>
-    </BookNowButton>
+
     <div class="flex justify-between align-center w-full mx-auto mt-3">
       <div class="w-full grid grid-cols-2 gap-4">
         {
@@ -36,6 +28,7 @@ const {
                   src={USPContentClinics.logo}
                   alt="USP Logo"
                   class="w-6 h-6 sm:w-8 sm:h-8"
+                  loading="lazy"
                 />
                 <p class="pl-2 text-sm sm:text-lg font-normal font-bricolage tracking-wide">
                   {USPContentClinics.heading}

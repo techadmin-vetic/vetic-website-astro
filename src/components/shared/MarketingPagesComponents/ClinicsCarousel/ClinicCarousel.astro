@@ -100,6 +100,7 @@ const clinicsData = await getAllClinicsresponse().then((data) => data);
               fridayEndTime={value?.visiting_hours?.friday_end_time}
               imageUrl={value?.image_url}
               rating={value?.rating}
+              location={location}
             />
           ))
         ) : (
