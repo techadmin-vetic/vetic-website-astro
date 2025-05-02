@@ -22,6 +22,7 @@ const districtToCityMap = {
   "ca3f04f6-3ad0-468f-aed8-b0c822a39e50": "Bengaluru",
   "ca3f04f6-3ad0-468f-aed8-b0c822a39e51": "Hyderabad",
   "352b32b3-49d4-419c-abef-6b2c9b2dcbcb": "Pune",
+  "b1734c53-dd55-4c65-84af-2b22d4c4aee7": "Kolkata",
 };
 
 const cities = [
@@ -102,6 +103,7 @@ const cities = [
     "ca3f04f6-3ad0-468f-aed8-b0c822a39e50": "Bengaluru",
     "ca3f04f6-3ad0-468f-aed8-b0c822a39e51": "Hyderabad",
     "352b32b3-49d4-419c-abef-6b2c9b2dcbcb": "Pune",
+    "b1734c53-dd55-4c65-84af-2b22d4c4aee7": "Kolkata",
   };
 
   async function fetchAndDisplayClinics(city = "") {
@@ -124,7 +126,7 @@ const cities = [
       clinicElement.className = "bg-white p-4 rounded-lg shadow";
       clinicElement.innerHTML = `
         <div class="relative flex flex-col h-full">
-          <img src="${clinic.image_url}" alt="${clinic.name}" class="w-full h-40 object-cover rounded-lg mb-4">
+          <img src="${clinic.image_url}" alt="${clinic.name}" class="w-full h-60 object-fill rounded-lg mb-4">
           <h3 class="text-xl font-bold mb-2">${clinic.name}</h3>
           <p class="text-gray-700 mb-2">${clinic.address}, ${districtToCityMap[clinic.district] || clinic.district}</p>
           <div class="flex justify-between items-center mt-auto pt-4">
