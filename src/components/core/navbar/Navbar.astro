@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import CityDropDownMobile from "@components/core/cityDropDown/CityDropDownMobile.astro";
 import CityDropDownDesktop from "@components/core/cityDropDown/CityDropDownDesktop.astro";
 import CallNowButton from "@components/ui/CallNowButton.astro";
+import ScrollPopup from "@components/ui/ScrollPopup.astro";
 
 interface Props {
   location: string;
@@ -204,7 +205,11 @@ const { location, srNumber } = Astro.props;
   <div class="lg:hidden fixed bottom-4 right-5 z-50">
     <CallNowButton srNumber={srNumber} location={location} variant="floating" />
   </div>
+  <div class="z-50">
+    <ScrollPopup  location={location}/>
+  </div>
 </header>
+
 
 <script
   is:inline
