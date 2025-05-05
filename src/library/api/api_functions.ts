@@ -324,3 +324,11 @@ export const GETHappyLocateData = async (): Promise<IPlumGETResponse> => {
   return response;
 };
 /* GET HAPPYLOCATE data API Function ends */
+/**************************************************** ADSURE-WEBSITE-PAGE ************************************************************/
+export const GETAdsureData = async (): Promise<IPlumGETResponse> => {
+  const response: IPlumGETResponse = await fetch(SITE_APIS.ADSURE).then(
+    async (res) => await res.json()
+  );
+  return response;
+};
+/* GET ADSURE data API Function ends */
