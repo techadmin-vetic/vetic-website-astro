@@ -36,4 +36,5 @@ export const SITE_APIS: ISiteApis = {
   CARS24: "https://static.vetic.in/api/marketing-new/cars24",
   HAPPYLOCATE: "https://static.vetic.in/api/marketing-new/happylocate",
   INSURANCE: "https://static.vetic.in/api/marketing-new/pet-insurance",
+  ADSURE: "https://static.vetic.in/api/marketing-new/adsure",
 };

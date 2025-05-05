@@ -33,4 +33,5 @@ export interface ISiteApis {
     CARS24: string;
     HAPPYLOCATE: string;
     INSURANCE: string;
+    ADSURE: string;
 }
