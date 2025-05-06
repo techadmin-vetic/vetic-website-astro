@@ -4,7 +4,6 @@ import tailwind from "@astrojs/tailwind";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import vercel from '@astrojs/vercel';
-import netlify from '@astrojs/netlify/functions';
 
 export default defineConfig({
   trailingSlash: "never",
@@ -20,7 +19,6 @@ export default defineConfig({
   },
   output: 'server',
   adapter: vercel(),
-  adapter: netlify(),
   integrations: [
     alpinejs(),
     tailwind(),
