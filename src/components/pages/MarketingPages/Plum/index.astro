@@ -9,6 +9,7 @@ import { reduceFAQs } from "@utils/global_utils";
 import AboutSection from "@components/shared/MarketingPagesComponents/AboutSection/AboutSection.astro";
 import StaticCityClinics from "@components/shared/MarketingPagesComponents/StaticCityClinics/StaticCityClinics.astro";
 import VeticServices from "@components/shared/MarketingPagesComponents/VeticServices/VeticServices.astro";
+import SingleStaticCityClinics from "@components/shared/MarketingPagesComponents/SingleStaticCityClinics/SingleStaticCityClinics.astro";
 
 const { content, srNumber, location } = Astro.props as IMetaNewPageProps;
 const reducedFAQs = reduceFAQs(
@@ -17,6 +18,8 @@ const reducedFAQs = reduceFAQs(
   "content"
 );
 // console.log(isCars24Page, "Check cars24 URL");
+const currentPath = Astro.url.pathname;
+const isAdsureUrl = currentPath.includes("adsure");
 ---
 
 <ServiceNavbarV1 location={location} srNumber={srNumber} />
@@ -25,7 +28,13 @@ const reducedFAQs = reduceFAQs(
 <TestimonialSectionV1 content={content} />
 <AboutSection content={content} />
 <VeticServices content={content} />
-<StaticCityClinics content={content} />
+{
+  isAdsureUrl ? (
+    <SingleStaticCityClinics content={content} />
+  ) : (
+    <StaticCityClinics content={content} />
+  )
+}
 <ContactUsSectionV1
   title="Hello"
   location={location}
