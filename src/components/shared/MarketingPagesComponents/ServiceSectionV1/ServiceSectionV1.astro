@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import BookNowButton from "@components/ui/BookNowButton.astro";
 
 const {
@@ -35,7 +34,7 @@ const {
   <h2
     class="text-2xl font-semibold font-bricolage text-left mb-4 pt-3 mx-auto sm:w-11/12"
   >
-    {ServiceCards.headingForCard}
+    {ServiceCards?.headingForCard}
   </h2>
   <div
     class="carousel-main mb-6 lg:mb-10"
@@ -75,13 +74,13 @@ const {
             <div class="carousel-cell py-4 mx-2 rounded-3xl w-[90%] sm:w-[30%] border-[1px] bg-white realtive">
               <div class="text-center mb-4 px-4">
                 <p class="text-lg text-left font-semibold font-bricolage ">
-                  {serviceContent.price}{" "}
+                  {serviceContent?.price}{" "}
                   <span class="line-through text-sm font-semibold font-bricolage text-zinc-500">
-                    {serviceContent.cutPrice}
+                    {serviceContent?.cutPrice}
                   </span>
                 </p>
                 <p class="text-green-700 text-left text-semibold font-semibold text-sm font-bricolage">
-                  {serviceContent.discount}
+                  {serviceContent?.discount}
                 </p>
               </div>
               
@@ -89,7 +88,7 @@ const {
                   class="h-[236px] bg-center bg-no-repeat relative tracking-image"
                   style={{
                     backgroundSize: "contain",
-                    backgroundImage: `url("${serviceContent.mobileImage}")`,
+                    backgroundImage: `url("${serviceContent?.mobileImage}")`,
                   }}
                 >
                   {showDuration && (
@@ -110,7 +109,7 @@ const {
                       </svg>
 
                       <p class="mb-2 pt-2 pl-2 text-sm font-bricolage font-light">
-                        <strong>{serviceContent.timeDuraction}</strong>
+                        <strong>{serviceContent?.timeDuraction}</strong>
                       </p>
                     </div>
                   )}
@@ -118,9 +117,9 @@ const {
              
               <div class="px-4">
                 <h3 class="font-bricolage font-normal text-md mb-2 py-2">
-                  {serviceContent.serviceInclusionText}
+                  {serviceContent?.serviceInclusionText}
                 </h3>
-                {serviceContent.serviceIncludes.map((data, idx) => {
+                {serviceContent?.serviceIncludes.map((data, idx) => {
                   const isObject =
                     typeof data === "object" &&
                     data !== null &&
@@ -138,10 +137,10 @@ const {
                         />
                         {isObject ? (
                           <div class="font-bricolage text-sm font-normal">
-                            {data.content}
-                            {data.price}
+                            {data?.content}
+                            {data?.price}
                             <span class="line-through pl-1">
-                              {data.cutPrice}
+                              {data?.cutPrice}
                             </span>
                           </div>
                         ) : (
@@ -153,10 +152,10 @@ const {
                 })}
                 <div class="mt-4 flex items-center justify-between pt-4 pb-2">
                   <p class="text-sm font-bricolage font-light pl-1">
-                    {serviceContent.serviceInclusion}
+                    {serviceContent?.serviceInclusion}
                   </p>
                   <button class=" bg-[#152239] text-white px-7 py-2 rounded-xl font-bricolage tracking-button">
-                    {serviceContent.buttonText}
+                    {serviceContent?.buttonText}
                   </button>
                 </div>
               </div>
