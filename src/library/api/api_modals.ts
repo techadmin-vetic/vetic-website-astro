@@ -256,6 +256,7 @@ export interface IGETMeta {
 
 export interface IGETHomeMain {
   meta: IGETMeta;
+  ogData: any;
   appDownloadBar: {
     heading: string;
   };

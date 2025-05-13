@@ -14,9 +14,11 @@ interface Props {
   withServiceLayout?: boolean;
   noIndex?: boolean;
   schemaData?: any;
+  ogData?: any;
 }
 
-const { title, description, canonicalTag, noIndex, schemaData } = Astro.props;
+const { title, description, canonicalTag, noIndex, schemaData, ogData } =
+  Astro.props;
 
 // console.log(canonicalTag, "title");
 
@@ -48,6 +50,18 @@ const isPmUrl = currentPath.includes("-pm");
         </>
       )
     }
+    {
+      ogData && (
+        <>
+          <meta property="og:title" content={ogData?.title} />
+          <meta property="og:type" content={ogData?.type} />
+          <meta property="og:url" content={ogData?.url} />
+          <meta property="og:image" content={ogData?.image} />
+          <meta property="og:description" content={ogData?.description} />
+          <meta property="og:logo" content={ogData?.logo} />
+        </>
+      )
+    }
     <meta name="description" content={description} />
     <meta
       name="viewport"
@@ -63,8 +77,14 @@ const isPmUrl = currentPath.includes("-pm");
     {
       isPmUrl ? (
         <script
-          src="https://www.google.com/recaptcha/api.js" is:inline  async defer />
-      ) : ( "" )
+          src="https://www.google.com/recaptcha/api.js"
+          is:inline
+          async
+          defer
+        />
+      ) : (
+        ""
+      )
     }
 
     <!-- Notify Visitors Tracking Code -->
