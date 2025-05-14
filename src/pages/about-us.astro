@@ -15,7 +15,12 @@ const {
 } = await GETAboutUspageSiteData();
 ---
 
-<MainLayout title={mainContent?.meta?.title} description={mainContent?.meta?.description} canonicalTag={mainContent?.meta?.canonicalTag}>
+<MainLayout
+  title={mainContent?.meta?.title}
+  description={mainContent?.meta?.description}
+  canonicalTag={mainContent?.meta?.canonicalTag}
+  ogData={mainContent?.ogData}
+>
   <AboutUsPage
     content={mainContent}
     location={mainContent.meta.location}

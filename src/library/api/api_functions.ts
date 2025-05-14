@@ -181,14 +181,7 @@ export const GETVaccinationpageSiteData =
     return response;
   };
 
-/*************************************************************CLINICS NEAR ME PAGE***********************************************************/
-export const GETClinicNearMepageSiteData =
-  async (): Promise<IClinicPageGETResponse> => {
-    const response: IClinicPageGETResponse = await fetch(
-      SITE_APIS.CLINICNEARME
-    ).then(async (res) => await res.json());
-    return response;
-  };
+
 /*************************************************************CLINICS DETAILS PAGE***********************************************************/
 export const GETClinicDetailspageSiteData =
   async (): Promise<IClinicDetailsPageGETResponse> => {
@@ -208,32 +201,6 @@ export const GETConsultationpageSiteData =
   };
 
 
-/*************************************************************GROOMING NEAR ME PAGE***********************************************************/
-export const GETGroomingNearMepageSiteData =
-  async (): Promise<IGroomingPageGETResponse> => {
-    const response: IGroomingPageGETResponse = await fetch(
-      SITE_APIS.GROOMINGNEARME
-    ).then(async (res) => await res.json());
-    return response;
-  };
-
-/*************************************************************CONSULTATION NEAR ME PAGE***********************************************************/
-export const GETConsultationNearMepageSiteData =
-  async (): Promise<IConsultationPageGETResponse> => {
-    const response: IConsultationPageGETResponse = await fetch(
-      SITE_APIS.CONSULTATIONNEARME
-    ).then(async (res) => await res.json());
-    return response;
-  };
-
-/*************************************************************Vaccination NEAR ME PAGE***********************************************************/
-export const GETVaccinationNearMepageSiteData =
-  async (): Promise<IVaccinationPageGETResponse> => {
-    const response: IVaccinationPageGETResponse = await fetch(
-      SITE_APIS.VACCINATIONNEARME
-    ).then(async (res) => await res.json());
-    return response;
-  };
 
   /*************************************************************EMERGENCY PAGE***********************************************************/
 export const GETEmergencypageSiteData =

@@ -76,6 +76,7 @@ export interface IGETClinicsLocatorMeta {
 
 export interface IGETClinicsLocatorMain {
   meta: IGETClinicsLocatorMeta;
+  ogData: any;
   pageCategory: string;
   appDownloadBar: {
     heading: string;
@@ -389,6 +390,7 @@ export interface IAboutUsFaq {
 }
 export interface IGETAboutUsMain {
   meta: IGETAboutUsMeta;
+  ogData: any;
   Faq: IAboutUsFaq;
   pageCategory: string;
   appDownloadBar: {
@@ -1060,6 +1062,7 @@ export interface IConsultationFaq {
 }
 export interface IGETConsultationMain {
   meta: IGETConsultationMeta;
+  ogData: any;
   Faq: IConsultationFaq;
   pageCategory: string;
   appDownloadBar: {
@@ -1173,6 +1176,7 @@ export interface IGroomingFaq {
 }
 export interface IGETGroomingMain {
   meta: IGETGroomingMeta;
+  ogData: any;
   Faq: IGroomingFaq;
   pageCategory: string;
   appDownloadBar: {
@@ -1299,6 +1303,7 @@ export interface IClinicFaq {
 }
 export interface IGETClinicMain {
   meta: IGETClinicMeta;
+  ogData: any;
   Faq: IClinicFaq;
   pageCategory: string;
   appDownloadBar: {
@@ -1570,6 +1575,7 @@ export interface IVaccinationFaq {
 }
 export interface IGETVaccinationMain {
   meta: IGETVaccinationMeta;
+  ogData: any;
   Faq: IVaccinationFaq;
   pageCategory: string;
   appDownloadBar: {
@@ -1702,6 +1708,7 @@ export interface IEmergencyFaq {
 }
 export interface IGETEmergencyMain {
   meta: IGETEmergencyMeta;
+  ogData: any;
   Faq: IEmergencyFaq;
   pageCategory: string;
   appDownloadBar: {
