@@ -72,7 +72,7 @@ export default function CountdownTimer({
   const formatNumber = (num: number) => num.toString().padStart(2, "0");
 
   return (
-    <span className="bg-red-500 text-white text-sm px-2 py-1 rounded ml-2 font-bricolage">
+    <span className="bg-primaryFontColor text-white text-sm px-2 py-1 rounded ml-2 font-bricolage">
       {formatNumber(timeLeft.hours)}H : {formatNumber(timeLeft.minutes)}M :{" "}
       {formatNumber(timeLeft.seconds)}S
     </span>
