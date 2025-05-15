@@ -3,13 +3,14 @@ const { variant, srNumber } = Astro.props;
 ---
 
 <a
+  class="floating-bottom-call-btn"
   x-data=`{variant: '${variant}'}`
   x-on:scroll.window=" window.scrollY > 0"
   href={`tel:${srNumber}`}
 >
   <button
     type="button"
-    x-bind:class="{'tracking-button floating-callNow-btn rounded-md bg-[#000000] px-3.5 py-2.5 text-sm sm:text-lg sm:px-6 font-semibold text-white shadow-sm hover:bg-950-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#000000]': variant === 'button', 'tracking-button fixed bottom-24 right-4 sm:hidden rounded-full p-4 flex justify-center items-center flex-col bg-green-600 text-white': variant === 'floating' }"
+    x-bind:class="{'tracking-button rounded-md bg-[#000000] px-3.5 py-2.5 text-sm sm:text-lg sm:px-6 font-semibold text-white shadow-sm hover:bg-950-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#000000]': variant === 'button', 'tracking-button fixed bottom-24 right-4 sm:hidden rounded-full p-4 flex justify-center items-center flex-col bg-green-600 text-white': variant === 'floating' }"
   >
     <span x-show="variant === 'button'">Call Now</span>
     <span
