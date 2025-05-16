@@ -115,7 +115,7 @@ const {
 
   {isEmergencyPage && (
     <div class="mt-auto pt-6 hidden md:block"> <!-- Hide on mobile, show on desktop -->
-      <BookNowButton location={location} className="border-[1px] border-black rounded-lg py-2 px-4 hover:bg-buttonColor hover:text-white">
+      <BookNowButton location={location} className="border-[1px] border-black rounded-lg py-2 px-4 hover:text-white  transition-transform duration-200 ease-in-out transform hover:scale-105 cursor-pointer shadow-xl">
         {cards?.buttonText}
       </BookNowButton>
     </div>
@@ -137,7 +137,7 @@ const {
               </p>
               <BookNowButton
                location={location}
-               className="px-4 py-2 w-1/2 text-center bg-black text-white text-sm font-semibold rounded-md font-secondaryFont">
+               className="px-4 py-2 w-1/2 text-center bg-black text-white text-sm font-semibold rounded-md font-secondaryFont  transition-transform duration-200 ease-in-out transform hover:scale-105 cursor-pointer shadow-xl">
                 {veticServices?.buttonText}
                </BookNowButton>
             </div>

@@ -51,24 +51,25 @@ const blogPosts = await getBlogPostsResponse().then((data) => data);
         {
           blogPosts.map((blogPost) => (
             <div class="carousel-cell sm:w-[30%] w-[90%] rounded-xl mx-auto bg-white">
-              <div class="w-11/12 mx-auto py-4">
-                <img
-                  class="object-cover rounded-xl"
-                  src={blogPost.og_image}
-                  alt="Blog Image"
-                />
-                <h3 class="text-gray-600 text-md font-secondaryFont mb-1 mt-4">
-                  Pet Health and Care
-                </h3>
-                <p class="text-lg font-primaryFont text-gray-900 mb-4 line-clamp-2">
-                  {blogPost.title}
-                </p>
-                <a href={blogPost.og_url}>
+              <a href={blogPost.og_url}>
+                <div class="w-11/12 mx-auto py-4">
+                  <img
+                    class="object-cover rounded-xl"
+                    src={blogPost.og_image}
+                    alt="Blog Image"
+                  />
+                  <h3 class="text-gray-600 text-md font-secondaryFont mb-1 mt-4">
+                    Pet Health and Care
+                  </h3>
+                  <p class="text-lg font-primaryFont text-gray-900 mb-4 line-clamp-2">
+                    {blogPost.title}
+                  </p>
+
                   <button class="bg-black text-center font-secondaryFont text-white px-6 py-3 rounded-xl uppercase text-xs font-medium">
                     Read More
                   </button>
-                </a>
-              </div>
+                </div>
+              </a>
             </div>
           ))
         }
